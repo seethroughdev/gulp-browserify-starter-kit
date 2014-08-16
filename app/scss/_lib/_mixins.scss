@@ -1,0 +1,21 @@
+
+
+/*==========  Media Queries  ==========*/
+
+@mixin break($media) {
+  @if $media == mobile-only {
+    @media screen and (max-width:$break-small) {@content;}
+  }
+  @else if $media == small {
+    @media screen and (min-width:$break-small +1) {@content;}
+  }
+  @else if $media == small-only {
+    @media screen and (max-width:$break-medium) {@content;}
+  }
+  @else if $media == medium {
+    @media screen and (min-width:$break-medium +1) {@content;}
+  }
+  @else if $media == large {
+    @media screen and (min-width:$break-large +1) {@content;}
+  }
+}

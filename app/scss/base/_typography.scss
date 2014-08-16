@@ -1,0 +1,75 @@
+body {
+  hyphens: none;
+}
+
+.font-primary {
+  font-family: $fontPrimary;
+  font-style: normal;
+}
+
+.font-light {
+  @extend .font-primary;
+  font-weight: 300;
+}
+
+.font-normal {
+  @extend .font-primary;
+  font-weight: 500;
+}
+
+.font-semi {
+  @extend .font-primary;
+  font-weight: 600;
+}
+
+.font-bold {
+  @extend .font-primary;
+  font-weight: 700;
+}
+
+.hero h3 {
+  color: $secondaryTextColor;
+  font-weight: 300;
+  text-align: center;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: $black;
+}
+
+@mixin fontSize($fontVar) {
+  @include type-scale($fontVar, $font-base, '#{$type-scale-unit-value}', $measure);
+}
+
+ul.horizontal-list {
+  list-style-type: none;
+  text-transform: uppercase;
+  text-align: center;
+  li {
+    display: block;
+    @include break(small) {
+      display: inline-block;
+    }
+    margin: 0 .567em;
+    a {
+      display: block;
+      text-decoration: none;
+    }
+    &:first-of-type {
+      margin-left: 0;
+    }
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+}
+
+ul, dd, dt {
+  margin: 0;
+  padding: 0;
+}
+
+p+p {
+  text-indent: 0;
+  margin-top: 0;
+}
