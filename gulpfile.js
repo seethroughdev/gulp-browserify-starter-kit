@@ -7,22 +7,26 @@ var gulp        = require('gulp')
 ,   $           = require('gulp-load-plugins')()
 ,   browserSync = require('browser-sync')
 ,   reload      = browserSync.reload
-,   fs          = require('fs');
+,   fs          = require('fs')
+,   browserify = require('browserify')
+,   source     = require('vinyl-source-stream');
+
 
 var path = {
   src: {
+    path: 'app/',
     css: 'app/scss/',
     img: 'app/img/',
     js: 'app/js/',
     html: 'app/html/'
   },
   dist: {
+    path: 'dist/',
     css: 'dist/css/',
     img: 'dist/img/',
     js: 'dist/js/',
     html: 'dist/views/',
-    fonts: 'dist/fonts/',
-    public: 'dist/'
+    fonts: 'dist/fonts/'
   }
 };
 
@@ -30,8 +34,24 @@ var path = {
 
 /*==========  JAVASCRIPT  ==========*/
 
+// Options
+var browserifyOpts = {
+  debug: true,
+  standalone: 'svgFallbackify'
+};
 
-gulp.task('jshint', function () {
+gulp.task('js:browserify', function () {
+  return browserify( './' + path.src.js + 'index.js', browserifyOpts ).bundle()
+    .pipe(source( './' + path.src.js + 'index.js' ))
+    .pipe($.changed(path.dist.js))
+    .pipe($.rename('bundle.js'))
+    .pipe(gulp.dest(path.dist.js))
+    .pipe($.rename('bundle.min.js'))
+    .pipe($.streamify($.uglify()))
+    .pipe(gulp.dest(path.dist.js));
+});
+
+gulp.task('js:hint', function () {
   return gulp.src([path.src.js + '**/*.js', '!' + path.src.js + 'vendor/**/*.js'])
     .pipe($.jshint())
     .pipe($.jshint.reporter('jshint-stylish'))
@@ -39,30 +59,29 @@ gulp.task('jshint', function () {
     .pipe(reload({stream: true}));
 });
 
-gulp.task('js:main', function() {
-  return gulp.src([
-      path.src.js + 'fallbacks.js',
-      path.src.js + '**/*.js',
-      path.src.js + 'zzz_init.js',
-      '!' + path.src.js + 'vendor/**/*.js'
-    ])
-    .pipe($.concat('bundle.js'))
-    .pipe($.uglify())
-    .pipe($.size({ showFiles: true, title: 'JS COMPRESSED' }))
-    .pipe(gulp.dest(path.dist.js));
-});
-
 gulp.task('js:vendor', function() {
-  return gulp.src(path.src.js + 'vendor/**/*.js')
+  return gulp.src([path.src.js + 'vendor/**/*.js', '!' + path.src.js + 'vendor/modernizr.js'])
+    .pipe($.changed(path.dist.js + 'vendor/'))
     .pipe($.concat('vendor.js'))
     .pipe($.uglify())
-    .pipe($.size({ showFiles: true, title: 'JS COMPRESSED' }))
+    .pipe($.size({ showFiles: true, title: 'compressed vendor:' }))
     .pipe(gulp.dest(path.dist.js));
 });
 
-gulp.task('js', ['js:main', 'js:vendor']);
+gulp.task('js:modernizr', function() {
+  return gulp.src(path.src.js + 'vendor/modernizr.js')
+    .pipe($.changed(path.dist.js + 'vendor/modernizr/js'))
+    .pipe($.uglify())
+    .pipe($.size({ showFiles: true, title: 'compressed modernizr:' }))
+    .pipe(gulp.dest(path.dist.js));
+});
+
+gulp.task('js', ['js:browserify', 'js:vendor', 'js:modernizr']);
+
+
 
 /*==========  IMAGES  ==========*/
+
 
 gulp.task('images:compress', function () {
   return gulp.src(path.src.img + '**/*')
@@ -102,6 +121,7 @@ gulp.task('images:iconfont', function() {
 gulp.task('images', [ 'images:compress', 'images:iconfont' ]);
 
 
+
 /*==========  CSS  ==========*/
 
 
@@ -121,6 +141,7 @@ gulp.task('styles', [ 'styles:scss' ]);
 
 /*==========  HTML  ==========*/
 
+
 gulp.task('html:all', function () {
   return gulp.src(path.src.html + 'pages/**/*.jade')
     .pipe($.jade({ pretty: true }))
@@ -131,13 +152,16 @@ gulp.task('html:all', function () {
 
 gulp.task('html', [ 'html:all' ]);
 
+
+
 /*==========  BUILD  ==========*/
+
 
 gulp.task('serve', [ 'default' ], function () {
 
   browserSync.init({
     server: {
-      baseDir: path.dist.public,
+      baseDir: path.dist.path,
       directory: true
     },
     startPath: '/views/',
