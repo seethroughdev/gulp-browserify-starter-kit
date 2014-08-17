@@ -1,7 +1,8 @@
 /**
 *
-* I'm choosing to deploy to gh-pages, but feel free to replace this
-* task with any deployment task you choose.
+* For some reason the latest gh-pages is broken with gulp,
+* waiting for a fix, after, after, we'll need to add deploy:gh
+* back to the deploy task list.
 *
 **/
 
@@ -32,5 +33,5 @@ gulp.task('deploy:gh', function() {
 });
 
 gulp.task('deploy', function(callback) {
-  runSequence('clean', 'default', 'deploy:gh', callback);
+  runSequence('clean', 'default', callback);
 });
