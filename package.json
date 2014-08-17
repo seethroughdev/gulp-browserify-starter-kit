@@ -1,7 +1,7 @@
 {
-  "name": "mock",
-  "version": "0.0.0",
-  "description": "",
+  "name": "gulp-browserify-starter-kit",
+  "version": "0.0.2",
+  "description": "A starter template for gulp browserify and a bunch of other tools for building prototypes.",
   "main": "index.js",
   "scripts": {
     "test": "gulp test",
