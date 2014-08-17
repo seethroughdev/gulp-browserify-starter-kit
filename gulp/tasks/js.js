@@ -33,8 +33,8 @@ gulp.task('js:browserify', function () {
 gulp.task('js:hint', function () {
   return gulp.src([path.src.js + '**/*.js', '!' + path.src.js + 'vendor/**/*.js'])
     .pipe($.jshint())
+    .on('error', handleErrors)
     .pipe($.jshint.reporter('jshint-stylish'))
-    .pipe($.jshint.reporter('fail'))
     .pipe(reload({stream: true}));
 });
 
@@ -57,4 +57,4 @@ gulp.task('js:modernizr', function() {
     .pipe(gulp.dest(path.dist.js));
 });
 
-gulp.task('js', ['js:browserify', 'js:vendor', 'js:modernizr']);
+gulp.task('js', ['js:browserify', 'js:vendor', 'js:modernizr', 'js:hint']);
