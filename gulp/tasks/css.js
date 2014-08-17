@@ -10,7 +10,7 @@ var path         = require('../utils/paths')
 
 
 gulp.task('css:scss', function () {
-  return gulp.src([ path.src.css + '**/*.scss' ])
+  return gulp.src([ path.src.css + '*.scss' ])
     .pipe($.rubySass())
     .on('error', handleErrors)
     .pipe($.autoprefixer('last 1 version', '> 1%', 'ie 8', 'ie 7'))
