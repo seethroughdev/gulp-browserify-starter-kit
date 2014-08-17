@@ -7,6 +7,7 @@ It includes:
 - [Browserify](http://browserify.org/) | Javascript
 - [Sass](http://sass-lang.com/) | CSS
 - [Jade](http://jade-lang.com/) | HTML
+- [Mocha](http://visionmedia.github.io/mocha/) | Testing
 
 
 It also compresses images and builds custom icon-fonts (that was a pain...).
@@ -31,3 +32,5 @@ To run, you can just type:
 ```gulp serve```
 
 Which will run all watch commands and open Chrome Canary (if installed) with Browsersync.
+
+It will also run a mocha-chai test suite that is ready to go.

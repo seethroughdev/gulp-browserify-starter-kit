@@ -19,5 +19,9 @@
     "modernizr": "~2.8.3",
     "normalize-scss": "~3.0.1",
     "semantic-grid": "*"
+  },
+  "devDependencies": {
+    "mocha": "~1.21.4",
+    "chai": "~1.9.1"
   }
 }

@@ -19,8 +19,9 @@ gulp.task('serve', [ 'default', 'test' ], function () {
 
   gulp.watch([path.src.html + '**/*.jade'], ['html']);
   gulp.watch([path.src.css + '**/*.scss'], ['css']);
-  gulp.watch([path.src.js + '**/*.js'], ['js', 'test']);
+  gulp.watch([path.src.js + '**/*.js'], ['js', 'test:unit']);
   gulp.watch([path.src.img + '**/*'], ['img']);
-  gulp.watch([path.test.path + '**/*.js'], ['test']);
+  gulp.watch([path.test.unit + '**/*.js'], ['test:unit']);
+  gulp.watch([path.test.functional + '**/*'], ['test:functional']);
 
 });

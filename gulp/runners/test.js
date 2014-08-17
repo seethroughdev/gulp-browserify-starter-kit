@@ -11,7 +11,21 @@ var mochaOpts = {
   globals: ['module']
 };
 
-gulp.task('test', function() {
-  return gulp.src(path.test.path + '**/*.js')
+var phantomOpts = {
+  viewportSize: {
+    width: 1,
+    height: 1
+  }
+};
+
+gulp.task('test:unit', function() {
+  return gulp.src(path.test.unit + '**/*.js')
     .pipe($.mocha(mochaOpts));
 });
+
+gulp.task('test:functional', function() {
+  return gulp.src(path.test.functional + 'runner.html')
+    .pipe($.mochaPhantomjs({phantomjs: phantomOpts}));
+});
+
+gulp.task('test', ['test:unit', 'test:functional']);

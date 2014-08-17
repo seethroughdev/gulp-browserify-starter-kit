@@ -15,6 +15,8 @@ module.exports = {
     fonts: 'dist/fonts/'
   },
   test: {
-    path: 'spec/'
+    path: 'spec/',
+    unit: 'spec/unit/',
+    functional: 'spec/functional/'
   }
 };
