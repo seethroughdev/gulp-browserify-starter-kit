@@ -9,10 +9,12 @@ It includes:
 - [Jade](http://jade-lang.com/) | HTML
 
 
-It also handles images and icon-fonts.
+It also compresses images and builds custom icon-fonts (that was a pain...).
 
-And includes an evolved version of my custom CSS starting structure.  Read more about it here:
+The CSS includes an evolved version of my custom starting structure.  Read more about it here:
 [https://github.com/seethroughtrees/styles-seed](https://github.com/seethroughtrees/styles-seed)
+
+It's opinionated, but the main reason for this repo is for me to reuse it.
 
 #### Installation
 
@@ -29,9 +31,3 @@ To run, you can just type:
 ```gulp serve```
 
 Which will run all watch commands and open Chrome Canary (if installed) with Browsersync.
-
-or you can run:
-
-```gulp```
-
-To run all the tasks without watching or starting the server.
