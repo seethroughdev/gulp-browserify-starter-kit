@@ -5,7 +5,8 @@ var gulp        = require('gulp')
 ,   browserSync = require('browser-sync')
 ,   reload      = browserSync.reload;
 
-var path = require('../utils/paths');
+var path         = require('../utils/paths')
+,   handleErrors = require('../utils/handleErrors');
 
 
 gulp.task('img:compress', function () {
@@ -16,6 +17,7 @@ gulp.task('img:compress', function () {
       interlaced: true,
       svgoPlugins: []
     }))
+    .on('error', handleErrors)
     .pipe($.size({ showFiles: true, title: 'images compressed:' }))
     .pipe(gulp.dest(path.dist.img))
     .pipe(reload({ stream: true, once: true }));
@@ -31,6 +33,7 @@ gulp.task('img:iconfont', function() {
       normalize: true,
       appendCodepoints: true
     }))
+    .on('error', handleErrors)
     .on('codepoints', function(codepoints, options) {
       gulp.src(path.src.css + 'templates/_font-icons.scss')
         .pipe($.consolidate('lodash', {
@@ -38,6 +41,7 @@ gulp.task('img:iconfont', function() {
           fontName: fontName,
           fontPath: path.dist.fonts
           }))
+        .on('error', handleErrors)
         .pipe(gulp.dest(path.src.css + 'modules/'));
     })
     .pipe(gulp.dest(path.dist.fonts));
