@@ -19,7 +19,7 @@ var path         = require('../utils/paths')
 /*==========  GH PAGES OPTIONS  ==========*/
 
 var ghPagesOpts = {
-  cacheDir: '.tmpPages'
+  cacheDir: '.tmp'
 };
 
 gulp.task('deploy:gh', function() {
