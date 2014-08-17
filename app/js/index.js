@@ -1,3 +1,5 @@
-var fallbacks = require('./modules/fallbacks');
+var $ = require('jquery');
 
-module.exports = console.log('index yoooo!');
+$('body').text('oh yeah');
+
+module.exports = console.log('index is loaded!');

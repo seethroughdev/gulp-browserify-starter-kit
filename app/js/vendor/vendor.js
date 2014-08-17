@@ -1,1 +1,1 @@
-console.log('vendor');
+console.log('vendor is loaded');
