@@ -24,23 +24,30 @@ To install just clone the repo and run
 
 ```npm install && bower install```.
 
-Afterwards you have a completely modular Gulp build system.
+Afterwards you have a completely modular Gulp build system.  This structure
+was heavily inspired by: [this article](http://viget.com/extend/gulp-browserify-starter-faq).
+I can't recommend it enough.
 
 
 ### Usage
 
-There are several tasks you can run to manage your build.
-
-To run all the tasks, watch files and start a server:
+There are several tasks you can run to manage your build.  To run all the tasks,
+watch files and start a server:
 
 ```gulp serve```
 
 The other tasks are in gulp/runners, including:
 
-```clean, test, default and deploy```
+```[clean, test, default and deploy]```
+
+As well as all the sub-tasks.  A quick look through the folder structure should
+make it pretty obvious what's going on here.
 
 
-### Details
+*********************
+
+
+## Details
 
 
 #### Browserify
@@ -53,10 +60,10 @@ in the browserifyOpts obj.  But I've found it handy.
 
 It will compile a bundle.js and bundle.min.js file in your dist/js/ folders.
 
-TODO:  Switch this to a node-env dependency instead.
+*TODO:  Switch this to a node-env dependency instead.*
 
 
-#### Other JS
+#### Other JS Tasks
 
 This build does a couple other things with javascript.
 
@@ -75,6 +82,42 @@ js/vendor/folder.
 
 It will run all javascript through jshint.  It uses the pretty reporter.  And
 will not break on fail.  All these are options in the **js:hint** task.
+
+*TODO: Considering switching to my preferred linter: eslint.*
+
+##### Uglify
+
+All javascript is compressed with **Uglify**.  I am anticipating big improvements
+for source maps with Gulp 4.x so I'm prepared for this step to change a bit.
+
+
+#### CSS
+
+All CSS is run through the RubySass module.  If you're interested in my current
+default CSS layout, check out [https://github.com/seethroughtrees/styles-seed](https://github.com/seethroughtrees/styles-seed).
+You can pretty much copy it right in.
+
+All CSS is compiled to **dist/css/main.css**.  However, it will compile any top-level
+scss file, so you can have several if you want.
+
+##### Compression
+
+Compression is handled by **gulp-csso**.  I love the way they approach compression.
+
+##### Autoprefixer
+
+Enough said.  Nothing better.  I don't plan to ever write CSS without it again.
+
+
+#### HTML
+
+All HTML is currently handled with Jade.  Another thing that should easy to switch
+out, and depending if anyone uses this repo, something I might consider doing myself.
+
+But I do find prototyping with Jade is the most pleasant experience of all of them.
+
+This build uses a pretty common structure and something I've been using on all
+of my prototyping projects.
 
 
 #### Testing
