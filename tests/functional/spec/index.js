@@ -1,21 +1,22 @@
-'use strict';
+(function(expect, $) {
 
-var expect = window.chai.expect;
+  'use strict';
 
-var $ = window.jQuery;
 
-describe('Main Test Suite', function() {
+  describe('Functional Test Suite', function() {
 
-  it('Should run tests', function () {
+    it('Should run tests', function () {
 
-    expect(true).to.be.true;
+      expect(true).to.be.true;
+
+    });
+
+    it('should read elements on the page', function () {
+
+      expect($('#testElement')).to.have.class('is-active');
+
+    });
 
   });
 
-  it('should read elements on the page', function () {
-
-    expect($('#testElement')).to.have.class('is-active');
-
-  });
-
-});
+}(window.chai.expect, window.jQuery));
