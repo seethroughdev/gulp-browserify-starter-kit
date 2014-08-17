@@ -10,17 +10,23 @@
 
 var gulp        = require('gulp')
 ,   $           = require('gulp-load-plugins')()
-,   ghPages     = require('gulp-gh-pages')
 ,   runSequence = require('run-sequence');
 
 var path         = require('../utils/paths')
 ,   handleErrors = require('../utils/handleErrors');
 
 
+/*==========  GH PAGES OPTIONS  ==========*/
+
+var ghPagesOpts = {
+  cacheDir: '.tmpPages'
+};
+
 gulp.task('deploy:gh', function() {
-  return gulp.src(path.dist.path)
-    .pipe(ghPages())
-    .on('error', handleErrors);
+  return gulp.src(path.dist.path + '**/*')
+    .pipe($.ghPages(ghPagesOpts))
+    .on('error', handleErrors)
+    .pipe(gulp.dest(ghPagesOpts.cacheDir));
 });
 
 gulp.task('deploy', function(callback) {
