@@ -59,9 +59,9 @@ in the browserifyOpts obj.  But I've found it handy.
 
 It will compile a bundle.js and bundle.min.js file in your dist/js/ folders.
 
-*TODO:  Switch this to a node-env dependency instead.*
+*TODO:  Consider switching compression to a node-env dependency instead.*
 
-*TODO:  Decide whether its better to open up src to multiple browserify builds.*
+*TODO:  Consider whether its better to open up src to multiple browserify builds.*
 
 
 ## Other JS Tasks
@@ -107,12 +107,13 @@ Compression is handled by **gulp-csso**.  I love the way they approach compressi
 
 ##### Autoprefixer
 
-Enough said.  Nothing better.  I don't plan to ever write CSS without it again.
+Nothing better than [Autoprefixer](https://github.com/ai/autoprefixer).
+I don't plan to ever write CSS without it again.
 
 
 ## HTML
 
-All HTML is currently handled with Jade.  Another thing that should easy to switch
+All HTML is currently handled with *Jade*.  Another thing that should easy to switch
 out, and depending if anyone uses this repo, something I might consider doing myself.
 
 But I do find prototyping with Jade is the most pleasant experience of all of them.
@@ -121,11 +122,27 @@ This build uses a pretty common structure and something I've been using on all
 of my prototyping projects.
 
 
+## Images
+
+Images are compressed with *imagemin* and put into their respective folders.
+
+##### Icon-Font Generation
+
+I have configured a scss file for icon-fonts.  To use it, just add any svg file
+to the img/icons/ folder and it will recompile the font to **dist/fonts/**.
+
+Font configuration is handled in the **lib/_vars.scss** file.
+
+It uses a template in the **app/scss/templates** folder.
+
+
 ## Testing
 
-Testing includes 2 sub-tasks:  unit and functional.  Both are run by mocha
-and chai.  Only one is in node and one is in the browser.  And are split in the
+Testing includes 2 sub-tasks:  unit and functional.  Both are run by *mocha*
+and *chai*.  Only one is in node and one is in the browser.  They are split in the
 test folder respectively.
 
 For sanity, both suites run on **gulp serve** and **gulp test**.  However, only
 **test:unit** runs on watch.
+
+You can also run ```gulp test``` to run all tests.
