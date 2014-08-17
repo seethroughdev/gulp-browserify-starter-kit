@@ -1,7 +1,9 @@
+'use strict';
+
 var mocha  = require('mocha')
 ,   expect = require('chai').expect;
 
-describe('Main suite', function() {
+describe('Unit Test Suite', function() {
 
   it('should have tests', function () {
     expect(true).to.be.true;
