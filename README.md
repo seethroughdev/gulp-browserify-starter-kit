@@ -55,13 +55,13 @@ Here's some details about the build:
 Browserify is configured to run on ```index.js```.
 
 It also exposes a single global called **shared**.  You can easily remove this
-in the browserifyOpts obj.  But I've found it handy.
+in the browserifyOpts obj.  But I've found it handy.  All configuration for this
+task can be found in **gulp/tasks/js.js**.
 
-It will compile a bundle.js and bundle.min.js file in your dist/js/ folders.
+The task will compile a bundle.js and bundle.min.js file in your **dist/js/** folder.
 
-*TODO:  Consider switching compression to a node-env dependency instead.*
-
-*TODO:  Consider whether its better to open up src to multiple browserify builds.*
+- *TODO:  Consider switching compression to a node-env dependency instead.*
+- *TODO:  Consider whether its better to open up src to multiple browserify builds.*
 
 
 ## Other JS Tasks
