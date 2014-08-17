@@ -11,6 +11,12 @@ It includes:
 
 It also compresses images and builds custom icon-fonts.
 
+Feel free to change, edit, remove or add to your build.  This is only a starting
+point.  I tried to make it as modular and non-opionated as possible.  But I'm
+sure there are places I could have done better.
+
+***********************
+
 
 ### Installation
 
