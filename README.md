@@ -47,13 +47,12 @@ make it pretty obvious what's going on here.
 *********************
 
 
-## Details
+Here's some details about the build:
 
 
-#### Browserify
+## Browserify
 
-Browserify is configured to run on ```index.js```.  I am debating whether to
-modify the process to run on all top-level js files for multiple builds.
+Browserify is configured to run on ```index.js```.
 
 It also exposes a single global called **shared**.  You can easily remove this
 in the browserifyOpts obj.  But I've found it handy.
@@ -62,8 +61,10 @@ It will compile a bundle.js and bundle.min.js file in your dist/js/ folders.
 
 *TODO:  Switch this to a node-env dependency instead.*
 
+*TODO:  Decide whether its better to open up src to multiple browserify builds.*
 
-#### Other JS Tasks
+
+## Other JS Tasks
 
 This build does a couple other things with javascript.
 
@@ -91,7 +92,7 @@ All javascript is compressed with **Uglify**.  I am anticipating big improvement
 for source maps with Gulp 4.x so I'm prepared for this step to change a bit.
 
 
-#### CSS
+## CSS
 
 All CSS is run through the RubySass module.  If you're interested in my current
 default CSS layout, check out [https://github.com/seethroughtrees/styles-seed](https://github.com/seethroughtrees/styles-seed).
@@ -109,7 +110,7 @@ Compression is handled by **gulp-csso**.  I love the way they approach compressi
 Enough said.  Nothing better.  I don't plan to ever write CSS without it again.
 
 
-#### HTML
+## HTML
 
 All HTML is currently handled with Jade.  Another thing that should easy to switch
 out, and depending if anyone uses this repo, something I might consider doing myself.
@@ -120,7 +121,7 @@ This build uses a pretty common structure and something I've been using on all
 of my prototyping projects.
 
 
-#### Testing
+## Testing
 
 Testing includes 2 sub-tasks:  unit and functional.  Both are run by mocha
 and chai.  Only one is in node and one is in the browser.  And are split in the
