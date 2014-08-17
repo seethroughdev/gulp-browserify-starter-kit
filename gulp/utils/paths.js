@@ -13,5 +13,8 @@ module.exports = {
     js: 'dist/js/',
     html: 'dist/views/',
     fonts: 'dist/fonts/'
+  },
+  test: {
+    path: 'spec/'
   }
 };

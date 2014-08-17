@@ -5,7 +5,7 @@ var gulp        = require('gulp')
 
 var path = require('../utils/paths');
 
-gulp.task('serve', [ 'default' ], function () {
+gulp.task('serve', [ 'default', 'test' ], function () {
 
   browserSync.init({
     server: {
@@ -19,7 +19,8 @@ gulp.task('serve', [ 'default' ], function () {
 
   gulp.watch([path.src.html + '**/*.jade'], ['html']);
   gulp.watch([path.src.css + '**/*.scss'], ['css']);
-  gulp.watch([path.src.js + '**/*.js'], ['js']);
+  gulp.watch([path.src.js + '**/*.js'], ['js', 'test']);
   gulp.watch([path.src.img + '**/*'], ['img']);
+  gulp.watch([path.test.path + '**/*.js'], ['test']);
 
 });
