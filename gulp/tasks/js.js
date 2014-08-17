@@ -30,14 +30,6 @@ gulp.task('js:browserify', function () {
     .pipe(gulp.dest(path.dist.js));
 });
 
-gulp.task('js:hint', function () {
-  return gulp.src([path.src.js + '**/*.js', '!' + path.src.js + 'vendor/**/*.js'])
-    .pipe($.jshint())
-    .on('error', handleErrors)
-    .pipe($.jshint.reporter('jshint-stylish'))
-    .pipe(reload({stream: true}));
-});
-
 gulp.task('js:vendor', function() {
   return gulp.src([path.src.js + 'vendor/**/*.js', '!' + path.src.js + 'vendor/modernizr.js'])
     .on('error', handleErrors)
@@ -56,5 +48,14 @@ gulp.task('js:modernizr', function() {
     .pipe($.size({ showFiles: true, title: 'compressed modernizr:' }))
     .pipe(gulp.dest(path.dist.js));
 });
+
+gulp.task('js:hint', function () {
+  return gulp.src([path.src.js + '**/*.js', '!' + path.src.js + 'vendor/**/*.js'])
+    .pipe($.jshint())
+    .on('error', handleErrors)
+    .pipe($.jshint.reporter('jshint-stylish'))
+    .pipe(reload({stream: true}));
+});
+
 
 gulp.task('js', ['js:browserify', 'js:vendor', 'js:modernizr', 'js:hint']);
