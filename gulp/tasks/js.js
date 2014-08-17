@@ -41,7 +41,7 @@ gulp.task('js:vendor', function() {
 });
 
 gulp.task('js:modernizr', function() {
-  return gulp.src(path.src.js + 'vendor/modernizr.js')
+  return gulp.src(path.bower.path + 'modernizr/modernizr.js')
     .on('error', handleErrors)
     .pipe($.changed(path.dist.js + 'vendor/modernizr/js'))
     .pipe($.uglify())

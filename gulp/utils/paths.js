@@ -18,5 +18,11 @@ module.exports = {
     path: 'tests/',
     unit: 'tests/unit/',
     functional: 'tests/functional/'
+  },
+  bower: {
+    path: 'bower_components/'
+  },
+  npm: {
+    path: 'node_modules/'
   }
 };
