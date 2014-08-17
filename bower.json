@@ -1,0 +1,23 @@
+{
+  "name": "static-gulp-browserify",
+  "version": "0.0.0",
+  "homepage": "https://github.com/seethroughtrees/static-gulp-browserify",
+  "authors": [
+    "Adam L. <github@adamin.net>"
+  ],
+  "description": "My goto for setting up a build with gulp and browserify.",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "modernizr": "~2.8.3",
+    "normalize-scss": "~3.0.1",
+    "semantic-grid": "*"
+  }
+}
