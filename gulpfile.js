@@ -37,7 +37,7 @@ var path = {
 // Options
 var browserifyOpts = {
   debug: true,
-  standalone: 'svgFallbackify'
+  standalone: 'shared'
 };
 
 gulp.task('js:browserify', function () {
