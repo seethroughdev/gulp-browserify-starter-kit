@@ -19,11 +19,13 @@ var path         = require('../utils/paths')
 /*==========  GH PAGES OPTIONS  ==========*/
 
 var ghPagesOpts = {
-  cacheDir: '.tmp'
+  cacheDir: '.tmp',
+  origin: 'origin',
+  branch: 'gh-pages'
 };
 
 gulp.task('deploy:gh', function() {
-  return gulp.src(path.dist.path + '**/*')
+  return gulp.src(path.dist.path + '**/*.*')
     .pipe($.ghPages(ghPagesOpts))
     .on('error', handleErrors)
     .pipe(gulp.dest(ghPagesOpts.cacheDir));
