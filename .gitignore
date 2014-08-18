@@ -1,6 +1,0 @@
-node_modules
-bower_components
-.sass-cache
-dist
-.tmp
-npm-debug.log
