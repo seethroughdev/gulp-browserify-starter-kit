@@ -38,10 +38,22 @@ watch files and start a server:
 
 The other tasks are in gulp/runners, including:
 
-```[clean, test, default and deploy]```
 
-As well as all the sub-tasks.  A quick look through the folder structure should
-make it pretty obvious what's going on here.
+Default
+
+- Runs all tasks but doesn't start local server
+
+Clean
+
+- Deletes the **dist/** folder.
+
+Test
+
+- Runs all unit and functional tests in **tests/** folder.
+
+Deploy
+
+- Runs Clean and Default, then will push branch to gh-pages.
 
 
 *********************
