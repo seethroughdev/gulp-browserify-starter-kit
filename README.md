@@ -39,7 +39,7 @@ watch files and start a server:
 
 ```gulp serve```
 
-The other tasks are in gulp/runners, including:
+The other tasks are in ```gulp/runners/```, including:
 
 
 ##### Default
