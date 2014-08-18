@@ -1,11 +1,3 @@
-/**
-*
-* For some reason the latest gh-pages is broken with gulp,
-* waiting for a fix, after, after, we'll need to add deploy:gh
-* back to the deploy task list.
-*
-**/
-
 
 'use strict';
 
