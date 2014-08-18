@@ -18,18 +18,21 @@ sure there are places I could have done better.
 ***********************
 
 
-### Installation
+## Installation
 
-To install just clone the repo and run
+Assuming you already have [Node](http://nodejs.org/) and [Gulp](http://gulpjs.com/) installed.  Just clone the repo and run
 
 ```npm install && bower install```.
 
-Afterwards you have a completely modular Gulp build system.  This structure
+Afterwards you will have a completely modular Gulp build system.  This structure
 was heavily inspired by: [this article](http://viget.com/extend/gulp-browserify-starter-faq).
 I can't recommend it enough.
 
 
-### Usage
+***********************
+
+
+## Usage
 
 There are several tasks you can run to manage your build.  To run all the tasks,
 watch files and start a server:
@@ -39,19 +42,19 @@ watch files and start a server:
 The other tasks are in gulp/runners, including:
 
 
-Default
+##### Default
 
 - Runs all tasks but doesn't start local server
 
-Clean
+##### Clean
 
 - Deletes the **dist/** folder.
 
-Test
+##### Test
 
 - Runs all unit and functional tests in **tests/** folder.
 
-Deploy
+##### Deploy
 
 - Runs Clean and Default, then will push branch to gh-pages.
 
