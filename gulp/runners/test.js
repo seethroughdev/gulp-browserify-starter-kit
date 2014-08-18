@@ -28,4 +28,10 @@ gulp.task('test:functional', function() {
     .pipe($.mochaPhantomjs({phantomjs: phantomOpts}));
 });
 
+gulp.task('test:watch', ['test'], function() {
+  gulp.watch([path.src.js + '**/*.js'], ['test']);
+  gulp.watch([path.test.unit + '**/*.js'], ['test:unit']);
+  gulp.watch([path.test.functional + '**/*'], ['test:functional']);
+});
+
 gulp.task('test', ['test:unit', 'test:functional']);

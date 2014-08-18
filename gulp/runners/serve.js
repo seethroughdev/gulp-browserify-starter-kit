@@ -5,9 +5,8 @@ var gulp        = require('gulp')
 
 var path = require('../utils/paths');
 
-gulp.task('serve', [ 'default', 'test' ], function () {
-
-  browserSync.init({
+function browserSyncInit() {
+  return browserSync.init({
     server: {
       baseDir: path.dist.path,
       directory: true
@@ -16,6 +15,11 @@ gulp.task('serve', [ 'default', 'test' ], function () {
     notify: false,
     browser: 'google chrome canary'
   });
+}
+
+gulp.task('serve', [ 'default', 'test' ], function () {
+
+  browserSyncInit();
 
   gulp.watch([path.src.html + '**/*.jade'], ['html']);
   gulp.watch([path.src.css + '**/*.scss'], ['css']);
@@ -25,3 +29,13 @@ gulp.task('serve', [ 'default', 'test' ], function () {
   gulp.watch([path.test.functional + '**/*'], ['test:functional']);
 
 });
+
+gulp.task('serve:notest', [ 'default' ], function() {
+
+  browserSyncInit();
+  gulp.watch([path.src.js + '**/*.js'], ['js']);
+  gulp.watch([path.src.html + '**/*.jade'], ['html']);
+  gulp.watch([path.src.css + '**/*.scss'], ['css']);
+  gulp.watch([path.src.img + '**/*'], ['img']);
+
+})
