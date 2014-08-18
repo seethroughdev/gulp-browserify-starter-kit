@@ -1,0 +1,30 @@
+/*==========  COLORS  ==========*/
+
+$primaryColor: rgba(0,0,0,1) !default;
+$secondaryColor: rgba(0,0,0,1) !default;
+$tertiaryColor: rgba(0,0,0,1) !default;
+
+
+/*==========  TYPOGRAPHY  ==========*/
+
+$bodyColor: $primaryColor;
+$fontFamily: Helvetica, Arial, sans-serif !default;
+$fontName: 'icons' !default;
+$fontPath: '/';
+
+
+/*==========  ANIMATION  ==========*/
+
+$animationEasing: cubic-bezier(0.455, 0.030, 0.515, 0.955) !default;
+
+
+/*==========  BREAKPOINTS  ==========*/
+
+$break-mobile: 320px !default;
+$break-small: 480px !default;
+$break-medium: 768px !default;
+$break-large: 1200px !default;
+
+
+/*==========  MISC  ==========*/
+
