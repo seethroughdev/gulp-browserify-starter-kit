@@ -50,13 +50,19 @@ The other tasks are in ```gulp/runners/```, including:
 
 - Deletes the ```dist/``` folder.
 
+##### Deploy
+
+- Runs Clean and Default, then will push branch to gh-pages.
+
 ##### Test
 
 - Runs all unit and functional tests in **tests/** folder.
 
-##### Deploy
+##### Alt. Testing Setup
 
-- Runs Clean and Default, then will push branch to gh-pages.
+- If you prefer to have your tests running in a separate window, you can run
+```gulp serve:notest``` in your main terminal window, and ```gulp test:watch``` 
+in a separate window to get the same effect.
 
 
 *********************
