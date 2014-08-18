@@ -33,5 +33,5 @@ gulp.task('deploy:gh', function() {
 });
 
 gulp.task('deploy', function(callback) {
-  runSequence('clean', 'default', callback);
+  runSequence('clean', 'default', 'deploy:gh', callback);
 });
