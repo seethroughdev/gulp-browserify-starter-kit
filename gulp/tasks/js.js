@@ -14,7 +14,8 @@ var path         = require('../utils/paths')
 // Options
 var browserifyOpts = {
   debug: true,
-  standalone: 'shared'
+  standalone: 'shared',
+  transform: 'reactify'
 };
 
 gulp.task('js:browserify', function () {
