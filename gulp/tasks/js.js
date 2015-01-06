@@ -21,9 +21,9 @@ var browserifyOpts = {
 };
 
 gulp.task('js:browserify', function () {
-  return browserify( './' + path.src.js + 'app.jsx', browserifyOpts ).bundle()
+  return browserify( './' + path.src.js + 'index.js', browserifyOpts ).bundle()
     .on('error', handleErrors)
-    .pipe(source( './' + path.src.js + 'app.jsx' ))
+    .pipe(source( './' + path.src.js + 'index.js' ))
     .pipe($.rename('bundle.js'))
     .pipe(gulp.dest(path.dist.js))
     .pipe($.rename('bundle.min.js'))

@@ -39,7 +39,7 @@ gulp.task('img:iconfont', function() {
         .pipe($.consolidate('lodash', {
           glyphs: codepoints,
           fontName: fontName,
-          fontPath: path.dist.fonts
+          fontPath: '/fonts/'
           }))
         .on('error', handleErrors)
         .pipe(gulp.dest(path.src.css + 'modules/'));

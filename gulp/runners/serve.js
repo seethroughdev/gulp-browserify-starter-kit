@@ -11,7 +11,7 @@ function browserSyncInit() {
       baseDir: path.dist.path,
       directory: true
     },
-    startPath: '/views/',
+    startPath: '/',
     notify: false,
     browser: 'google chrome canary'
   });
