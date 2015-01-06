@@ -57,7 +57,7 @@ gulp.task('js:modernizr', function() {
 });
 
 gulp.task('js:hint', function () {
-  return gulp.src([path.src.js + '**/*.js', '!' + path.src.js + 'vendor/**/*.js'])
+  return gulp.src([path.src.js + '**/*', '!' + path.src.js + 'vendor/**/*.js'])
     .pipe($.jscs())
     .on('error', handleErrors)
     .pipe(reload({stream: true}));
