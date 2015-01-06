@@ -1,25 +1,24 @@
 doctype
-html
+html(data-ng-app="tingeApp")
 
   head
-
-    //- if you need to add anything you can hook with prepend/append to these blocks
-
     block head
 
       include ../partials/meta
 
       block css
         link(rel='stylesheet', href='../css/main.css')
+        link(rel='stylesheet', href='//code.cdn.mozilla.net/fonts/fira.css')
 
-      script(src='../js/modernizr.js')
+      //- script(src='../js/modernizr.js')
 
       //- IE shims
-      block ie
-        include ../partials/ie
+      //- block ie
+      //-   include ../partials/ie
 
-  body
+  body()
     #viewport
+
       block body
 
 
@@ -29,7 +28,5 @@ html
       block footer
 
     block scripts
-      script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
-      script window.jQuery || document.write('<script src="/scripts/vendor/jquery-1.11.1.min.js"><\/script>')
       script(src='../js/vendor.js')
       script(src='../js/bundle.js')
