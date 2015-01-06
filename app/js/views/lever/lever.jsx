@@ -20,7 +20,7 @@ View = React.createClass({
   getInitialState: function() {
     return {
       leverData: {},
-      leverTitle: '',
+      leverTitle: this.getParams().lever,
       leverSubs: []
     };
   },
@@ -45,7 +45,7 @@ View = React.createClass({
           leverSubs={this.state.leverSubs}
         />
         <section className="chart">
-          <LeverChart leverTitle={this.state.leverTitle} />
+          <LeverChart leverTitle={this.getParams().lever} />
           <LeverAside />
         </section>
       </div>
