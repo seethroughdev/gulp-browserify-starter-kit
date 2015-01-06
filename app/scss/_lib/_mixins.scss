@@ -16,4 +16,15 @@
   @else if $media == large {
     @media screen and (min-width:$break-large +1) {@content;}
   }
+  @else if $media == wide {
+    @media screen and (min-width:$break-wide +1) {@content;}
+  }
+}
+
+@mixin arrow-down($size: 20px, $color: $grey) {
+  width: 0;
+  height: 0;
+  border-left: $size solid transparent;
+  border-right: $size solid transparent;
+  border-top: $size solid $color;
 }

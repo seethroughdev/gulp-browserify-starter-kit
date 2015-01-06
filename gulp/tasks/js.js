@@ -51,9 +51,8 @@ gulp.task('js:modernizr', function() {
 
 gulp.task('js:hint', function () {
   return gulp.src([path.src.js + '**/*.js', '!' + path.src.js + 'vendor/**/*.js'])
-    .pipe($.jshint())
+    .pipe($.jscs())
     .on('error', handleErrors)
-    .pipe($.jshint.reporter('jshint-stylish'))
     .pipe(reload({stream: true}));
 });
 

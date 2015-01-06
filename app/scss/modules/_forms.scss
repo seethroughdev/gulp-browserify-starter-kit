@@ -1,0 +1,62 @@
+input:not([type="submit"]) {
+  border: 2px solid $ltltGrey;
+  outline: none;
+  margin-bottom: .6rem;
+  @extend .font-semi;
+  color: $dkdkGrey;
+  line-height: 2rem;
+  padding: 5px 15px;
+  width: 100%;
+}
+
+label {
+  display: block;
+  font-size: 0.8rem;
+  @extend .font-normal;
+  color: $grey;
+  text-align: left;
+  margin-bottom: .3rem;
+}
+
+
+form {
+  width: 100%;
+  margin: 0 auto 1.667rem;
+  text-align: center;
+
+  p {
+    font-size: 0.9rem;
+    font-style: italic;
+  }
+
+  .btn__submit {
+    margin: 1.5em 0;
+  }
+
+  .horizontal-nav {
+    font-size: 0.9rem;
+  }
+
+}
+
+fieldset {
+  border: 0;
+}
+
+
+// .field {
+//   @extend %flex-container-row;
+
+//   label {
+//     flex: 3;
+//     @include break(medium) {
+//       text-align: right;
+//       line-height: 2rem;
+//       padding: 5px 15px;
+//     }
+//   }
+//   input {
+//     flex: 5;
+//   }
+
+// }

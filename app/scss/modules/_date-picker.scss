@@ -1,0 +1,75 @@
+.date-picker {
+  // margin-top: 5px;
+  overflow: visible;
+  width: 100%;
+  background: $white;
+  text-align: center;
+  vertical-align: middle;
+  text-transform: uppercase;
+  z-index: 9999;
+  user-select: none;
+  @include break(medium) {
+    position: absolute;
+  }
+
+  &.is-active {
+    .date-picker__current {
+      border-bottom: 1px solid $datePickerBorderColor;
+    }
+    .date-picker__dropdown {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+}
+
+.date-picker__current {
+  border: 1px solid $datePickerBorderColor;
+  padding: .5em 2em;
+  font-size: 1.2 * $scale * 1rem;
+  @extend .ellipses;
+  cursor: pointer;
+  &:after {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    content: '';
+    @include arrow-down(12px, $datePickerBorderColor);
+  }
+}
+.date-picker.is-active .date-picker__current:after, .date-picker__current:hover:after {
+  @include arrow-down(12px, $datePickerActiveColor);
+}
+
+.date-picker__wrapper {
+  position: relative;
+}
+
+ul.date-picker__dropdown {
+  list-style-type: none;
+  background: $white;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  width: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: 300ms opacity $animationEasing;
+  border: 1px solid $datePickerBorderColor;
+  border-top: 0;
+
+  li {
+    padding: .75em 2em;
+    &:hover {
+      background: $ltGrey;
+      cursor: pointer;
+    }
+    &.is-active {
+      background: $datePickerActiveColor;
+      cursor: default;
+    }
+  }
+
+}

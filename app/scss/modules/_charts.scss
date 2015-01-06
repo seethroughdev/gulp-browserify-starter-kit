@@ -1,0 +1,42 @@
+.c3 {
+  svg {
+    font-size: .8rem;
+    font-family: $fontPrimary;
+  }
+  g.tick {
+    fill: $dkGrey;
+  }
+  g.c3-axis line, g.c3-axis path {
+    stroke: $dkGrey;
+  }
+  g.c3-axis text {
+    fill: $dkGrey;
+  }
+  .c3-grid line {
+    stroke: $ltGrey;
+  }
+  .c3-lines-2013-Y-Y, .c3-lines-2012-Y-Y, .c3-lines-2011-Y-Y, .c3-lines-Growth {
+    path {
+      stroke-dasharray: $svgDash;
+    }
+  }
+  .c3-legend-item {
+    @include break(large) {
+      display: none;
+    }
+  }
+  .c3-tooltip th {
+    background: $black;
+    text-align: center;
+  }
+  .c3-tooltip td {
+    color: $black;
+  }
+  .c3-tooltip {
+    opacity: 1;
+    min-width: 7rem;
+  }
+}
+
+#chart {
+}

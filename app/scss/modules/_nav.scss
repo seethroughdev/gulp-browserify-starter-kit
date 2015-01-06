@@ -1,0 +1,96 @@
+.main__aside {
+  color: $navColor;
+  background: $navBgColor;
+  text-transform: uppercase;
+  padding: 1em;
+
+  ul {
+    list-style-type: none;
+    flex-grow: 0;
+  }
+  li {
+    line-height: 1.8rem;
+  }
+  & > a {
+    flex-grow: 0;
+  }
+  a {
+    color: $navColor;
+    text-decoration: none;
+    outline: none;
+    display: block;
+    &:hover {
+      color: $blue;
+    }
+  }
+  .icon-star {
+    font-size: 2.45rem;
+    margin-bottom: 10px;
+    &:after {
+      display: block;
+      font-size: 1rem;
+      content: 'Favorite';
+    }
+    &:hover {
+      &:after {
+        content: 'Add';
+      }
+    }
+
+  }
+  .favorite-btn-wrapper {
+    text-align: center;
+    a {
+      color: $dkdkGrey;
+      &:hover {
+        color: $blue;
+      }
+    }
+  }
+}
+
+.chart {
+  z-index: 0;
+}
+
+.main__aside__nav {
+  ul {
+    max-height: 0;
+    opacity: 0;
+    transform: translateX(-9999em);
+    transition: max-height 350ms ease-in, opacity 150ms ease-in ;
+    a {
+      padding-left: .4em;
+      color: $pink;
+      &.is-active {
+        color: $yellow;
+      }
+    }
+  }
+
+  a.is-active {
+    color: $blue;
+  }
+
+  .is-active {
+    ul {
+      opacity: 1;
+      max-height: 1500px;
+      transform: translateX(0em);
+    }
+  }
+}
+
+.horizontal-nav {
+  margin: 0 auto 1em;
+  display: inline-block;
+  padding: .5em 1em;
+  border-top: 1px solid $ltltGrey;
+  border-bottom: 1px solid $ltltGrey;
+  a.is-active {
+    color: $pink;
+  }
+  a:hover {
+    color: $pink;
+  }
+}

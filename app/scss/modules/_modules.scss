@@ -1,0 +1,13 @@
+.scroll-wrapper {
+  position: relative;
+  & > * {
+    position: absolute;
+    height: auto;
+    overflow: visible;
+    min-height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}

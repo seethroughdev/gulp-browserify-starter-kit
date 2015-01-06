@@ -1,0 +1,204 @@
+%flex-container-column {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  flex-wrap: no-wrap;
+}
+
+%flex-container-row {
+  display: flex;
+  flex-direction: column;
+  @include break(medium) {
+    flex-direction: row;
+  }
+  align-items: stretch;
+  justify-content: space-between;
+  flex-wrap: no-wrap;
+}
+
+
+.container {
+  padding: 1em .5em;
+  overflow: hidden;
+  position: relative;
+  transition: 500ms ease padding;
+
+  @include break(medium) {
+    padding: 1em 2em;
+  }
+
+  @include break(large) {
+    padding: 1.667em 2.667em;
+  }
+
+  .container {
+    @include break(mobile-only) {
+      padding: 0;
+    }
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  &.no-padding {
+    padding: 0 !important;
+  }
+}
+
+
+
+#site-wrapper {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  min-height: 100%;
+}
+
+
+#viewport {
+  min-height: 100%;
+  @extend %flex-container-row;
+}
+
+.main__content {
+  @extend %flex-container-column;
+  flex: 1;
+  @include break(medium) {
+    margin-left: 140px;
+  }
+  @include break(large) {
+    margin-left: 160px;
+  }
+}
+
+.main__aside {
+  @extend %flex-container-column;
+  flex-grow: 0;
+  justify-content: space-between;
+  width: 100%;
+  top: 0;
+  height: auto;
+  position: relative;
+  @include break(medium) {
+    position: fixed;
+    height: 100%;
+    width: 140px;
+  }
+  @include break(large) {
+    width: 160px;
+  }
+}
+
+.page {
+  width: 100%;
+  max-width: 760px;
+  @extend .container;
+
+  &.is-centered {
+    align-items: center;
+    justify-content: center;
+  }
+
+  background: $ltltGrey;
+
+  @include break(large) {
+    border: 5px solid $ltltGrey;
+    background: transparent;
+    margin: 0 2em;
+  }
+
+  @include break(wide) {
+    margin: 0 auto;
+  }
+
+}
+
+.chart {
+  flex: 7;
+  @extend %flex-container-row;
+}
+
+.chart__content {
+  @extend .container;
+  flex-grow: 3;
+  padding: 1em .5em;
+  min-height: 100%;
+
+  @include break(medium) {
+    padding: 1em 2em 0;
+  }
+
+  @include break(large) {
+    padding: 1.667em 2.667em 0;
+    flex: 4;
+  }
+}
+
+
+.chart__aside {
+  display: none;
+  flex: 1;
+  padding: 0em 2.5em 2.5em 0;
+  @include break(large) {
+    display: block;
+  }
+}
+
+.message__container {
+  @extend .container;
+  text-align: center;
+}
+
+.data-row {
+  flex-grow: 0;
+  @extend %flex-container-row;
+  background: $ltltGrey;
+  border-top: 1px solid darken($ltltGrey, 3%);
+}
+
+.main-header {
+  @extend %flex-container-row;
+  @extend .container;
+  overflow: visible;
+  flex-grow: 0;
+  .main-header__tl {
+    flex: 0;
+    @include break(wide) {
+      flex: 1;
+    }
+  }
+  .main-header__tc {
+    flex: 2;
+  }
+  .main-header__tr {
+    flex: 1;
+  }
+}
+
+section.main-header__tr {
+  position: relative;
+}
+
+
+
+// some mobile only layout fixes
+@include break(mobile-only) {
+  .no-mobile {
+    display: none !important;
+  }
+}
+
+.mobile-only {
+  @include break(small) {
+    display: none !important;
+  }
+}
+
+.small-only {
+  @include break(medium) {
+    display: none !important;
+  }
+}
+
+

@@ -1,0 +1,103 @@
+.btn-row {
+  display: block;
+  text-align: center;
+  margin: 1.667em 0;
+
+  &.is-left {
+    text-align: center;
+    @include break(medium) {
+      text-align: left;
+    }
+  }
+
+  .btn, a {
+    margin: 1em auto;
+    display: block;
+    text-align: center;
+    @include break(medium) {
+      display: inline-block;
+      margin: 0 .5em;
+      &:first-of-type {
+        margin-left: 0;
+      }
+      &:last-of-type {
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+.btn {
+  display: inline-block;
+  padding: 15px 32px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  outline: 0;
+  border: 1px solid lighten($linkColor, 15%);
+  font-weight: 300;
+
+  @include break(medium) {
+    padding: 5px 32px;
+  }
+
+  &.is-large {
+    @include break(mobile-only) {
+      width: 100%;
+    }
+  }
+
+  &:hover {
+    background: lighten($linkColor, 5%);
+    color: $white;
+    border: 1px solid lighten($linkColor, 5%);
+  }
+}
+
+a.btn {
+  text-decoration: none;
+}
+
+// Mixin to create buttons
+@mixin style-button($color, $textColor) {
+  background: $color;
+  color: $textColor;
+}
+
+// add state colors for each
+@each $color in $colorsList {
+  $i: index($colorsList, $color);
+  $textColor: $white;
+  @if (lightness($color) > 80) {
+    $textColor: $black; // Lighter backgorund, return dark color
+  } @else {
+    $textColor: $white; // Darker background, return light color
+  }
+
+  .ngdialog .btn.is-#{nth($colorsName, $i)} {
+    color: lighten($color, 25%);
+  }
+
+  .btn.is-#{nth($colorsName, $i)} {
+    border: 1px solid $color;
+    background: $color;
+    color: $textColor;
+    &:hover {
+      border: 1px solid darken($color, 3%);
+      background: lighten($color, 30%);
+      color: $bodyColor;
+    }
+  }
+}
+
+.btn[disabled] {
+  background: $ltGrey;
+  cursor: default;
+  border-color: $ltGrey;
+  &:hover {
+    background: $ltGrey;
+    border-color: $ltGrey;
+    color: $grey;
+  }
+}

@@ -1,14 +1,51 @@
 /*==========  COLORS  ==========*/
 
-$primaryColor: rgba(0,0,0,1) !default;
-$secondaryColor: rgba(0,0,0,1) !default;
+$white: hsla(0, 5%, 98%, 1) !default;
+$black: hsla(0, 0%, 17%, 1) !default;
+$dkdkGrey: hsla(210, 1%, 23%, 1) !default;
+$dkGrey: hsla(210, 1%, 43%, 1) !default;
+$grey: hsla(0, 0%, 60%, 1) !default;
+$ltGrey: hsla(220, 27%, 90%, 1) !default;
+$ltltGrey: darken($white, 4%);
+
+
+$pink: hsla(340, 100%, 63%, 1) !default;
+$orange: hsla(14, 100%, 67%, 1) !default;
+$blue: hsla(199, 92%, 56%, 1) !default;
+$purple: hsla(262, 52%, 47%, 1) !default;
+$cyan: hsla(187, 100%, 42%, 1) !default;
+$green: hsla(120, 61%, 43%, 1) !default;
+$yellow: HSLA(60, 72%, 73%, 1) !default;
+
+$primaryColor: $black;
+$secondaryColor: $pink !default;
 $tertiaryColor: rgba(0,0,0,1) !default;
+
+$colorsName: 'primary', 'error', 'success', 'cancel';
+$colorsList: $blue, $pink, $green, $white;
+
+
+$bodyBgColor: $white;
+$navColor: $white;
+$navBgColor: $black;
+$linkColor: $blue;
+$linkHoverColor: $orange;
+$linkVisitedColor: $linkColor;
+
+
+/*==========  MODALS  ==========*/
+
+$modalBgColor: $black;
+$modalColor: $white;
+$modalBgTransparency: rgba(255, 255, 255, .6);
+$modalAnimationTime: 0.5s;
 
 
 /*==========  TYPOGRAPHY  ==========*/
 
 $bodyColor: $primaryColor;
-$fontFamily: Helvetica, Arial, sans-serif !default;
+$fontPrimary: 'Fira Sans', Helvetica, Arial, sans-serif !default;
+$fontPrimaryWeight: 300;
 $fontName: 'icons' !default;
 $fontPath: '/';
 
@@ -23,8 +60,13 @@ $animationEasing: cubic-bezier(0.455, 0.030, 0.515, 0.955) !default;
 $break-mobile: 320px !default;
 $break-small: 480px !default;
 $break-medium: 768px !default;
-$break-large: 1200px !default;
+$break-large: 1024px !default;
+$break-wide: 1440px !default;
 
 
 /*==========  MISC  ==========*/
 
+$datePickerBorderColor: $ltGrey;
+$datePickerActiveColor: lighten($blue, 30%);
+$svgDash: 3 3;
+$round: 5px;
