@@ -11,7 +11,7 @@ module.exports = {
     css: 'dist/css/',
     img: 'dist/img/',
     js: 'dist/js/',
-    html: 'dist/',
+    html: 'dist/views/',
     fonts: 'dist/fonts/'
   },
   test: {

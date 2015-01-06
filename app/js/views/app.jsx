@@ -2,12 +2,13 @@
 
 var Router        = require('react-router'),
     RouteHandler  = Router.RouteHandler,
+    Datepicker    = require('./lever_datepicker.jsx'),
     App;
 
 App = React.createClass({
   render: function() {
     return (
-      <div>
+      <div id="viewport">
         <aside className="main__aside">
           <ul className="main__aside__nav">
             <li className="favorite-btn-wrapper">
@@ -52,6 +53,27 @@ App = React.createClass({
           </ul>
         </aside>
         <main className="main__content">
+          <header className="main-header">
+            <section className="main-header__tl">
+            </section>
+            <section className="main-header__tc">
+              <h1>Revenue</h1>
+              <ul className="horizontal-list">
+                <li>
+                  <a href="#">Something</a>
+                </li>
+                <li>
+                  <a href="#">Something</a>
+                </li>
+                <li>
+                  <a href="#">Something</a>
+                </li>
+              </ul>
+            </section>
+            <section className="main-header__tr">
+              <Datepicker />
+            </section>
+          </header>
           <RouteHandler/>
         </main>
       </div>
