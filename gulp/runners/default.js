@@ -2,4 +2,4 @@
 
 var gulp        = require('gulp');
 
-gulp.task('default', ['css', 'js', 'html', 'img']);
+gulp.task('default', ['css', 'js', 'html', 'img', 'data']);

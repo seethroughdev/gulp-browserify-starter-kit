@@ -1,8 +1,8 @@
 'use strict';
 
 var React         = window.React,
+    Router        = window.ReactRouter,
     Reflux        = require('reflux'),
-    Router        = require('react-router'),
     Route         = Router.Route,
     DefaultRoute  = Router.DefaultRoute,
     NotFoundRoute = Router.NotFoundRoute,
@@ -10,7 +10,7 @@ var React         = window.React,
 
     AppView       = require('./views/app.jsx'),
     HomeView      = require('./views/home.jsx'),
-    LeverView     = require('./views/lever.jsx'),
+    LeverView     = require('./views/lever/lever.jsx'),
     routes;
 
 routes = (

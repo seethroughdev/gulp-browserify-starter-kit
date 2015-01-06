@@ -4,7 +4,8 @@ module.exports = {
     css: 'app/scss/',
     img: 'app/img/',
     js: 'app/js/',
-    html: 'app/html/'
+    html: 'app/html/',
+    data: 'app/data/'
   },
   dist: {
     path: 'dist/',
@@ -12,7 +13,8 @@ module.exports = {
     img: 'dist/img/',
     js: 'dist/js/',
     html: 'dist/views/',
-    fonts: 'dist/fonts/'
+    fonts: 'dist/fonts/',
+    data: 'dist/data/'
   },
   test: {
     path: 'tests/',
