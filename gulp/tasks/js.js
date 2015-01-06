@@ -14,24 +14,31 @@ var path         = require('../utils/paths')
 // Options
 var browserifyOpts = {
   debug: true,
-  standalone: 'shared'
+  standalone: 'shared',
+  transform: [
+    'reactify'
+  ]
 };
 
 gulp.task('js:browserify', function () {
-  return browserify( './' + path.src.js + 'index.js', browserifyOpts ).bundle()
+  return browserify( './' + path.src.js + 'app.jsx', browserifyOpts ).bundle()
     .on('error', handleErrors)
-    .pipe(source( './' + path.src.js + 'index.js' ))
-    .pipe($.changed(path.dist.js))
+    .pipe(source( './' + path.src.js + 'app.jsx' ))
     .pipe($.rename('bundle.js'))
     .pipe(gulp.dest(path.dist.js))
     .pipe($.rename('bundle.min.js'))
     .pipe($.streamify($.uglify()))
     .on('error', handleErrors)
-    .pipe(gulp.dest(path.dist.js));
+    .pipe(gulp.dest(path.dist.js))
+    .pipe(reload({stream: true}));
 });
 
 gulp.task('js:vendor', function() {
-  return gulp.src([path.src.js + 'vendor/**/*.js', '!' + path.src.js + 'vendor/modernizr.js'])
+  return gulp.src([
+    path.npm.path + 'react/dist/react-with-addons.js',
+    path.src.js + 'vendor/**/*.js',
+    '!' + path.src.js + 'vendor/modernizr.js'
+    ])
     .on('error', handleErrors)
     .pipe($.changed(path.dist.js + 'vendor/'))
     .pipe($.concat('vendor.js'))

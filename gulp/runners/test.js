@@ -29,7 +29,7 @@ gulp.task('test:functional', function() {
 });
 
 gulp.task('test:watch', ['test'], function() {
-  gulp.watch([path.src.js + '**/*.js'], ['test']);
+  gulp.watch([path.src.js + '**/*'], ['test']);
   gulp.watch([path.test.unit + '**/*.js'], ['test:unit']);
   gulp.watch([path.test.functional + '**/*'], ['test:functional']);
 });
