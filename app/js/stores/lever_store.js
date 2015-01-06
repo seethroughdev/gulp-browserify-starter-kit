@@ -23,7 +23,7 @@ leverStore = Reflux.createStore({
     return this.trigger(lever);
   },
 
-  getLeverData: function() {
+  getLeverData: function(lever) {
     return _lever;
   },
 
