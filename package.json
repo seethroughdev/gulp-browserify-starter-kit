@@ -13,8 +13,10 @@
   "devDependencies": {
     "browser-sync": "^1.8.3",
     "browserify": "^8.0.3",
+    "c3": "^0.4.7",
     "chai": "^1.10.0",
     "chai-jq": "0.0.8",
+    "d3": "^3.5.3",
     "esprima-fb": "^8001.2001.0-dev-harmony-fb",
     "flux": "^2.0.1",
     "gulp": "^3.8.10",

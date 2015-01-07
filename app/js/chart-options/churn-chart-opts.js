@@ -3,40 +3,40 @@
 var colorScheme = require('../util/colors-util');
 
 module.exports.summary = {
-    options: {
-      axis: {
-        y: {
-          tick: {
-            format: function(d) {
-              return d;
-            }
-          },
-          label: {
-            text: 'Customers'
+  options: {
+    axis: {
+      y: {
+        tick: {
+          format: function(d) {
+            return d;
           }
         },
-        y2: {
-          show: true,
-          label: {
-            text: 'Growth %'
-          }
+        label: {
+          text: 'Customers'
         }
       },
-      color: {
-        pattern: colorScheme.churn
+      y2: {
+        show: true,
+        label: {
+          text: 'Growth %'
+        }
       }
     },
-    data: {
-      x: 'x',
-      type: 'spline',
-      axes: {
-        Growth: 'y2'
-      },
-      colors: {
-        Growth: colorScheme.y2
-      }
+    color: {
+      pattern: colorScheme.churn
     }
-  };
+  },
+  data: {
+    x: 'x',
+    type: 'spline',
+    axes: {
+      Growth: 'y2'
+    },
+    colors: {
+      Growth: colorScheme.y2
+    }
+  }
+};
 
 module.exports.revenue = {
     options: {
