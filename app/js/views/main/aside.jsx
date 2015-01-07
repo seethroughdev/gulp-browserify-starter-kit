@@ -63,7 +63,10 @@ View = React.createClass({
                       <Link
                         to="lever"
                         activeClassName="is-active"
-                        params={{lever:lever.toLowerCase()}}>
+                        params={{
+                          lever: lever.toLowerCase(),
+                          sub: 'summary'
+                        }}>
                         {lever}
                       </Link>
                     </li>

@@ -15,7 +15,7 @@ var React         = window.React,
 
 routes = (
   <Route handler={ AppView }>
-    <Route name='lever' path=':lever' handler={ LeverView } />
+    <Route name='lever' path=':lever/:sub/' handler={ LeverView } />
     <DefaultRoute name='homePage' handler={ HomeView } />
   </Route>
 );

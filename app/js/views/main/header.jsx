@@ -2,6 +2,9 @@
 
 var React       = window.React,
     _           = window._,
+    Router = window.ReactRouter,
+    Route   = Router.Route,
+    Link   = Router.Link,
     DatePicker  = require('../lever/lever_datepicker.jsx'),
     View;
 
@@ -11,6 +14,8 @@ View = React.createClass({
     leverSubs: React.PropTypes.array
   },
   render: function() {
+    var leverTitle = this.props.leverTitle;
+
     return (
      <header className="main-header">
         <section className="main-header__tl">
@@ -22,7 +27,15 @@ View = React.createClass({
               _.map(this.props.leverSubs, function(sub, i) {
                 return (
                   <li key={i}>
-                    <a href="#">{sub}</a>
+                    <Link
+                      to="lever"
+                      activeClassName="is-active"
+                      params={{
+                        lever: leverTitle,
+                        sub: sub
+                      }}>
+                      {sub}
+                    </Link>
                   </li>
                 )
               })
