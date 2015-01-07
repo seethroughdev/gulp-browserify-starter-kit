@@ -28,13 +28,17 @@ View = React.createClass({
   onStoreUpdate: function(lever) {
     this.setState({
       leverData: LeverStore.getLeverData(this.getParams().lever),
-      leverTitle: LeverStore.getLever(),
+      leverTitle: this.getParams().lever,
       leverSubs: LeverStore.getLeverSubs()
     });
   },
 
   componentWillMount: function() {
-    LeverActions.load();
+    LeverActions.load(this.getParams().lever);
+  },
+
+  componentWillUpdate: function() {
+    LeverActions.load(this.getParams().lever);
   },
 
   render: function() {

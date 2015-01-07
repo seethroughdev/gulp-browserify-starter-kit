@@ -1,10 +1,12 @@
+'use strict';
+
 var reqwest = require('reqwest'),
     LeverService;
 
 LeverService = {
-  getLever: function getLever(cb, errCb) {
+  getLever: function getLever(lever, cb, errCb) {
     reqwest({
-      url: '/data/example-revenue-min.json',
+      url: '/data/example-' + lever + '-min.json',
       type: 'json',
       success: function(resp) {
         cb(resp);

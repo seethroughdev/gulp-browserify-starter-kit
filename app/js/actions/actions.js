@@ -1,18 +1,19 @@
 'use strict';
 
 var Reflux = require('reflux'),
-    reqwest = require('reqwest'),
     leverService = require('../services/levers_service'),
     Actions, getLever;
 
 /**
  * access to get lever from service
- * @param  {Function} cb  [Call success action]
- * @param  {Function} err [Call failure action]
+ * @param  {String} lever  [lever to get]
+ * @param  {Function} cb   [Call success action]
+ * @param  {Function} errCb [Call failure action]
  * @return {Function}     [Returns service function]
  */
-getLever = function getLever(cb, errCb) {
-  return leverService.getLever(cb, errCb);
+getLever = function getLever(lever, cb, errCb) {
+  lever = lever || 'revenue';
+  return leverService.getLever(lever, cb, errCb);
 };
 
 Actions = Reflux.createActions([
@@ -22,8 +23,8 @@ Actions = Reflux.createActions([
   'loadFailed'
 ]);
 
-Actions.load.listen(function() {
-  getLever(Actions.loadCompleted, Actions.loadFailed);
+Actions.load.listen(function(lever) {
+  getLever(lever, Actions.loadCompleted, Actions.loadFailed);
 });
 
 module.exports = Actions;
