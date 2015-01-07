@@ -12,7 +12,9 @@ module.exports = {
         '2014-10-04',
         '2014-10-03'
       ]
-    ]
+    ],
+    type: 'bar',
+    order: 'desc'
   },
   size: {
     height: 400
