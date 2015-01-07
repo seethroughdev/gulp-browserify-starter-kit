@@ -28,7 +28,7 @@ View = React.createClass({
                 return (
                   <li key={i}>
                     <Link
-                      to="lever"
+                      to="leverSub"
                       activeClassName="is-active"
                       params={{
                         lever: leverTitle,
