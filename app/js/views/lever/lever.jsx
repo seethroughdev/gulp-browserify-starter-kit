@@ -13,7 +13,7 @@ var React        = window.React,
 View = React.createClass({
 
   mixins: [
-    Reflux.listenTo(LeverStore, 'onStoreUpdate'),
+    Reflux.ListenerMixin,
     Router.State
   ],
 
@@ -25,7 +25,7 @@ View = React.createClass({
     };
   },
 
-  onStoreUpdate: function(lever) {
+  handleLoadItemsComplete: function(lever) {
     this.setState({
       leverData: LeverStore.getLeverData(this.getParams().lever),
       leverTitle: this.getParams().lever,
@@ -33,11 +33,17 @@ View = React.createClass({
     });
   },
 
+  // when page is loaded, call lever action
   componentWillMount: function() {
-    LeverActions.load(this.getParams().lever);
+    this.listenTo(LeverStore, this.handleLoadItemsComplete);
+    if (!LeverStore.isLoaded()) {
+      LeverActions.load(this.getParams().lever);
+    }
   },
 
-  componentWillUpdate: function() {
+  // when lever/subs change, update lever data
+  componentWillReceiveProps: function(nextprops) {
+    this.listenTo(LeverStore, this.handleLoadItemsComplete);
     LeverActions.load(this.getParams().lever);
   },
 
@@ -49,7 +55,7 @@ View = React.createClass({
           leverSubs={this.state.leverSubs}
         />
         <section className="chart">
-          <LeverChart leverTitle={this.getParams().lever} />
+          <LeverChart leverTitle={this.state.leverTitle} />
           <LeverAside />
         </section>
       </div>

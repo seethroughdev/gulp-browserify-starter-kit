@@ -6,7 +6,9 @@ var Reflux = require('reflux'),
     ChartProto = require('../chart-options/_default-chart-opts'),
     ChartOpts = require('../chart-options/revenue-chart-opts'),
     leverStore,
-    _lever;
+    _lever, _isLoaded;
+
+_isLoaded = false;
 
 leverStore = Reflux.createStore({
 
@@ -16,14 +18,23 @@ leverStore = Reflux.createStore({
     _lever = {};
   },
 
+  getInitialState: function() {
+    return _lever;
+  },
+
   onLoadCompleted: function(lever) {
-    this.updateLever(lever);
-    console.log('load completed');
-    // this.getChartData(lever);
+    _lever = lever;
+    _isLoaded = true;
+    this.trigger(lever);
+    console.log('load completed', lever);
+    return lever;
+  },
+
+  isLoaded: function() {
+    return _isLoaded;
   },
 
   updateLever: function(lever) {
-    _lever = lever;
     return this.trigger(lever);
   },
 

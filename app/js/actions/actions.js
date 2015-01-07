@@ -16,15 +16,15 @@ getLever = function getLever(lever, cb, errCb) {
   return leverService.getLever(lever, cb, errCb);
 };
 
-Actions = Reflux.createActions([
-  'onStoreUpdate',
-  'load',
-  'loadCompleted',
-  'loadFailed'
-]);
+Actions = Reflux.createActions({
+  load: {children: [
+    'completed',
+    'failed'
+  ]}
+});
 
 Actions.load.listen(function(lever) {
-  getLever(lever, Actions.loadCompleted, Actions.loadFailed);
+  getLever(lever, Actions.load.completed, Actions.load.failed);
 });
 
 module.exports = Actions;
