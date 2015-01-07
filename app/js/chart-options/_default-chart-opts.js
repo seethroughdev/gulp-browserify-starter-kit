@@ -3,7 +3,20 @@
 var colorScheme = require('../util/colors-util');
 
 module.exports = {
-  data: [],
+  data: {
+    x: 'x',
+    columns: [
+      [
+        'x',
+        '2014-10-05',
+        '2014-10-04',
+        '2014-10-03'
+      ]
+    ]
+  },
+  size: {
+    height: 400
+  },
   bindto: '#chartContainer',
   color: {
     pattern: colorScheme.main

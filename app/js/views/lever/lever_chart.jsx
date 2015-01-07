@@ -4,7 +4,7 @@ var React      = window.React,
     Reflux     = require('reflux'),
     c3         = window.c3,
     LeverStore = require('../../stores/lever_store'),
-    View;
+    View, chart;
 
 View = React.createClass({
 
@@ -16,12 +16,24 @@ View = React.createClass({
     leverTitle: React.PropTypes.string.isRequired
   },
 
-  onStoreUpdate: function() {
+  onStoreUpdate: function(lever) {
+    var rand = _.times(3, _.partial(_.random, 1, 100));
+    rand.unshift('data');
+    chart.load({
+      columns: [
+        [
+          'x',
+          '2014-10-05',
+          '2014-10-04',
+          '2014-10-03'
+        ],
+        rand
+      ]
+    });
   },
 
   componentDidMount: function() {
-    console.log(LeverStore.getChartData());
-    // var chart = c3.generate();
+    chart = c3.generate(LeverStore.getChartData());
   },
 
   render: function() {
@@ -29,9 +41,7 @@ View = React.createClass({
       <div id="chartContainer"
            className="chart__content summary-chart"
            ref="chartContainer"
-           >
-        <p>{this.props.leverTitle + ' Container'}</p>
-      </div>
+           />
     )
   }
 });
