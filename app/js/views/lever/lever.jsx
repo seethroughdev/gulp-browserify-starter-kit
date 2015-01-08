@@ -27,7 +27,6 @@ View = React.createClass({
   },
 
   handleLoadItemsComplete: function(lever) {
-    // console.log('handleLoadItemsComplete');
     this.setState({
       leverData: lever.data,
       leverTitle: this.getParams().lever,
@@ -38,21 +37,18 @@ View = React.createClass({
 
   // when page is loaded, call lever action
   componentWillMount: function() {
-    // console.log('componentWillMount');
     this.listenTo(LeverStore, this.handleLoadItemsComplete);
     LeverActions.load(this.getParams().lever);
   },
 
   // when lever/subs change, update lever data
   componentWillReceiveProps: function(nextprops) {
-    // console.log('componentWillReceiveProps');
-    // this.listenTo(LeverStore, this.handleLoadItemsComplete);
     LeverActions.load(this.getParams().lever);
   },
 
   render: function() {
     return (
-      <div>
+      <main className="main__content">
         <MainHeader
           leverTitle={this.state.leverTitle}
           leverSubs={this.state.leverSubs}
@@ -68,7 +64,7 @@ View = React.createClass({
             leverFilters={this.state.leverFilters}
           />
         </section>
-      </div>
+      </main>
     )
   }
 });

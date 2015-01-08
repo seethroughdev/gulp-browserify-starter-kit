@@ -14,8 +14,6 @@ module.exports = {
     columns: [
       [
         'x',
-        '2014-10-05',
-        '2014-10-04',
         '2014-10-03'
       ]
     ],
@@ -31,7 +29,7 @@ module.exports = {
   },
   padding: {
     top: 0,
-    right: 20,
+    right: 120,
     left: 70,
     bottom: 10
   },

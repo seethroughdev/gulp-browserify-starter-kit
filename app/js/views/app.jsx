@@ -17,9 +17,7 @@ App = React.createClass({
     return (
       <div id="viewport">
         <MainAside />
-        <main className="main__content">
-          <RouteHandler />
-        </main>
+        <RouteHandler />
       </div>
     )
   }

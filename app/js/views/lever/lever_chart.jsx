@@ -26,6 +26,16 @@ View = React.createClass({
      */
 
     chart = c3.generate(LeverStore.getChartInfo(this.props.leverTitle, this.props.leverSub));
+
+    console.log(this.getDOMNode().offsetHeight);
+
+  },
+
+  handleResize: function(chart) {
+    chart.resize({
+      height: this.getDOMNode().offsetHeight,
+      width: this.getDOMNode().offsetWidth
+    });
   },
 
   onStoreUpdate: function(lever) {
@@ -49,14 +59,17 @@ View = React.createClass({
     */
 
     chart.groups([this.props.leverFilters]);
+
+    /**
+     * resize the chart automatically, if necessary
+     */
+    this.handleResize(chart);
+
   },
 
   render: function() {
     return (
-      <div id="chartContainer"
-           className="chart__content summary-chart"
-           ref="chartContainer"
-       />
+      <div id="chartContainer" className="chart__content" />
     )
   }
 });
