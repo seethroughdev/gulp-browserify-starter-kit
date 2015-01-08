@@ -18,12 +18,37 @@ View = React.createClass({
     leverSub: React.PropTypes.string.isRequired
   },
 
-  onStoreUpdate: function(lever) {
-    chart.load(LeverStore.getChartUpdate(this.props.leverSub));
+  componentDidMount: function() {
+
+    /**
+     * Generate initial chart instance.  We will replace the
+     * data contents after the async load is finished below.
+     */
+
+    chart = c3.generate(LeverStore.getChartInfo(this.props.leverTitle, this.props.leverSub));
   },
 
-  componentDidMount: function() {
-    chart = c3.generate(LeverStore.getChartInfo(this.props.leverSub));
+  onStoreUpdate: function(lever) {
+
+    /**
+     * each time the store is updated, the chart data is updated
+     * you will only see a change if the lever/subs change
+     * but this also allows us to only instantiate one chart and
+     * just change the contents
+     */
+
+    chart.load(LeverStore.getChartUpdate(this.props.leverTitle, this.props.leverSub));
+
+    /**
+    * stack the appropriate groups
+    * this will only apply to stackable charts
+    * although at some point we might want to consider making
+    * this a flag instead of applying to all
+    * but because its based off a dynamic list, we can't
+    * add them before...
+    */
+
+    chart.groups([this.props.leverFilters]);
   },
 
   render: function() {

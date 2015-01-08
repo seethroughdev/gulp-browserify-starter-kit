@@ -4,7 +4,7 @@ var Reflux     = window.Reflux,
     _          = window._,
     actions    = require('../actions/actions'),
     ChartProto = require('../chart-options/_default-chart-opts'),
-    ChartOpts  = require('../chart-options/revenue-chart-opts'),
+    ChartOpts  = require('../chart-options/_lever-chart-opts'),
     leverStore, _lever, _leverData, _leverObj, _isLoaded;
 
 _isLoaded = false;
@@ -51,17 +51,16 @@ leverStore = Reflux.createStore({
    * Return default chart object to create chart
    * @return {Object}       New prototype object of chart options
    */
-  getChartInfo: function(sub) {
-    var c = _.merge({}, ChartOpts[sub], ChartProto);
-    return c;
+  getChartInfo: function(lever, sub) {
+    return _.merge({}, ChartOpts[lever][sub], ChartProto);
   },
 
-  getChartUpdate: function(sub) {
+  getChartUpdate: function(lever, sub) {
     var o = {
       columns: _leverData[sub],
       unload: true
     };
-    return _.merge({}, o, ChartOpts[sub].data);
+    return _.merge({}, o, ChartOpts[lever][sub].data);
   },
 
   /**

@@ -1,5 +1,11 @@
 'use strict';
 
+/**
+ * These are the default chart options.  They are
+ * inherited into all chart objects, and used
+ * to be instantiate the new Chart on load.
+ */
+
 var colorScheme = require('../util/colors-util');
 
 module.exports = {
