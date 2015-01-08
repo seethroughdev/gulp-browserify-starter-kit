@@ -13,6 +13,12 @@ View = React.createClass({
     Reflux.listenTo(LeverStore, 'onStoreUpdate')
   ],
 
+  getDefaultProps: function() {
+    return {
+      chartInfo: LeverStore.getChartInfo()
+    };
+  },
+
   propTypes: {
     leverTitle: React.PropTypes.string.isRequired,
     leverData: React.PropTypes.object.isRequired,
@@ -27,7 +33,7 @@ View = React.createClass({
   },
 
   componentDidMount: function() {
-    chart = c3.generate(LeverStore.getChartData());
+    chart = c3.generate(this.props.chartInfo);
   },
 
   render: function() {

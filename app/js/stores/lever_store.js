@@ -48,7 +48,7 @@ leverStore = Reflux.createStore({
    * Return default chart object to create chart
    * @return {Object}       New prototype object of chart options
    */
-  getChartData: function() {
+  getChartInfo: function() {
     // console.log('getChartData');
     return _.merge(Object.create(ChartProto), ChartOpts[_lever]);
   },
