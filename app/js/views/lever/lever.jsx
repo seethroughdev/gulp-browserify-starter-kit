@@ -8,6 +8,7 @@ var React        = window.React,
     LeverActions = require('../../actions/actions'),
     LeverAside   = require('./lever_aside.jsx'),
     LeverChart   = require('./lever_chart.jsx'),
+    LeverRow   = require('./lever_row.jsx'),
     View;
 
 View = React.createClass({
@@ -64,6 +65,7 @@ View = React.createClass({
             leverFilters={this.state.leverFilters}
           />
         </section>
+        <LeverRow />
       </main>
     )
   }
