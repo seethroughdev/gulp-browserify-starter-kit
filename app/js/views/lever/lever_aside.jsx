@@ -10,7 +10,6 @@ View = React.createClass({
   },
 
   render: function() {
-    console.log('filter', this.props.leverFilters);
     return (
       <aside className="chart__aside">
         <div>

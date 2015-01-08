@@ -1,7 +1,7 @@
 'use strict';
 
-var React = window.React,
-    Reflux = require('reflux'),
+var React  = window.React,
+    Reflux = window.Reflux,
     Home;
 
 Home = React.createClass({

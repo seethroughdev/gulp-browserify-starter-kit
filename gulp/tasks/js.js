@@ -38,6 +38,7 @@ gulp.task('js:vendor', function() {
     path.npm.path + 'lodash/dist/lodash.js',
     path.npm.path + 'react/dist/react-with-addons.js',
     path.npm.path + 'react-router/dist/react-router.js',
+    path.bower.path + 'reflux/dist/reflux.js',
     path.npm.path + 'd3/d3.js',
     path.npm.path + 'c3/c3.js',
     path.src.js + 'vendor/**/*.js',

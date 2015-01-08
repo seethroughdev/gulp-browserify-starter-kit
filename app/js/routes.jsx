@@ -2,7 +2,7 @@
 
 var React         = window.React,
     Router        = window.ReactRouter,
-    Reflux        = require('reflux'),
+    Reflux        = window.Reflux,
     Route         = Router.Route,
     DefaultRoute  = Router.DefaultRoute,
     NotFoundRoute = Router.NotFoundRoute,

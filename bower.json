@@ -23,6 +23,7 @@
   "devDependencies": {
     "mocha": "~1.21.4",
     "chai": "~1.9.1",
-    "chai-jquery": "~1.2.2"
+    "chai-jquery": "~1.2.2",
+    "reflux": "~0.2.3"
   }
 }

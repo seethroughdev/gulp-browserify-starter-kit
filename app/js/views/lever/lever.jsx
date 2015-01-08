@@ -1,9 +1,9 @@
 'use strict';
 
 var React        = window.React,
-    Reflux       = require('reflux'),
-    Router        = window.ReactRouter,
-    MainHeader    = require('../main/header.jsx'),
+    Reflux       = window.Reflux,
+    Router       = window.ReactRouter,
+    MainHeader   = require('../main/header.jsx'),
     LeverStore   = require('../../stores/lever_store'),
     LeverActions = require('../../actions/actions'),
     LeverAside   = require('./lever_aside.jsx'),
@@ -27,24 +27,25 @@ View = React.createClass({
   },
 
   handleLoadItemsComplete: function(lever) {
+    // console.log('handleLoadItemsComplete');
     this.setState({
-      leverData: LeverStore.getLeverData(this.getParams().lever),
+      leverData: LeverStore.getLeverData(),
       leverTitle: this.getParams().lever,
       leverSubs: LeverStore.getLeverSubs(),
-      leverFilters: LeverStore.getLeverFilters(this.getParams().lever, this.getParams().sub)
+      leverFilters: LeverStore.getLeverFilters(this.getParams().sub)
     });
   },
 
   // when page is loaded, call lever action
   componentWillMount: function() {
+    // console.log('componentWillMount');
     this.listenTo(LeverStore, this.handleLoadItemsComplete);
-    if (!LeverStore.isLoaded()) {
-      LeverActions.load(this.getParams().lever);
-    }
+    LeverActions.load(this.getParams().lever);
   },
 
   // when lever/subs change, update lever data
   componentWillReceiveProps: function(nextprops) {
+    // console.log('componentWillReceiveProps');
     this.listenTo(LeverStore, this.handleLoadItemsComplete);
     LeverActions.load(this.getParams().lever);
   },

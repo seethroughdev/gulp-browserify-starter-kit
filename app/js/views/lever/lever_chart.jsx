@@ -2,7 +2,7 @@
 
 var React      = window.React,
     _          = window._,
-    Reflux     = require('reflux'),
+    Reflux     = window.Reflux,
     c3         = window.c3,
     LeverStore = require('../../stores/lever_store'),
     View, chart;
