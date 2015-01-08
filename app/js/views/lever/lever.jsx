@@ -29,9 +29,9 @@ View = React.createClass({
   handleLoadItemsComplete: function(lever) {
     // console.log('handleLoadItemsComplete');
     this.setState({
-      leverData: LeverStore.getLeverData(),
+      leverData: lever.data,
       leverTitle: this.getParams().lever,
-      leverSubs: LeverStore.getLeverSubs(),
+      leverSubs: lever.subs,
       leverFilters: LeverStore.getLeverFilters(this.getParams().sub)
     });
   },
@@ -46,7 +46,7 @@ View = React.createClass({
   // when lever/subs change, update lever data
   componentWillReceiveProps: function(nextprops) {
     // console.log('componentWillReceiveProps');
-    this.listenTo(LeverStore, this.handleLoadItemsComplete);
+    // this.listenTo(LeverStore, this.handleLoadItemsComplete);
     LeverActions.load(this.getParams().lever);
   },
 

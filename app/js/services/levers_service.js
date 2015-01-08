@@ -5,6 +5,7 @@ var reqwest = require('reqwest'),
 
 LeverService = {
   getLever: function getLever(lever, cb, errCb) {
+    console.log('calling service');
     reqwest({
       url: '/data/example-' + lever + '-min.json',
       type: 'json',
