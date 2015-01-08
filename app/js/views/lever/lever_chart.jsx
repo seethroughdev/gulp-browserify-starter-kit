@@ -27,15 +27,28 @@ View = React.createClass({
 
     chart = c3.generate(LeverStore.getChartInfo(this.props.leverTitle, this.props.leverSub));
 
-    console.log(this.getDOMNode().offsetHeight);
+    /**
+     * Add event listener to add/remove chart during resize
+     */
 
+    window.addEventListener('resize', this.handleResize);
   },
 
-  handleResize: function(chart) {
+  componentWillUnmount: function() {
+    window.removeEventListener('resize', this.handleResize);
+  },
+
+  resizeChart: function(chart) {
     chart.resize({
       height: this.getDOMNode().offsetHeight,
       width: this.getDOMNode().offsetWidth
     });
+  },
+
+  handleResize: function(chart) {
+    return _.debounce(function() {
+      return this.resizeChart(chart);
+    }, 450);
   },
 
   onStoreUpdate: function(lever) {

@@ -38,23 +38,29 @@ leverStore = Reflux.createStore({
   },
 
   getLever: function() {
-    // console.log('getLever');
     return _.keys(_leverObj)[0];
   },
 
   getLeverSubs: function() {
-    // console.log('getLeverSubs');
     return _.keys(_leverObj[_lever]);
   },
 
   /**
    * Return default chart object to create chart
-   * @return {Object}       New prototype object of chart options
+   * @param  {String} lever Current Lever
+   * @param  {String} sub   Current Sub
+   * @return {Object}       New prototype obj of chart options
    */
   getChartInfo: function(lever, sub) {
     return _.merge({}, ChartOpts[lever][sub], ChartProto);
   },
 
+  /**
+   * Get Object of chart data and chart options merged
+   * @param  {String} lever Current Lever
+   * @param  {String} sub   Current Sub
+   * @return {Object}       New prototype obj of chart opts/data
+   */
   getChartUpdate: function(lever, sub) {
     var o = {
       columns: _leverData[sub],
@@ -69,7 +75,6 @@ leverStore = Reflux.createStore({
    * @return {Array}       Array of current filters
    */
   getLeverFilters: function(sub) {
-    // console.log('getLeverFilters');
     return _.chain(_leverData[sub])
             .map(function(s) {
               return s[0];

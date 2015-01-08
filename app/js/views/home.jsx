@@ -7,7 +7,9 @@ var React  = window.React,
 Home = React.createClass({
   render: function() {
     return (
-      <h1>Homepage</h1>
+      <main className="main__content">
+        <h1>Homepage</h1>
+      </main>
     )
   }
 });
