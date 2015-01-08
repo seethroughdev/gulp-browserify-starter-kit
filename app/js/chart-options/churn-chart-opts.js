@@ -3,28 +3,26 @@
 var colorScheme = require('../util/colors-util');
 
 module.exports.summary = {
-  options: {
-    axis: {
-      y: {
-        tick: {
-          format: function(d) {
-            return d;
-          }
-        },
-        label: {
-          text: 'Customers'
+  axis: {
+    y: {
+      tick: {
+        format: function(d) {
+          return d;
         }
       },
-      y2: {
-        show: true,
-        label: {
-          text: 'Growth %'
-        }
+      label: {
+        text: 'Customers'
       }
     },
-    color: {
-      pattern: colorScheme.churn
+    y2: {
+      show: true,
+      label: {
+        text: 'Growth %'
+      }
     }
+  },
+  color: {
+    pattern: colorScheme.churn
   },
   data: {
     x: 'x',
@@ -39,139 +37,133 @@ module.exports.summary = {
 };
 
 module.exports.revenue = {
-    options: {
-      axis: {
-        y: {
-          tick: {
-            format: function(d) {
-              return d;
-            }
-          },
-          label: {
-            text: 'Revenue (USD)'
-          }
-        },
-        y2: {
-          show: true,
-          label: {
-            text: 'Growth %'
-          }
+  axis: {
+    y: {
+      tick: {
+        format: function(d) {
+          return d;
         }
       },
-      color: {
-        pattern: colorScheme.churn
-      },
-      tooltip: {
-        format: {
-          // title: function (d) { return 'Data ' + d; },
-          value: function(d) {
-            return d;
-          }
-        }
+      label: {
+        text: 'Revenue (USD)'
       }
     },
-    data: {
-      x: 'x',
-      types: {
-        Revenue: 'bar',
-        Growth: 'spline'
-      },
-      axes: {
-        Growth: 'y2'
-      },
-      colors: {
-        Growth: colorScheme.y2
-      },
-      order: 'desc'
+    y2: {
+      show: true,
+      label: {
+        text: 'Growth %'
+      }
     }
-  };
+  },
+  color: {
+    pattern: colorScheme.churn
+  },
+  tooltip: {
+    format: {
+      // title: function (d) { return 'Data ' + d; },
+      value: function(d) {
+        return d;
+      }
+    }
+  },
+  data: {
+    x: 'x',
+    types: {
+      Revenue: 'bar',
+      Growth: 'spline'
+    },
+    axes: {
+      Growth: 'y2'
+    },
+    colors: {
+      Growth: colorScheme.y2
+    },
+    order: 'desc'
+  }
+};
 
-module.exports.monthly =  {
-    options: {
-      axis: {
-        y: {
-          tick: {
-            format: function(d) {
-              return d;
-            }
-          },
-          label: {
-            text: 'Customers'
-          }
-        },
-        y2: {
-          show: true,
-          label: {
-            text: 'Growth %'
-          }
+module.exports.monthly = {
+  axis: {
+    y: {
+      tick: {
+        format: function(d) {
+          return d;
         }
       },
-      color: {
-        pattern: colorScheme.churn
-      },
-      tooltip: {
-        format: {
-          // title: function (d) { return 'Data ' + d; },
-          value: function(d) {
-            return d;
-          }
-        }
+      label: {
+        text: 'Customers'
       }
     },
-    data: {
-      x: 'x',
-      type: 'spline',
-      axes: {
-        Growth: 'y2'
-      },
-      colors: {
-        Growth: colorScheme.y2
-      },
-      order: 'desc'
+    y2: {
+      show: true,
+      label: {
+        text: 'Growth %'
+      }
     }
-  };
+  },
+  color: {
+    pattern: colorScheme.churn
+  },
+  tooltip: {
+    format: {
+      // title: function (d) { return 'Data ' + d; },
+      value: function(d) {
+        return d;
+      }
+    }
+  },
+  data: {
+    x: 'x',
+    type: 'spline',
+    axes: {
+      Growth: 'y2'
+    },
+    colors: {
+      Growth: colorScheme.y2
+    },
+    order: 'desc'
+  }
+};
 
-module.exports.annual =  {
-    options: {
-      axis: {
-        y: {
-          tick: {
-            format: function(d) {
-              return d;
-            }
-          },
-          label: {
-            text: 'Customers'
-          }
-        },
-        y2: {
-          show: true,
-          label: {
-            text: 'Growth %'
-          }
+module.exports.annual = {
+  axis: {
+    y: {
+      tick: {
+        format: function(d) {
+          return d;
         }
       },
-      color: {
-        pattern: colorScheme.churn
-      },
-      tooltip: {
-        format: {
-          // title: function (d) { return 'Data ' + d; },
-          value: function(d) {
-            return d;
-          }
-        }
+      label: {
+        text: 'Customers'
       }
     },
-    data: {
-      x: 'x',
-      type: 'spline',
-      axes: {
-        Growth: 'y2'
-      },
-      colors: {
-        Growth: colorScheme.y2
-      },
-      order: 'desc'
+    y2: {
+      show: true,
+      label: {
+        text: 'Growth %'
+      }
     }
-  };
+  },
+  color: {
+    pattern: colorScheme.churn
+  },
+  tooltip: {
+    format: {
+      // title: function (d) { return 'Data ' + d; },
+      value: function(d) {
+        return d;
+      }
+    }
+  },
+  data: {
+    x: 'x',
+    type: 'spline',
+    axes: {
+      Growth: 'y2'
+    },
+    colors: {
+      Growth: colorScheme.y2
+    },
+    order: 'desc'
+  }
+};

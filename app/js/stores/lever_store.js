@@ -51,9 +51,17 @@ leverStore = Reflux.createStore({
    * Return default chart object to create chart
    * @return {Object}       New prototype object of chart options
    */
-  getChartInfo: function() {
-    // console.log('getChartData');
-    return _.merge(Object.create(ChartProto), ChartOpts[_lever]);
+  getChartInfo: function(sub) {
+    var c = _.merge({}, ChartOpts[sub], ChartProto);
+    return c;
+  },
+
+  getChartUpdate: function(sub) {
+    var o = {
+      columns: _leverData[sub],
+      unload: true
+    };
+    return _.merge({}, o, ChartOpts[sub].data);
   },
 
   /**

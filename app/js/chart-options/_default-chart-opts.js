@@ -17,7 +17,7 @@ module.exports = {
     order: 'desc'
   },
   size: {
-    height: 400
+    height: 600
   },
   bindto: '#chartContainer',
   color: {

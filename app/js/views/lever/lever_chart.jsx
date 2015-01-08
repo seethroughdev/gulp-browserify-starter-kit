@@ -1,7 +1,6 @@
 'use strict';
 
 var React      = window.React,
-    _          = window._,
     Reflux     = window.Reflux,
     c3         = window.c3,
     LeverStore = require('../../stores/lever_store'),
@@ -13,12 +12,6 @@ View = React.createClass({
     Reflux.listenTo(LeverStore, 'onStoreUpdate')
   ],
 
-  getDefaultProps: function() {
-    return {
-      chartInfo: LeverStore.getChartInfo()
-    };
-  },
-
   propTypes: {
     leverTitle: React.PropTypes.string.isRequired,
     leverData: React.PropTypes.object.isRequired,
@@ -26,14 +19,11 @@ View = React.createClass({
   },
 
   onStoreUpdate: function(lever) {
-    chart.unload();
-    chart.load({
-      columns: this.props.leverData[this.props.leverSub]
-    });
+    chart.load(LeverStore.getChartUpdate(this.props.leverSub));
   },
 
   componentDidMount: function() {
-    chart = c3.generate(this.props.chartInfo);
+    chart = c3.generate(LeverStore.getChartInfo(this.props.leverSub));
   },
 
   render: function() {
