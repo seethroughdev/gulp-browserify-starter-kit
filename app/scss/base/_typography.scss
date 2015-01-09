@@ -99,3 +99,12 @@ h3 {
   padding-bottom: .5em;
 }
 
+.badge {
+  color: $white;
+  @extend .font-bold;
+  font-size: .7rem;
+  background: $blue;
+  border-radius: 8px;
+  padding: 2px 10px;
+}
+

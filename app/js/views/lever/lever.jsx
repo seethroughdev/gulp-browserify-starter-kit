@@ -23,13 +23,15 @@ View = React.createClass({
       leverData: {},
       leverTitle: this.getParams().lever,
       leverSubs: [],
-      leverFilters: []
+      leverFilters: [],
+      leverRow: []
     };
   },
 
   handleLoadItemsComplete: function(lever) {
     this.setState({
       leverData: lever.data,
+      leverRow: lever.row,
       leverTitle: this.getParams().lever,
       leverSubs: lever.subs,
       leverFilters: LeverStore.getLeverFilters(this.getParams().sub)
@@ -65,7 +67,7 @@ View = React.createClass({
             leverFilters={this.state.leverFilters}
           />
         </section>
-        <LeverRow />
+        <LeverRow leverRow={this.state.leverRow} />
       </main>
     )
   }

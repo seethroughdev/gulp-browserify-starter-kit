@@ -3,11 +3,10 @@
 var Reflux     = window.Reflux,
     _          = window._,
     actions    = require('../actions/actions'),
+    LeverRowHelper = require('../util/lever-row-util'),
     ChartProto = require('../chart-options/_default-chart-opts'),
     ChartOpts  = require('../chart-options/_lever-chart-opts'),
-    leverStore, _lever, _leverData, _leverObj, _isLoaded;
-
-_isLoaded = false;
+    leverStore, _lever, _leverData, _leverObj, _leverRow;
 
 leverStore = Reflux.createStore({
 
@@ -22,13 +21,15 @@ leverStore = Reflux.createStore({
   },
 
   onLoadCompleted: function(leverObj) {
-    // console.log('onLoadCompleted');
+    console.log(leverObj);
     _leverObj = leverObj;
     _lever = this.getLever();
     _leverData = this.getLeverData();
+    _leverRow = this.getLeverRow();
     return this.trigger({
       data: _leverData,
-      subs: this.getLeverSubs()
+      subs: this.getLeverSubs(),
+      row: _leverRow
     });
   },
 
@@ -43,6 +44,12 @@ leverStore = Reflux.createStore({
 
   getLeverSubs: function() {
     return _.keys(_leverObj[_lever]);
+  },
+
+  getLeverRow: function() {
+    _leverRow = LeverRowHelper;
+
+    return LeverRowHelper;
   },
 
   /**

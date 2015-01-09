@@ -45,16 +45,9 @@
 // }
 
 .data-row__obj__today {
+  @extend .badge;
   margin-left: .75em;
-  font-size: .9rem;
   display: inline-block;
-  color: $blue;
-  &.is-positive {
-    color: $green;
-  }
-  &.is-negative {
-    color: $pink;
-  }
 }
 
 .data-row__obj__label {

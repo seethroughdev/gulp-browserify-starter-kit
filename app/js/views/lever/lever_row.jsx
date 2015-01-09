@@ -5,14 +5,26 @@ var React = window.React,
     View;
 
 View = React.createClass({
+
+  propTypes: {
+    leverRow: React.PropTypes.array.isRequired
+  },
+
   render: function() {
     return (
       <section className="data-row">
-        <LeverItem />
-        <LeverItem />
-        <LeverItem />
-        <LeverItem />
-        <LeverItem />
+        {
+          _.map(this.props.leverRow, function(item, i) {
+            return (
+              <LeverItem
+                Title={item.title}
+                Total={item.total}
+                Today={item.today}
+                key={i}
+              />
+            )
+          })
+        }
       </section>
     )
   }

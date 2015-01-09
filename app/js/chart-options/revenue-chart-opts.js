@@ -35,7 +35,7 @@ module.exports.summary = {
   data: {
     x: 'x',
     types: {
-      Current: 'spline',
+      Current: 'line',
       Growth: 'spline'
     },
     axes: {

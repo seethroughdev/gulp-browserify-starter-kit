@@ -41,6 +41,7 @@ gulp.task('js:vendor', function() {
     path.bower.path + 'reflux/dist/reflux.js',
     path.npm.path + 'd3/d3.js',
     path.npm.path + 'c3/c3.js',
+    path.npm.path + 'numeral/min/numeral.min.js',
     path.src.js + 'vendor/**/*.js',
     '!' + path.src.js + 'vendor/modernizr.js'
     ])
