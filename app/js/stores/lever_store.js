@@ -1,12 +1,19 @@
 'use strict';
 
+/**
+ * This is the lever store.  All lever related data is managed through here.
+ */
+
+
 var Reflux     = window.Reflux,
     _          = window._,
+    slugify    = require('slugify'),
     actions    = require('../actions/actions'),
     LeverRowHelper = require('../util/lever-row-util'),
     ChartProto = require('../chart-options/_default-chart-opts'),
     ChartOpts  = require('../chart-options/_lever-chart-opts'),
-    leverStore, _lever, _leverData, _leverObj, _leverRow;
+    leverStore, _lever, _leverData, _leverObj;
+
 
 leverStore = Reflux.createStore({
 
@@ -16,39 +23,63 @@ leverStore = Reflux.createStore({
     _leverData = {};
   },
 
-  getInitialState: function() {
-    return _leverData;
-  },
+
+  /**
+   * Fired when async lever data is loaded
+   * @param  {Object} leverObj Raw lever data
+   * @return {Function} Emitter telling views data is ready.
+   */
 
   onLoadCompleted: function(leverObj) {
     console.log(leverObj);
     _leverObj = leverObj;
     _lever = this.getLever();
     _leverData = this.getLeverData();
-    _leverRow = this.getLeverRow();
     return this.trigger({
       data: _leverData,
       subs: this.getLeverSubs(),
-      row: _leverRow
+      row: this.getLeverRow()
     });
   },
 
+  /**
+   * Return all the raw data from the current lever
+   * @return {Array} Array of data objects of each sub belonging to lever.
+   */
+
   getLeverData: function() {
-    // console.log('getLeverData');
     return _leverObj[_lever];
   },
 
+  /**
+   * Get the current lever title from the object
+   * @return {String} Slugified version of the current lever.
+   */
+
   getLever: function() {
-    return _.keys(_leverObj)[0];
+    return slugify(
+              _.keys(_leverObj)[0]
+            );
   },
+
+  /**
+   * Get the subs of the given lever
+   * @return {Array} Slugified array of each sub.
+   */
 
   getLeverSubs: function() {
-    return _.keys(_leverObj[_lever]);
+    return _.chain(_leverObj[_lever])
+              .keys()
+              .map(slugify)
+              .value();
   },
 
-  getLeverRow: function() {
-    _leverRow = LeverRowHelper;
+  /**
+   * Get the lever row data which is static for all levers
+   * @return {Array} Array of objects for each row item
+   */
 
+  getLeverRow: function() {
     return LeverRowHelper;
   },
 
@@ -58,6 +89,7 @@ leverStore = Reflux.createStore({
    * @param  {String} sub   Current Sub
    * @return {Object}       New prototype obj of chart options
    */
+
   getChartInfo: function(lever, sub) {
     return _.merge({}, ChartOpts[lever][sub], ChartProto);
   },
@@ -68,6 +100,7 @@ leverStore = Reflux.createStore({
    * @param  {String} sub   Current Sub
    * @return {Object}       New prototype obj of chart opts/data
    */
+
   getChartUpdate: function(lever, sub) {
     var o = {
       columns: _leverData[sub],
@@ -81,6 +114,7 @@ leverStore = Reflux.createStore({
    * @param  {String} sub   Current sub selected
    * @return {Array}       Array of current filters
    */
+
   getLeverFilters: function(sub) {
     return _.chain(_leverData[sub])
             .map(function(s) {

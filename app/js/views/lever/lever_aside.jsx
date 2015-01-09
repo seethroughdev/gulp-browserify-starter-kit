@@ -6,6 +6,7 @@ var React = window.React,
     View;
 
 View = React.createClass({
+
   propTypes: {
     leverFilters: React.PropTypes.array.isRequired
   },

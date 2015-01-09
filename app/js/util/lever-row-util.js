@@ -13,7 +13,7 @@ _currencyFormat = function _currencyFormat(val) {
 module.exports = [
   {
     title: 'Total Revenue',
-    total: _currencyFormat(0),
+    total: _currencyFormat(65532),
     today: _currencyFormat(423)
   },
   {
