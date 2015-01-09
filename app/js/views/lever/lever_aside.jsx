@@ -12,7 +12,7 @@ View = React.createClass({
   },
 
   render: function() {
-    var self = this;
+    var _this = this;
 
     return (
       <aside className="chart__aside">
@@ -28,8 +28,8 @@ View = React.createClass({
                         className="filter__span"
                         style={
                 {
-                  background: colorScheme[self.props.leverTitle][i],
-                  border: '1px solid ' + colorScheme[self.props.leverTitle][i]
+                  background: colorScheme[_this.props.leverTitle][i],
+                  border: '1px solid ' + colorScheme[_this.props.leverTitle][i]
                 }
                         }></span>
                       <div>{filter}</div>

@@ -23,7 +23,6 @@ leverStore = Reflux.createStore({
     _leverData = {};
   },
 
-
   /**
    * Fired when async lever data is loaded
    * @param  {Object} leverObj Raw lever data
@@ -57,9 +56,7 @@ leverStore = Reflux.createStore({
    */
 
   getLever: function() {
-    return slugify(
-              _.keys(_leverObj)[0]
-            );
+    return _.keys(_leverObj)[0];
   },
 
   /**

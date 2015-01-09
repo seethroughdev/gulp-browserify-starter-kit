@@ -1,7 +1,7 @@
 'use strict';
 
 var numeral = window.numeral,
-    _currencyFormat, _formatPartial, _format;
+    _currencyFormat;
 
 
 _currencyFormat = function _currencyFormat(val) {
