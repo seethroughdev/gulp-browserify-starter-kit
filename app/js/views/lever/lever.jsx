@@ -65,6 +65,7 @@ View = React.createClass({
           />
           <LeverAside
             leverFilters={this.state.leverFilters}
+            leverTitle={this.state.leverTitle}
           />
         </section>
         <LeverRow leverRow={this.state.leverRow} />

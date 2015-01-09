@@ -1,13 +1,14 @@
 'use strict';
 
-var colorScheme = require('../util/colors-util');
+var colorScheme = require('../util/colors-util'),
+    numeral     = window.numeral;
 
 module.exports.summary = {
   axis: {
     y: {
       tick: {
         format: function(d) {
-          return d;
+          return numeral(d).format('(0.0a)');
         }
       },
       label: {
@@ -35,7 +36,7 @@ module.exports.summary = {
   data: {
     x: 'x',
     types: {
-      Current: 'line',
+      Current: 'spline',
       Growth: 'spline'
     },
     axes: {

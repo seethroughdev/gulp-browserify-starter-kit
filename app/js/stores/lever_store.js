@@ -59,7 +59,7 @@ leverStore = Reflux.createStore({
    * @return {Object}       New prototype obj of chart options
    */
   getChartInfo: function(lever, sub) {
-    return _.extend(Object.create(ChartOpts[lever][sub]), ChartProto);
+    return _.merge({}, ChartOpts[lever][sub], ChartProto);
   },
 
   /**
@@ -73,7 +73,7 @@ leverStore = Reflux.createStore({
       columns: _leverData[sub],
       unload: true
     };
-    return _.extend({}, o, ChartOpts[lever][sub].data);
+    return _.merge({}, o, ChartOpts[lever][sub].data);
   },
 
   /**
