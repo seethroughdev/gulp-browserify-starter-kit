@@ -72,9 +72,16 @@ View = React.createClass({
     * this a flag instead of applying to all
     * but because its based off a dynamic list, we can't
     * add them before...
+    *
+    * so will there be a time where we want to stack
+    * some and not others?
     */
 
     chart.groups([this.props.leverFilters]);
+
+    // this should look for params in url first
+    // -AL figure out why this breaks churn!
+    chart.show(this.props.leverFilters);
 
     /**
      * resize the chart automatically, if necessary

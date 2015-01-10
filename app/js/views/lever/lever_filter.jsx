@@ -3,6 +3,7 @@
 var React        = window.React,
     Router       = window.ReactRouter,
     _            = window._,
+    LeverStore = require('../../stores/lever_store'),
     LeverActions = require('../../actions/actions'),
     colorScheme  = require('../../util/colors-util'),
     $            = window.$,
@@ -19,7 +20,8 @@ View = React.createClass({
 
   mixins: [
     Router.State,
-    Router.Navigation
+    Router.Navigation,
+    Reflux.listenTo(LeverStore, 'onLeverUpdate')
   ],
 
   /**
@@ -79,6 +81,12 @@ View = React.createClass({
 
     // call action with active filters
     return LeverActions.toggleFilters(activeFilters, inactiveFilters);
+  },
+
+  onLeverUpdate: function(lever) {
+    // this should look for params in the url first
+    var $filters = $('.filter__filter');
+    $filters.addClass('is-active');
   },
 
   addFilterSpanStyle: function() {
