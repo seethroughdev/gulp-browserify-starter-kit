@@ -27,6 +27,7 @@ routes = (
 
 module.exports = Router.run(routes, function(Handler, state) {
   React.render(
-    <Handler params={state.params} />, document.getElementById('page')
+    <Handler params={state.params} query={state.query} />,
+                                  document.getElementById('page')
   );
 });

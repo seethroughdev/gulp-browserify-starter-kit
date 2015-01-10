@@ -10,14 +10,15 @@ var React         = window.React,
 App = React.createClass({
 
   mixins: [
-    Router.Navigation
+    Router.Navigation,
+    Router.State
   ],
 
   render: function() {
     return (
       <div id="viewport">
         <MainAside />
-        <RouteHandler />
+        <RouteHandler query={this.props.query} />
       </div>
     )
   }

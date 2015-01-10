@@ -4,7 +4,6 @@ var React        = window.React,
     Router       = window.ReactRouter,
     _            = window._,
     LeverActions = require('../../actions/actions'),
-    LeverFilter  = require('./lever_filter.jsx'),
     colorScheme  = require('../../util/colors-util'),
     $            = window.$,
     View;
@@ -12,7 +11,9 @@ var React        = window.React,
 View = React.createClass({
 
   propTypes: {
-    leverFilters: React.PropTypes.array.isRequired
+    filter: React.PropTypes.string.isRequired,
+    leverTitle: React.PropTypes.string.isRequired,
+    itemNumber: React.PropTypes.number.isRequired
   },
 
   mixins: [
@@ -28,12 +29,12 @@ View = React.createClass({
 
   getActiveFilters: function(filters) {
     return filters
-              .filter(function(el) {
-                return $(el).hasClass('is-active');
-              })
-              .map(function(el) {
-                return el.innerText.trim();
-              });
+      .filter(function(el) {
+        return $(el).hasClass('is-active');
+      })
+      .map(function(el) {
+        return el.innerText.trim();
+      });
   },
 
 
@@ -79,29 +80,21 @@ View = React.createClass({
     return LeverActions.toggleFilters(activeFilters, inactiveFilters);
   },
 
-  render: function() {
-    var _this = this;
+  addFilterSpanStyle: function() {
+    return {
+      background: colorScheme[this.props.leverTitle][this.props.itemNumber],
+      border: '1px solid ' + colorScheme[this.props.leverTitle][this.props.itemNumber]
+    };
+  },
 
+  render: function() {
     return (
-      <aside className="chart__aside">
-        <div>
-          <h3>Summary</h3>
-          <div className="scroll-wrapper">
-            <ul className="filter__tags">
-              {
-                _.map(this.props.leverFilters, function(filter, i) {
-                  return <LeverFilter
-                    leverTitle={_this.props.leverTitle}
-                    filter={filter}
-                    key={i}
-                    itemNumber={i}
-                    onClick={_this.handleClick} />
-                })
-              }
-            </ul>
-          </div>
-        </div>
-      </aside>
+      <li className="is-active filter__filter" itemNumber={this.props.itemNumber}>
+        <span
+          className="filter__span"
+          style={this.addFilterSpanStyle()}></span>
+        <div>{this.props.filter}</div>
+      </li>
     )
   }
 });
