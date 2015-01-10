@@ -13,6 +13,7 @@ View = React.createClass({
   propTypes: {
     filter: React.PropTypes.string.isRequired,
     leverTitle: React.PropTypes.string.isRequired,
+    leverFilters: React.PropTypes.array.isRequired,
     itemNumber: React.PropTypes.number.isRequired
   },
 
@@ -89,7 +90,7 @@ View = React.createClass({
 
   render: function() {
     return (
-      <li className="is-active filter__filter" itemNumber={this.props.itemNumber}>
+      <li className="is-active filter__filter" itemNumber={this.props.itemNumber} onClick={this.handleClick}>
         <span
           className="filter__span"
           style={this.addFilterSpanStyle()}></span>
