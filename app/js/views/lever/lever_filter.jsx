@@ -83,10 +83,14 @@ View = React.createClass({
     return LeverActions.toggleFilters(activeFilters, inactiveFilters);
   },
 
-  onLeverUpdate: function(lever) {
+  resetFilters: function() {
     // this should look for params in the url first
     var $filters = $('.filter__filter');
     $filters.addClass('is-active');
+  },
+
+  onLeverUpdate: function(lever) {
+    this.resetFilters();
   },
 
   addFilterSpanStyle: function() {

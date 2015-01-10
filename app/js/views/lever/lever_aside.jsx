@@ -2,6 +2,7 @@
 
 var React        = window.React,
     _            = window._,
+    $            = window.$,
     LeverFilter  = require('./lever_filter.jsx'),
     View;
 
@@ -14,13 +15,19 @@ View = React.createClass({
     query: React.PropTypes.object.isRequired
   },
 
+  resetFilters: function() {
+    // this should look for params in the url first
+    var $filters = $('.filter__filter');
+    $filters.addClass('is-active');
+  },
+
   render: function() {
     var _this = this;
 
     return (
       <aside className="chart__aside">
         <div>
-          <h3>Summary</h3>
+          <h3 onClick={this.resetFilters}>Summary</h3>
           <div className="scroll-wrapper">
             <ul className="filter__tags">
               {
