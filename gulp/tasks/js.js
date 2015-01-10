@@ -36,6 +36,7 @@ gulp.task('js:browserify', function () {
 gulp.task('js:vendor', function() {
   return gulp.src([
     path.npm.path + 'lodash/dist/lodash.js',
+    path.npm.path + 'domtastic/domtastic.js',
     path.npm.path + 'react/dist/react-with-addons.js',
     path.npm.path + 'react-router/dist/react-router.js',
     path.bower.path + 'reflux/dist/reflux.js',

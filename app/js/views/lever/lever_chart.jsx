@@ -85,8 +85,13 @@ View = React.createClass({
 
   },
 
+  /**
+   * Call chart hide/show depending on filter state
+   * @param  {Array} activeFilters   List of filters with .is-active class
+   * @param  {Array} inactiveFilters List of filters without .is-active class
+   */
+
   onFilterUpdate: function(activeFilters, inactiveFilters) {
-    console.log(activeFilters, inactiveFilters);
     chart.hide(inactiveFilters);
     chart.show(activeFilters);
   },

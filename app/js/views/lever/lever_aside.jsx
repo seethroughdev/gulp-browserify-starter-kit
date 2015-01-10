@@ -4,6 +4,7 @@ var React        = window.React,
     _            = window._,
     LeverActions = require('../../actions/actions'),
     colorScheme  = require('../../util/colors-util'),
+    $            = window.$,
     View;
 
 View = React.createClass({
@@ -12,39 +13,60 @@ View = React.createClass({
     leverFilters: React.PropTypes.array.isRequired
   },
 
+
+  /**
+   * Return text list of active filters
+   * @param  {Array} filters Array of jquery objects of filter <li>
+   * @return {Array}         List of strings matching active filters
+   */
+
+  getActiveFilters: function(filters) {
+    return filters
+              .filter(function(el) {
+                return $(el).hasClass('is-active');
+              })
+              .map(function(el) {
+                return el.innerText.trim();
+              });
+  },
+
+
+  /**
+   * Return array of filters that are not active
+   * @param  {Array} activeFilters Array of strings of active filters
+   * @return {Array}               List of not-active filters.
+   */
+
+  getInactiveFilters: function(activeFilters) {
+    return _.difference(this.props.leverFilters, activeFilters);
+  },
+
+
   handleClick: function(e) {
     e.preventDefault();
     var container     = e.target.parentNode,
         activeFilters = [],
         inactiveFilters = [],
-        filters;
+        $filters = $('.filter__filter');
 
     // toggle styling class
-    container.classList.toggle('is-active');
+    $(container).toggleClass('is-active');
 
     // get array of all active filters
-    filters = window.document.querySelectorAll('.filter__filter');
+    activeFilters = this.getActiveFilters($filters);
 
-    activeFilters = _.chain(filters)
-                        .filter(function(filter) {
-                          return filter.classList.contains('is-active');
-                        })
-                        .map(function(filter) {
-                          return filter.innerText.trim();
-                        })
-                        .value();
+    // if the filter is not active, then collect is at inactive
+    inactiveFilters = this.getInactiveFilters(activeFilters);
 
-    inactiveFilters = _.chain(filters)
-                        .filter(function(filter) {
-                          return !filter.classList.contains('is-active');
-                        })
-                        .map(function(filter) {
-                          return filter.innerText.trim();
-                        })
-                        .value();
+    // Reset if there are no active filters
+    if (activeFilters.length === 0) {
+      activeFilters = inactiveFilters;
+      inactiveFilters = [];
+      $filters.addClass('is-active');
+    }
 
     // call action with active filters
-    LeverActions.toggleFilters(activeFilters, inactiveFilters);
+    return LeverActions.toggleFilters(activeFilters, inactiveFilters);
   },
 
   render: function() {
