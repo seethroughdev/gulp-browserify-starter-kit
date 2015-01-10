@@ -21,9 +21,9 @@
     }
   }
   .c3-legend-item {
-    @include break(large) {
-      display: none;
-    }
+    // @include break(large) {
+    //   display: none;
+    // }
   }
   .c3-tooltip th {
     background: $black;

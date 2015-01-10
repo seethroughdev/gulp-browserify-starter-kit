@@ -7,7 +7,6 @@
 
 var Reflux     = window.Reflux,
     _          = window._,
-    slugify    = require('slugify'),
     actions    = require('../actions/actions'),
     LeverRowHelper = require('../util/lever-row-util'),
     ChartProto = require('../chart-options/_default-chart-opts'),
@@ -41,6 +40,10 @@ leverStore = Reflux.createStore({
     });
   },
 
+  onToggleFilters: function(filters) {
+    // console.log(filters);
+  },
+
   /**
    * Return all the raw data from the current lever
    * @return {Array} Array of data objects of each sub belonging to lever.
@@ -67,7 +70,6 @@ leverStore = Reflux.createStore({
   getLeverSubs: function() {
     return _.chain(_leverObj[_lever])
               .keys()
-              .map(slugify)
               .value();
   },
 
@@ -113,7 +115,7 @@ leverStore = Reflux.createStore({
    */
 
   getLeverFilters: function(sub) {
-    return _.chain(_leverData[sub])
+    var d = _.chain(_leverData[sub])
             .map(function(s) {
               return s[0];
             })
@@ -121,6 +123,8 @@ leverStore = Reflux.createStore({
               return s !== 'x';
             })
             .value();
+    console.log(d);
+    return d;
   }
 });
 

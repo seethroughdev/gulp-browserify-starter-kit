@@ -16,15 +16,19 @@ getLever = function getLever(lever, cb, errCb) {
   return leverService.getLever(lever, cb, errCb);
 };
 
-Actions = Reflux.createActions({
-  load: {children: [
-    'completed',
-    'failed'
-  ]}
-});
+Actions = Reflux.createActions([
+    'load',
+    'loadCompleted',
+    'loadFailed',
+    'toggleFilters'
+  ]);
 
 Actions.load.listen(function(lever) {
-  getLever(lever, Actions.load.completed, Actions.load.failed);
+  getLever(lever, Actions.loadCompleted, Actions.loadFailed);
 });
+
+// Actions.toggleFilters.listen(function(filters) {
+//   console.log('ffffilters', filters);
+// });
 
 module.exports = Actions;

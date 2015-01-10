@@ -3,13 +3,16 @@
 var React      = window.React,
     Reflux     = window.Reflux,
     c3         = window.c3,
+    _          = window._,
     LeverStore = require('../../stores/lever_store'),
+    LeverFilterStore = require('../../stores/lever_filter_store'),
     View, chart;
 
 View = React.createClass({
 
   mixins: [
-    Reflux.listenTo(LeverStore, 'onStoreUpdate')
+    Reflux.listenTo(LeverStore, 'onLeverUpdate'),
+    Reflux.listenTo(LeverFilterStore, 'onFilterUpdate')
   ],
 
   propTypes: {
@@ -51,7 +54,7 @@ View = React.createClass({
     }, 450);
   },
 
-  onStoreUpdate: function(lever) {
+  onLeverUpdate: function(lever) {
 
     /**
      * each time the store is updated, the chart data is updated
@@ -78,6 +81,14 @@ View = React.createClass({
      */
     this.handleResize(chart);
 
+    window.chart = chart;
+
+  },
+
+  onFilterUpdate: function(activeFilters, inactiveFilters) {
+    console.log(activeFilters, inactiveFilters);
+    chart.hide(inactiveFilters);
+    chart.show(activeFilters);
   },
 
   render: function() {

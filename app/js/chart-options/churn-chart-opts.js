@@ -28,10 +28,10 @@ module.exports.summary = {
     x: 'x',
     type: 'spline',
     axes: {
-      Growth: 'y2'
+      growth: 'y2'
     },
     colors: {
-      Growth: colorScheme.y2
+      growth: colorScheme.y2
     }
   }
 };
@@ -70,13 +70,13 @@ module.exports.revenue = {
     x: 'x',
     types: {
       Revenue: 'bar',
-      Growth: 'spline'
+      growth: 'spline'
     },
     axes: {
-      Growth: 'y2'
+      growth: 'y2'
     },
     colors: {
-      Growth: colorScheme.y2
+      growth: colorScheme.y2
     },
     order: 'desc'
   }
@@ -116,10 +116,10 @@ module.exports.monthly = {
     x: 'x',
     type: 'spline',
     axes: {
-      Growth: 'y2'
+      growth: 'y2'
     },
     colors: {
-      Growth: colorScheme.y2
+      growth: colorScheme.y2
     },
     order: 'desc'
   }
@@ -159,10 +159,10 @@ module.exports.annual = {
     x: 'x',
     type: 'spline',
     axes: {
-      Growth: 'y2'
+      growth: 'y2'
     },
     colors: {
-      Growth: colorScheme.y2
+      growth: colorScheme.y2
     },
     order: 'desc'
   }

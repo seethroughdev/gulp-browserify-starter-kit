@@ -18,7 +18,7 @@ module.exports.summary = {
     y2: {
       show: true,
       label: {
-        text: 'Growth %'
+        text: 'growth %'
       }
     }
   },
@@ -36,14 +36,14 @@ module.exports.summary = {
   data: {
     x: 'x',
     types: {
-      Current: 'spline',
-      Growth: 'spline'
+      current: 'spline',
+      growth: 'spline'
     },
     axes: {
-      Growth: 'y2'
+      growth: 'y2'
     },
     colors: {
-      Growth: colorScheme.y2
+      growth: colorScheme.y2
     }
   }
 };
