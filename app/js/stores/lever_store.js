@@ -5,12 +5,12 @@
  */
 
 
-var Reflux     = window.Reflux,
-    _          = window._,
-    actions    = require('../actions/actions'),
+var Reflux         = window.Reflux,
+    _              = window._,
+    actions        = require('../actions/actions'),
     LeverRowHelper = require('../util/lever-row-util'),
-    ChartProto = require('../chart-options/_default-chart-opts'),
-    ChartOpts  = require('../chart-options/_lever-chart-opts'),
+    ChartProto     = require('../chart-options/_default-chart-opts'),
+    ChartOpts      = require('../chart-options/_lever-chart-opts'),
     leverStore, _lever, _leverData, _leverObj;
 
 
@@ -37,10 +37,6 @@ leverStore = Reflux.createStore({
       subs: this.getLeverSubs(),
       row: this.getLeverRow()
     });
-  },
-
-  onToggleFilters: function(filters) {
-    // console.log(filters);
   },
 
   /**
@@ -99,12 +95,18 @@ leverStore = Reflux.createStore({
    * @return {Object}       New prototype obj of chart opts/data
    */
 
+  onLoadSub: function(lever, sub) {
+
+  },
+
   getChartUpdate: function(lever, sub) {
     var o = {
-      columns: _leverData[sub],
-      unload: true
-    };
-    return _.merge({}, o, ChartOpts[lever][sub].data);
+      unload: true,
+      columns: _leverData[sub]
+    }, d;
+    d = _.merge({}, o, ChartOpts[lever][sub].data);
+    console.log(d);
+    return d;
   },
 
   /**

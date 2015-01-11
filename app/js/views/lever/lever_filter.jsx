@@ -1,22 +1,23 @@
 'use strict';
 
-var React        = window.React,
-    Router       = window.ReactRouter,
-    _            = window._,
+var React            = window.React,
+    RP               = React.PropTypes,
+    Router           = window.ReactRouter,
+    _                = window._,
     LeverFilterStore = require('../../stores/lever_filter_store'),
-    LeverActions = require('../../actions/actions'),
-    colorScheme  = require('../../util/colors-util'),
-    $            = window.$,
+    LeverActions     = require('../../actions/actions'),
+    colorScheme      = require('../../util/colors-util'),
+    $                = window.$,
     View;
 
 View = React.createClass({
 
   propTypes: {
-    filter: React.PropTypes.string.isRequired,
-    leverTitle: React.PropTypes.string.isRequired,
-    leverFilters: React.PropTypes.array.isRequired,
-    itemNumber: React.PropTypes.number.isRequired,
-    active: React.PropTypes.bool.isRequired
+    filter: RP.string.isRequired,
+    leverTitle: RP.string.isRequired,
+    leverFilters: RP.array.isRequired,
+    itemNumber: RP.number.isRequired,
+    active: RP.bool.isRequired
   },
 
   mixins: [

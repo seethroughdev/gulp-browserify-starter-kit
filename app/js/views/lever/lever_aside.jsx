@@ -1,22 +1,24 @@
 'use strict';
 
 var React        = window.React,
+    RP         = React.PropTypes,
     _            = window._,
     $            = window.$,
+    LeverActions = require('../../actions/actions'),
     LeverFilter  = require('./lever_filter.jsx'),
     View;
 
 View = React.createClass({
 
   propTypes: {
-    leverFilters: React.PropTypes.array.isRequired,
-    leverTitle: React.PropTypes.string.isRequired,
-    activeFilters: React.PropTypes.array.isRequired
+    leverFilters: RP.array.isRequired,
+    leverTitle: RP.string.isRequired,
+    activeFilters: RP.array.isRequired
   },
 
   resetFilters: function() {
     // this should look for params in the url first
-    $('.filter__filter').addClass('is-active');
+    LeverActions.resetFilters(this.props.leverFilters);
   },
 
   isActive: function(filter) {

@@ -1,15 +1,15 @@
 'use strict';
 
-var React        = window.React,
-    Reflux       = window.Reflux,
-    Router       = window.ReactRouter,
-    MainHeader   = require('../main/header.jsx'),
-    LeverStore   = require('../../stores/lever_store'),
+var React            = window.React,
+    Reflux           = window.Reflux,
+    Router           = window.ReactRouter,
+    MainHeader       = require('../main/header.jsx'),
+    LeverStore       = require('../../stores/lever_store'),
     LeverFilterStore = require('../../stores/lever_filter_store'),
-    LeverActions = require('../../actions/actions'),
-    LeverAside   = require('./lever_aside.jsx'),
-    LeverChart   = require('./lever_chart.jsx'),
-    LeverRow   = require('./lever_row.jsx'),
+    LeverActions     = require('../../actions/actions'),
+    LeverAside       = require('./lever_aside.jsx'),
+    LeverChart       = require('./lever_chart.jsx'),
+    LeverRow         = require('./lever_row.jsx'),
     View;
 
 View = React.createClass({
@@ -32,6 +32,7 @@ View = React.createClass({
   },
 
   handleLoadItemsComplete: function(lever) {
+    console.log(lever);
     this.setState({
       leverData: lever.data,
       leverRow: lever.row,
@@ -40,12 +41,14 @@ View = React.createClass({
       leverFilters: LeverStore.getLeverFilters(this.getParams().sub),
       activeFilters: LeverStore.getLeverFilters(this.getParams().sub)
     });
+
+    LeverActions.resetFilters(this.state.leverFilters);
   },
 
   handleFilterChange: function(filters) {
     this.setState({
       activeFilters: filters.activeFilters,
-      inactiveFiltes: filters.inactiveFilters
+      inactiveFilters: filters.inactiveFilters
     });
   },
 
@@ -60,6 +63,7 @@ View = React.createClass({
 
   // when lever/subs change, update lever data
   componentWillReceiveProps: function(nextprops) {
+    console.log(this.getParams().lever);
     LeverActions.load(this.getParams().lever);
   },
 
@@ -79,8 +83,8 @@ View = React.createClass({
           />
           <LeverAside
             leverFilters={this.state.leverFilters}
-            activeFilters={this.state.activeFilters}
             leverTitle={this.state.leverTitle}
+            activeFilters={this.state.activeFilters}
           />
         </section>
         <LeverRow leverRow={this.state.leverRow} />

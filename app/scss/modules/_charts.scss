@@ -36,6 +36,13 @@
     opacity: 1;
     min-width: 7rem;
   }
+  .c3-line {
+    stroke-width: 1px;
+  }
+  .c3-line-growth {
+    stroke-dasharray: 5,5;
+    stroke-width: 1px;
+  }
 }
 
 #chart {

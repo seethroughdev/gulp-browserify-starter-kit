@@ -69,7 +69,7 @@ module.exports.revenue = {
   data: {
     x: 'x',
     types: {
-      Revenue: 'bar',
+      revenue: 'bar',
       growth: 'spline'
     },
     axes: {

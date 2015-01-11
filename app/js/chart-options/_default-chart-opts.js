@@ -17,7 +17,6 @@ module.exports = {
         '2014-10-03'
       ]
     ],
-    type: 'bar',
     order: 'desc'
   },
   size: {

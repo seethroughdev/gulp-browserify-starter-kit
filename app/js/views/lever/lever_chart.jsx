@@ -4,6 +4,7 @@ var React      = window.React,
     Reflux     = window.Reflux,
     c3         = window.c3,
     _          = window._,
+    RP         = React.PropTypes,
     LeverStore = require('../../stores/lever_store'),
     LeverFilterStore = require('../../stores/lever_filter_store'),
     View, chart;
@@ -16,9 +17,10 @@ View = React.createClass({
   ],
 
   propTypes: {
-    leverTitle: React.PropTypes.string.isRequired,
-    leverData: React.PropTypes.object.isRequired,
-    leverSub: React.PropTypes.string.isRequired
+    leverTitle: RP.string.isRequired,
+    leverData: RP.object.isRequired,
+    leverSub: RP.string.isRequired,
+    leverFilters: RP.array.isRequired
   },
 
   componentDidMount: function() {
@@ -41,6 +43,12 @@ View = React.createClass({
     window.removeEventListener('resize', this.handleResize);
   },
 
+
+  /**
+   * Resize chart based on container size
+   * @param  {Object} chart Lever chart instance.
+   */
+
   resizeChart: function(chart) {
     chart.resize({
       height: this.getDOMNode().offsetHeight,
@@ -48,22 +56,23 @@ View = React.createClass({
     });
   },
 
+  /**
+   * Handle on resize function in a performant way.
+   * @param  {Object} chart Lever chart instance.
+   * @return {Function}     Calls chart resize method.
+   */
+
   handleResize: function(chart) {
     return _.debounce(function() {
       return this.resizeChart(chart);
     }, 450);
   },
 
-  onLeverUpdate: function(lever) {
+  /**
+   * Callback after chart data is reloaded
+   */
 
-    /**
-     * each time the store is updated, the chart data is updated
-     * you will only see a change if the lever/subs change
-     * but this also allows us to only instantiate one chart and
-     * just change the contents
-     */
-
-    chart.load(LeverStore.getChartUpdate(this.props.leverTitle, this.props.leverSub));
+  handleChartCallback: function() {
 
     /**
     * stack the appropriate groups
@@ -79,14 +88,29 @@ View = React.createClass({
 
     chart.groups([this.props.leverFilters]);
 
-    // this should look for params in url first
-    // -AL figure out why this breaks churn!
-    chart.show(this.props.leverFilters);
-
     /**
      * resize the chart automatically, if necessary
      */
     this.handleResize(chart);
+  },
+
+
+  onLeverUpdate: function(lever) {
+    var obj = LeverStore.getChartUpdate(this.props.leverTitle, this.props.leverSub),
+        _this = this;
+
+    /**
+     * each time the store is updated, the chart data is updated
+     * you will only see a change if the lever/subs change
+     * but this also allows us to only instantiate one chart and
+     * just change the contents
+     */
+
+    setTimeout(function() {
+      return chart.load(obj, function(config) {
+        _this.handleChartCallback();
+      });
+    }, 200);
 
     window.chart = chart;
 
@@ -105,7 +129,10 @@ View = React.createClass({
 
   render: function() {
     return (
-      <div id="chartContainer" className="chart__content" />
+      <div
+          id="chartContainer"
+          className="chart__content"
+      />
     )
   }
 });

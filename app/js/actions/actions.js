@@ -20,7 +20,9 @@ Actions = Reflux.createActions([
     'load',
     'loadCompleted',
     'loadFailed',
-    'toggleFilters'
+    'loadSub',
+    'toggleFilters',
+    'resetFilters'
   ]);
 
 Actions.load.listen(function(lever) {

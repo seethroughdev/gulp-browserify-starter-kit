@@ -20,15 +20,9 @@ store = Reflux.createStore({
 
   init: function() {
     this.listenTo(actions.toggleFilters, this.onToggleFilters);
+    this.listenTo(actions.resetFilters, this.resetFilters);
   },
 
-  setFilters: function(filters) {
-    _filters = filters;
-  },
-
-  setActiveFilters: function(filters) {
-    _activeFilters = filters;
-  },
 
    /**
    * Return text list of active filters
@@ -56,6 +50,23 @@ store = Reflux.createStore({
     return _.difference(filters, activeFilters);
   },
 
+  /**
+   * Reset all filters
+   * @param  {Array} filters List of current filters.
+   *
+   * Note: this is currently dom dependent.  We should change this
+   * as soon as possible.
+   */
+  resetFilters: function(filters) {
+    $('.filter__filter').addClass('is-active');
+    this.onToggleFilters(filters);
+  },
+
+  /**
+   * Handle all filters
+   * @param  {Array} filters List of current filters.
+   * @return {Function}         Trigger change to filters.
+   */
   onToggleFilters: function(filters) {
     var obj;
 
@@ -67,15 +78,13 @@ store = Reflux.createStore({
       inactiveFilters: this.getInactiveFilters(filters, this.activeFilters)
     };
 
-    // make all active if none of them are
+    // Don't allow all inactive.  Instead, toggle to all active.
     if (obj.activeFilters.length === 0) {
       obj.activeFilters = obj.inactiveFilters;
       obj.inactiveFilters = [];
     }
 
-    console.log(obj);
-
-    this.trigger(obj);
+    return this.trigger(obj);
   }
 
 });
