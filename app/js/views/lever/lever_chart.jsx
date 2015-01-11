@@ -98,9 +98,9 @@ View = React.createClass({
    * @param  {Array} inactiveFilters List of filters without .is-active class
    */
 
-  onFilterUpdate: function(activeFilters, inactiveFilters) {
-    chart.hide(inactiveFilters);
-    chart.show(activeFilters);
+  onFilterUpdate: function(obj) {
+    chart.hide(obj.inactiveFilters);
+    chart.show(obj.activeFilters);
   },
 
   render: function() {

@@ -5,6 +5,7 @@ var React        = window.React,
     Router       = window.ReactRouter,
     MainHeader   = require('../main/header.jsx'),
     LeverStore   = require('../../stores/lever_store'),
+    LeverFilterStore = require('../../stores/lever_filter_store'),
     LeverActions = require('../../actions/actions'),
     LeverAside   = require('./lever_aside.jsx'),
     LeverChart   = require('./lever_chart.jsx'),
@@ -24,7 +25,9 @@ View = React.createClass({
       leverTitle: this.getParams().lever,
       leverSubs: [],
       leverFilters: [],
-      leverRow: []
+      leverRow: [],
+      activeFilters: [],
+      inactiveFilters: []
     };
   },
 
@@ -34,13 +37,24 @@ View = React.createClass({
       leverRow: lever.row,
       leverTitle: this.getParams().lever,
       leverSubs: lever.subs,
-      leverFilters: LeverStore.getLeverFilters(this.getParams().sub)
+      leverFilters: LeverStore.getLeverFilters(this.getParams().sub),
+      activeFilters: LeverStore.getLeverFilters(this.getParams().sub)
+    });
+  },
+
+  handleFilterChange: function(filters) {
+    this.setState({
+      activeFilters: filters.activeFilters,
+      inactiveFiltes: filters.inactiveFilters
     });
   },
 
   // when page is loaded, call lever action
   componentWillMount: function() {
     this.listenTo(LeverStore, this.handleLoadItemsComplete);
+    this.listenTo(LeverFilterStore, this.handleFilterChange);
+
+    // start async load of lever data
     LeverActions.load(this.getParams().lever);
   },
 
@@ -65,9 +79,8 @@ View = React.createClass({
           />
           <LeverAside
             leverFilters={this.state.leverFilters}
+            activeFilters={this.state.activeFilters}
             leverTitle={this.state.leverTitle}
-            leverSub={this.getParams().sub}
-            query={this.props.query}
           />
         </section>
         <LeverRow leverRow={this.state.leverRow} />

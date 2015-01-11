@@ -2,5 +2,6 @@
     "preset": "airbnb",
     "fileExtensions": [ ".js", "jscs", ".jsx" ],
     "esprima": "esprima-fb",
-    "disallowMultipleLineBreaks": null
+    "disallowMultipleLineBreaks": null,
+    "disallowQuotedKeysInObjects": null
 }

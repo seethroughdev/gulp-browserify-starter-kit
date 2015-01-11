@@ -11,14 +11,19 @@ View = React.createClass({
   propTypes: {
     leverFilters: React.PropTypes.array.isRequired,
     leverTitle: React.PropTypes.string.isRequired,
-    leverSub: React.PropTypes.string.isRequired,
-    query: React.PropTypes.object.isRequired
+    activeFilters: React.PropTypes.array.isRequired
   },
 
   resetFilters: function() {
     // this should look for params in the url first
-    var $filters = $('.filter__filter');
-    $filters.addClass('is-active');
+    $('.filter__filter').addClass('is-active');
+  },
+
+  isActive: function(filter) {
+    if (this.props.activeFilters.indexOf(filter) !== -1) {
+      return true;
+    }
+    return false;
   },
 
   render: function() {
@@ -38,6 +43,7 @@ View = React.createClass({
                     leverFilters={_this.props.leverFilters}
                     key={i}
                     itemNumber={i}
+                    active={_this.isActive(filter)}
                    />
                 })
               }

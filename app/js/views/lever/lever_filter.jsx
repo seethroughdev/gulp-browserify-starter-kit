@@ -3,7 +3,7 @@
 var React        = window.React,
     Router       = window.ReactRouter,
     _            = window._,
-    LeverStore = require('../../stores/lever_store'),
+    LeverFilterStore = require('../../stores/lever_filter_store'),
     LeverActions = require('../../actions/actions'),
     colorScheme  = require('../../util/colors-util'),
     $            = window.$,
@@ -15,82 +15,35 @@ View = React.createClass({
     filter: React.PropTypes.string.isRequired,
     leverTitle: React.PropTypes.string.isRequired,
     leverFilters: React.PropTypes.array.isRequired,
-    itemNumber: React.PropTypes.number.isRequired
+    itemNumber: React.PropTypes.number.isRequired,
+    active: React.PropTypes.bool.isRequired
   },
 
   mixins: [
-    Router.State,
-    Router.Navigation,
-    Reflux.listenTo(LeverStore, 'onLeverUpdate')
+    Reflux.listenTo(LeverFilterStore, 'onLeverUpdate')
   ],
 
-  /**
-   * Return text list of active filters
-   * @param  {Array} filters Array of jquery objects of filter <li>
-   * @return {Array}         List of strings matching active filters
-   */
-
-  getActiveFilters: function(filters) {
-    return filters
-      .filter(function(el) {
-        return $(el).hasClass('is-active');
-      })
-      .map(function(el) {
-        return el.innerText.trim();
-      });
+  getInitialState: function() {
+    return {
+      isActive: this.props.active
+    };
   },
 
-
-  /**
-   * Return array of filters that are not active
-   * @param  {Array} activeFilters Array of strings of active filters
-   * @return {Array}               List of not-active filters.
-   */
-
-  getInactiveFilters: function(activeFilters) {
-    return _.difference(this.props.leverFilters, activeFilters);
+  onLeverUpdate: function(obj) {
+    this.setState({
+      isActive: obj.activeFilters.indexOf(this.props.filter) !== -1 ? true : false
+    });
   },
-
 
   handleClick: function(e) {
     e.preventDefault();
-    var container     = e.target.parentNode,
-        activeFilters = [],
-        inactiveFilters = [],
-        $filters = $('.filter__filter');
 
-    // toggle styling class
-    $(container).toggleClass('is-active');
+    // toggle active state
+    this.setState({
+      isActive: !this.state.isActive
+    });
 
-    // get array of all active filters
-    activeFilters = this.getActiveFilters($filters);
-
-    // if the filter is not active, then collect is at inactive
-    inactiveFilters = this.getInactiveFilters(activeFilters);
-
-    // Reset if there are no active filters
-    if (activeFilters.length === 0) {
-      activeFilters = inactiveFilters;
-      inactiveFilters = [];
-      $filters.addClass('is-active');
-    }
-
-    // console.log(this.getQuery());
-    // this.replaceWith('leverSub', {lever: this.props.leverTitle, sub: this.props.leverSub}, {show: activeFilters});
-    // console.log(this.props.query);
-
-    // call action with active filters
-    return LeverActions.toggleFilters(activeFilters, inactiveFilters);
-  },
-
-  resetFilters: function() {
-    // this should look for params in the url first
-    var $filters = $('.filter__filter');
-    $filters.addClass('is-active');
-  },
-
-  onLeverUpdate: function(lever) {
-    this.resetFilters();
+    LeverActions.toggleFilters(this.props.leverFilters);
   },
 
   addFilterSpanStyle: function() {
@@ -101,8 +54,15 @@ View = React.createClass({
   },
 
   render: function() {
+
+    var cx = React.addons.classSet,
+        classes = cx({
+          'filter__filter': true,
+          'is-active': this.state.isActive
+        });
+
     return (
-      <li className="is-active filter__filter" itemNumber={this.props.itemNumber} onClick={this.handleClick}>
+      <li className={classes} itemNumber={this.props.itemNumber} onClick={this.handleClick}>
         <span
           className="filter__span"
           style={this.addFilterSpanStyle()}></span>

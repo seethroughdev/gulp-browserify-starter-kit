@@ -29,7 +29,6 @@ leverStore = Reflux.createStore({
    */
 
   onLoadCompleted: function(leverObj) {
-    console.log(leverObj);
     _leverObj = leverObj;
     _lever = this.getLever();
     _leverData = this.getLeverData();
@@ -115,7 +114,7 @@ leverStore = Reflux.createStore({
    */
 
   getLeverFilters: function(sub) {
-    var d = _.chain(_leverData[sub])
+    return _.chain(_leverData[sub])
             .map(function(s) {
               return s[0];
             })
@@ -123,8 +122,6 @@ leverStore = Reflux.createStore({
               return s !== 'x';
             })
             .value();
-    console.log(d);
-    return d;
   }
 });
 
