@@ -107,10 +107,10 @@ View = React.createClass({
      */
 
     setTimeout(function() {
-      return chart.load(obj, function(config) {
-        _this.handleChartCallback();
-      });
+      chart.load(obj);
+      _this.handleChartCallback();
     }, 200);
+
 
     window.chart = chart;
 
