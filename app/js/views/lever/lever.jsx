@@ -15,7 +15,8 @@ var React            = require('react/addons'),
 View = React.createClass({
 
   mixins: [
-    Reflux.ListenerMixin,
+    Reflux.listenTo(LeverStore, 'handleLoadItemsComplete'),
+    Reflux.listenTo(LeverFilterStore, 'handleFilterChange'),
     Router.State
   ],
 
@@ -49,16 +50,11 @@ View = React.createClass({
 
   // when page is loaded, call lever action
   componentWillMount: function() {
-    this.listenTo(LeverStore, this.handleLoadItemsComplete);
-    this.listenTo(LeverFilterStore, this.handleFilterChange);
-
-    // start async load of lever data
     LeverActions.load(this.getParams().lever);
   },
 
   // when lever/subs change, update lever data
   componentWillReceiveProps: function(nextprops) {
-    // console.log('componentWillMount');
     LeverActions.load(this.getParams().lever);
   },
 

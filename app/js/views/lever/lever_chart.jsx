@@ -7,13 +7,15 @@ var React            = require('react/addons'),
     RP               = React.PropTypes,
     LeverStore       = require('../../stores/lever_store'),
     LeverFilterStore = require('../../stores/lever_filter_store'),
+    LeverChartStore = require('../../stores/lever_chart_store'),
     View, chart;
 
 View = React.createClass({
 
   mixins: [
     Reflux.listenTo(LeverStore, 'onLeverUpdate'),
-    Reflux.listenTo(LeverFilterStore, 'onFilterUpdate')
+    Reflux.listenTo(LeverFilterStore, 'onFilterUpdate'),
+    Reflux.listenTo(LeverChartStore, 'onChartUpdate')
   ],
 
   propTypes: {
@@ -98,6 +100,8 @@ View = React.createClass({
   onLeverUpdate: function(lever) {
     var obj = LeverStore.getChartUpdate(this.props.leverTitle, this.props.leverSub),
         _this = this;
+
+    console.log('onLeverUpdate');
 
     /**
      * each time the store is updated, the chart data is updated
