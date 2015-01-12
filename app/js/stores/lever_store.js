@@ -7,7 +7,7 @@
 
 var Reflux         = require('reflux'),
     _              = require('lodash'),
-    actions        = require('../actions/actions'),
+    LeverActions   = require('../actions/actions'),
     LeverRowHelper = require('../util/lever-row-util'),
     ChartProto     = require('../chart-options/_default-chart-opts'),
     ChartOpts      = require('../chart-options/_lever-chart-opts'),
@@ -16,7 +16,7 @@ var Reflux         = require('reflux'),
 
 leverStore = Reflux.createStore({
 
-  listenables: actions,
+  listenables: LeverActions,
 
   init: function() {
     _leverData = {};
@@ -95,17 +95,12 @@ leverStore = Reflux.createStore({
    * @return {Object}       New prototype obj of chart opts/data
    */
 
-  onLoadSub: function(lever, sub) {
-
-  },
-
   getChartUpdate: function(lever, sub) {
     var o = {
       unload: true,
       columns: _leverData[sub]
     }, d;
     d = _.merge({}, o, ChartOpts[lever][sub].data);
-    console.log(d);
     return d;
   },
 
@@ -116,7 +111,9 @@ leverStore = Reflux.createStore({
    */
 
   getLeverFilters: function(sub) {
-    return _.chain(_leverData[sub])
+    var leverFilters = [];
+
+    leverFilters = _.chain(_leverData[sub])
             .map(function(s) {
               return s[0];
             })
@@ -124,6 +121,10 @@ leverStore = Reflux.createStore({
               return s !== 'x';
             })
             .value();
+
+    LeverActions.setFilters(leverFilters);
+
+    return leverFilters;
   }
 });
 

@@ -26,23 +26,18 @@ View = React.createClass({
       leverSubs: [],
       leverFilters: [],
       leverRow: [],
-      activeFilters: [],
-      inactiveFilters: []
+      activeFilters: []
     };
   },
 
   handleLoadItemsComplete: function(lever) {
-    console.log(lever);
     this.setState({
       leverData: lever.data,
       leverRow: lever.row,
       leverTitle: this.getParams().lever,
       leverSubs: lever.subs,
-      leverFilters: LeverStore.getLeverFilters(this.getParams().sub),
-      activeFilters: LeverStore.getLeverFilters(this.getParams().sub)
+      leverFilters: LeverStore.getLeverFilters(this.getParams().sub)
     });
-
-    LeverActions.resetFilters(this.state.leverFilters);
   },
 
   handleFilterChange: function(filters) {
@@ -63,7 +58,7 @@ View = React.createClass({
 
   // when lever/subs change, update lever data
   componentWillReceiveProps: function(nextprops) {
-    console.log(this.getParams().lever);
+    // console.log('componentWillMount');
     LeverActions.load(this.getParams().lever);
   },
 

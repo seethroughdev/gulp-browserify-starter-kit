@@ -10,8 +10,7 @@ var Reflux  = require('reflux'),
     actions = require('../actions/actions'),
     _       = require('lodash'),
     $       = require('domtastic'),
-    store, _filters, _activeFilters, _inactiveFilters;
-
+    store, _filters, _activeFilters;
 
 
 store = Reflux.createStore({
@@ -19,72 +18,59 @@ store = Reflux.createStore({
   listenables: actions,
 
   init: function() {
-    this.listenTo(actions.toggleFilters, this.onToggleFilters);
-    this.listenTo(actions.resetFilters, this.resetFilters);
   },
-
-
-   /**
-   * Return text list of active filters
-   * @param  {Array} filters Array of jquery objects of filter <li>
-   * @return {Array}         List of strings matching active filters
-   */
 
   getActiveFilters: function() {
-    return $('.filter__filter')
-      .filter(function(el) {
-        return $(el).hasClass('is-active');
-      })
-      .map(function(el) {
-        return el.innerText.trim();
-      });
+    return _activeFilters;
   },
 
-  /**
-   * Return array of filters that are not active
-   * @param  {Array} activeFilters Array of strings of active filters
-   * @return {Array}               List of not-active filters.
-   */
-
-  getInactiveFilters: function(filters, activeFilters) {
-    return _.difference(filters, activeFilters);
+  getInactiveFilters: function() {
+    return _.difference(_filters, _activeFilters);
   },
 
-  /**
-   * Reset all filters
-   * @param  {Array} filters List of current filters.
-   *
-   * Note: this is currently dom dependent.  We should change this
-   * as soon as possible.
-   */
-  resetFilters: function(filters) {
-    $('.filter__filter').addClass('is-active');
-    this.onToggleFilters(filters);
+  addActiveFilter: function(filter) {
+    _activeFilters.push(filter);
+    return _activeFilters;
   },
 
-  /**
-   * Handle all filters
-   * @param  {Array} filters List of current filters.
-   * @return {Function}         Trigger change to filters.
-   */
-  onToggleFilters: function(filters) {
-    var obj;
+  removeActiveFilter: function(filter) {
+    _activeFilters = _.pull(_activeFilters, filter);
 
-    _filters = filters;
-    _activeFilters = this.getActiveFilters();
-
-    obj = {
-      activeFilters: this.getActiveFilters(),
-      inactiveFilters: this.getInactiveFilters(filters, this.activeFilters)
-    };
-
-    // Don't allow all inactive.  Instead, toggle to all active.
-    if (obj.activeFilters.length === 0) {
-      obj.activeFilters = obj.inactiveFilters;
-      obj.inactiveFilters = [];
+    if (_activeFilters.length === 0) {
+      _activeFilters = this.getInactiveFilters();
     }
 
-    return this.trigger(obj);
+    return _activeFilters;
+  },
+
+  getFilterObject: function() {
+    return {
+      filters: _filters,
+      activeFilters: _activeFilters,
+      inactiveFilters: this.getInactiveFilters()
+    };
+  },
+
+  onSetFilters: function(filters) {
+    _filters = filters.slice(0);
+    _activeFilters = filters.slice(0);
+
+    this.trigger(this.getFilterObject());
+  },
+
+  onToggleFilters: function(filter) {
+    if (_.contains(_activeFilters, filter)) {
+      this.removeActiveFilter(filter);
+    } else {
+      this.addActiveFilter(filter);
+    }
+
+    this.trigger(this.getFilterObject());
+  },
+
+  onResetFilters: function() {
+    _activeFilters = _filters.slice(0);
+    this.trigger(this.getFilterObject());
   }
 
 });

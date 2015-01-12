@@ -16,6 +16,7 @@ var path = require('../utils/paths'),
 
 
 var dependencies = [
+  'lodash',
   'react/addons',
   'domtastic',
   'react-router',
@@ -23,7 +24,8 @@ var dependencies = [
   'd3',
   'c3',
   'numeral',
-  'reqwest'
+  'reqwest',
+  'to-no-case'
 ];
 
 // // Options
@@ -169,10 +171,7 @@ gulp.task('js:modernizr', function() {
 gulp.task('js:hint', function() {
   return gulp.src([path.src.js + '**/*', '!' + path.src.js + 'vendor/**/*.js'])
     .pipe($.jscs())
-    .on('error', handleErrors)
-    .pipe(reload({
-      stream: true
-    }));
+    .on('error', handleErrors);
 });
 
 

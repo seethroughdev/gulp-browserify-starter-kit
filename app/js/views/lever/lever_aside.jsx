@@ -17,20 +17,14 @@ View = React.createClass({
   },
 
   resetFilters: function() {
-    // this should look for params in the url first
-    LeverActions.resetFilters(this.props.leverFilters);
+    LeverActions.resetFilters();
   },
 
   isActive: function(filter) {
-    if (this.props.activeFilters.indexOf(filter) !== -1) {
-      return true;
-    }
-    return false;
+    return _.contains(this.props.activeFilters, filter);
   },
 
   render: function() {
-    var _this = this;
-
     return (
       <aside className="chart__aside">
         <div>
@@ -40,14 +34,13 @@ View = React.createClass({
               {
                 _.map(this.props.leverFilters, function(filter, i) {
                   return <LeverFilter
-                    leverTitle={_this.props.leverTitle}
                     filter={filter}
-                    leverFilters={_this.props.leverFilters}
-                    key={i}
+                    leverTitle={this.props.leverTitle}
+                    isActive={this.isActive(filter)}
                     itemNumber={i}
-                    active={_this.isActive(filter)}
+                    key={i}
                    />
-                })
+                }, this)
               }
             </ul>
           </div>
