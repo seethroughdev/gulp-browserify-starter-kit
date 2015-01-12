@@ -1,8 +1,8 @@
 'use strict';
 
-var React         = window.React,
-    Router        = window.ReactRouter,
-    _             = window._,
+var React         = require('react/addons'),
+    Router        = require('react-router'),
+    _             = require('lodash'),
     RouteHandler  = Router.RouteHandler,
     MainAside     = require('./main/aside.jsx'),
     App;

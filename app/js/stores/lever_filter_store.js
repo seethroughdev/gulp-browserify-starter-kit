@@ -6,10 +6,10 @@
  */
 
 
-var Reflux     = window.Reflux,
-    actions    = require('../actions/actions'),
-    _            = window._,
-    $            = window.$,
+var Reflux  = require('reflux'),
+    actions = require('../actions/actions'),
+    _       = require('lodash'),
+    $       = require('domtastic'),
     store, _filters, _activeFilters, _inactiveFilters;
 
 

@@ -1,7 +1,7 @@
 'use strict';
 
 var colorScheme = require('../util/colors-util'),
-    numeral     = window.numeral;
+    numeral     = require('numeral');
 
 module.exports.summary = {
   axis: {

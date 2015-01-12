@@ -1,11 +1,11 @@
 'use strict';
 
-var React       = window.React,
-    _           = window._,
-    Router = window.ReactRouter,
-    Route   = Router.Route,
-    Link   = Router.Link,
-    DatePicker  = require('../lever/lever_datepicker.jsx'),
+var React      = require('react/addons'),
+    _          = require('lodash'),
+    Router     = require('react-router'),
+    Route      = Router.Route,
+    Link       = Router.Link,
+    DatePicker = require('../lever/lever_datepicker.jsx'),
     View;
 
 View = React.createClass({

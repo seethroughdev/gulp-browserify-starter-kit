@@ -1,11 +1,11 @@
 'use strict';
 
-var React      = window.React,
-    Reflux     = window.Reflux,
-    c3         = window.c3,
-    _          = window._,
-    RP         = React.PropTypes,
-    LeverStore = require('../../stores/lever_store'),
+var React            = require('react/addons'),
+    Reflux           = require('reflux'),
+    c3               = require('c3'),
+    _                = require('lodash'),
+    RP               = React.PropTypes,
+    LeverStore       = require('../../stores/lever_store'),
     LeverFilterStore = require('../../stores/lever_filter_store'),
     View, chart;
 

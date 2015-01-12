@@ -1,6 +1,6 @@
 'use strict';
 
-var numeral = window.numeral,
+var numeral = require('numeral'),
     _currencyFormat;
 
 

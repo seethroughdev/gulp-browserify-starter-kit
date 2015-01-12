@@ -1,13 +1,14 @@
 'use strict';
 
-var React            = window.React,
+var React            = require('react/addons'),
     RP               = React.PropTypes,
-    Router           = window.ReactRouter,
-    _                = window._,
+    Reflux           = require('reflux'),
+    Router           = require('react-router'),
+    _                = require('lodash'),
+    $                = require('domtastic'),
     LeverFilterStore = require('../../stores/lever_filter_store'),
     LeverActions     = require('../../actions/actions'),
     colorScheme      = require('../../util/colors-util'),
-    $                = window.$,
     View;
 
 View = React.createClass({

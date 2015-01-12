@@ -1,9 +1,9 @@
 'use strict';
 
-var React        = window.React,
-    RP         = React.PropTypes,
-    _            = window._,
-    $            = window.$,
+var React        = require('react/addons'),
+    RP           = React.PropTypes,
+    _            = require('lodash'),
+    $            = require('domtastic'),
     LeverActions = require('../../actions/actions'),
     LeverFilter  = require('./lever_filter.jsx'),
     View;

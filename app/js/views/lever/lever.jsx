@@ -1,8 +1,8 @@
 'use strict';
 
-var React            = window.React,
-    Reflux           = window.Reflux,
-    Router           = window.ReactRouter,
+var React            = require('react/addons'),
+    Reflux           = require('reflux'),
+    Router           = require('react-router'),
     MainHeader       = require('../main/header.jsx'),
     LeverStore       = require('../../stores/lever_store'),
     LeverFilterStore = require('../../stores/lever_filter_store'),

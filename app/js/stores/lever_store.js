@@ -5,8 +5,8 @@
  */
 
 
-var Reflux         = window.Reflux,
-    _              = window._,
+var Reflux         = require('reflux'),
+    _              = require('lodash'),
     actions        = require('../actions/actions'),
     LeverRowHelper = require('../util/lever-row-util'),
     ChartProto     = require('../chart-options/_default-chart-opts'),

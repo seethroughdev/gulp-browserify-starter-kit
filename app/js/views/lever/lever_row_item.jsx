@@ -1,6 +1,6 @@
 'use strict';
 
-var React = window.React,
+var React = require('react/addons'),
     View;
 
 View = React.createClass({

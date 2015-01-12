@@ -1,6 +1,6 @@
 'use strict';
 
-var Reflux       = window.Reflux,
+var Reflux       = require('reflux'),
     leverService = require('../services/levers_service'),
     Actions, getLever;
 

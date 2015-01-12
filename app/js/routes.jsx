@@ -1,8 +1,8 @@
 'use strict';
 
-var React         = window.React,
-    Router        = window.ReactRouter,
-    Reflux        = window.Reflux,
+var React         = require('react/addons'),
+    Router        = require('react-router'),
+    Reflux        = require('reflux'),
     Route         = Router.Route,
     DefaultRoute  = Router.DefaultRoute,
     NotFoundRoute = Router.NotFoundRoute,
