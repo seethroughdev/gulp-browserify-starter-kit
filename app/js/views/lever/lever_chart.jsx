@@ -23,29 +23,44 @@ View = React.createClass({
 
   propTypes: {
     leverTitle: RP.string.isRequired,
-    leverSub: RP.string.isRequired
-    // leverData: RP.object.isRequired,
+    leverSub: RP.string.isRequired,
+    leverData: RP.object.isRequired
     // leverFilters: RP.array.isRequired
   },
 
   getInitialState: function() {
     return {
       chartInit: {}
-    }
+    };
   },
 
   componentWillReceiveProps: function(nextprops) {
 
+    // Lever changed ->
     if (this.props.leverTitle !== nextprops.leverTitle) {
-      console.log('lever changed!', this.props.leverTitle, nextprops.leverTitle)
-    }
+      console.log('lever changed!', this.props.leverTitle, nextprops.leverTitle);
+      LeverActions.chartInit(nextprops.leverTitle, nextprops.leverSub, nextprops.leverData);
 
-    if (this.props.leverTitle !== nextprops.leverTitle ||
+    // Sub changed ->
+    } else if (this.props.leverTitle === nextprops.leverTitle &&
       this.props.leverSub !== nextprops.leverSub) {
       console.log('sub changed!', this.props.leverSub, nextprops.leverSub);
-      LeverActions.chartInit(nextprops.leverTitle, nextprops.leverSub)
+      LeverActions.chartInit(nextprops.leverTitle, nextprops.leverSub, nextprops.leverData);
+
+    // Lever or Sub changed ->
+    } else if (this.props.leverTitle !== nextprops.leverTitle ||
+      this.props.leverSub !== nextprops.leverSub) {
+      console.log('lever and sub changed!', nextprops.leverTitle, nextprops.leverSub);
     }
 
+  },
+
+  onChartUpdate: function(chartObj) {
+    if (_.isObject(chart)) {
+      chart.destroy();
+    }
+
+    chart = c3.generate(chartObj);
   },
 
   onLeverUpdate: function onLeverUpdate(lever) {

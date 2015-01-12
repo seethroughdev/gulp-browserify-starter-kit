@@ -24,7 +24,8 @@ Actions = Reflux.createActions([
     'setFilters',
     'toggleFilters',
     'resetFilters',
-    'chartInit'
+    'chartInit',
+    'setLeverData'
   ]);
 
 Actions.load.listen(function(lever) {

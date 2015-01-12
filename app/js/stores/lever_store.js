@@ -9,8 +9,6 @@ var Reflux         = require('reflux'),
     _              = require('lodash'),
     LeverActions   = require('../actions/actions'),
     LeverRowHelper = require('../util/lever-row-util'),
-    ChartProto     = require('../chart-options/_default-chart-opts'),
-    ChartOpts      = require('../chart-options/_lever-chart-opts'),
     leverStore, _lever, _leverData, _leverObj;
 
 
@@ -33,9 +31,9 @@ leverStore = Reflux.createStore({
     _lever = this.getLever();
     _leverData = this.getLeverData();
     return this.trigger({
-      data: _leverData,
       subs: this.getLeverSubs(),
-      row: this.getLeverRow()
+      row: this.getLeverRow(),
+      data: this.getLeverData()
     });
   },
 
@@ -84,9 +82,9 @@ leverStore = Reflux.createStore({
    * @return {Object}       New prototype obj of chart options
    */
 
-  getChartInfo: function(lever, sub) {
-    return _.merge({}, ChartOpts[lever][sub], ChartProto);
-  },
+  // getChartInfo: function(lever, sub) {
+  //   return _.merge({}, ChartOpts[lever][sub], ChartProto);
+  // },
 
   /**
    * Get Object of chart data and chart options merged
@@ -95,14 +93,14 @@ leverStore = Reflux.createStore({
    * @return {Object}       New prototype obj of chart opts/data
    */
 
-  getChartUpdate: function(lever, sub) {
-    var o = {
-      unload: true,
-      columns: _leverData[sub]
-    }, d;
-    d = _.merge({}, o, ChartOpts[lever][sub].data);
-    return d;
-  },
+  // getChartUpdate: function(lever, sub) {
+  //   var o = {
+  //     unload: true,
+  //     columns: _leverData[sub]
+  //   }, d;
+  //   d = _.merge({}, o, ChartOpts[lever][sub].data);
+  //   return d;
+  // },
 
   /**
    * Return array of filters from data object.

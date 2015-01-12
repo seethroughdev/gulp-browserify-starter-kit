@@ -10,7 +10,7 @@ var Reflux         = require('reflux'),
     LeverActions   = require('../actions/actions'),
     ChartProto     = require('../chart-options/_default-chart-opts'),
     ChartOpts      = require('../chart-options/_lever-chart-opts'),
-    Store, _chartInit;
+    Store, _chartInit, _leverData;
 
 
 Store = Reflux.createStore({
@@ -18,14 +18,19 @@ Store = Reflux.createStore({
   listenables: LeverActions,
 
   init: function() {
-    _chartInit = Object.create(ChartProto);
     // console.log('chart store init: ', _chartInit);
   },
 
-  onChartInit: function setChartInit(lever, sub) {
-    var d = _.create(_chartInit);
-    console.log('chartInit: ', d, _chartInit);
-    return;
+  onChartInit: function setChartInit(lever, sub, data) {
+    _chartInit = _.merge({},
+                    _.extend({}, ChartProto),
+                    ChartOpts[lever][sub]);
+    _chartInit.data.columns = data[sub];
+    this.trigger(_chartInit);
+  },
+
+  onSetLeverData: function onSetLeverData(data) {
+    _leverData = data;
   }
 
 });

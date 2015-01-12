@@ -25,6 +25,7 @@ View = React.createClass({
       leverData: {},
       leverTitle: this.getParams().lever,
       leverSubs: [],
+      leverSub: '',
       leverFilters: [],
       leverRow: [],
       activeFilters: []
@@ -70,6 +71,7 @@ View = React.createClass({
           <LeverChart
             leverTitle={this.state.leverTitle}
             leverSub={this.state.leverSub}
+            leverData={this.state.leverData}
           />
           <LeverAside
             leverFilters={this.state.leverFilters}
