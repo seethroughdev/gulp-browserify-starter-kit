@@ -23,7 +23,8 @@ Actions = Reflux.createActions([
     'loadSub',
     'setFilters',
     'toggleFilters',
-    'resetFilters'
+    'resetFilters',
+    'chartInit'
   ]);
 
 Actions.load.listen(function(lever) {

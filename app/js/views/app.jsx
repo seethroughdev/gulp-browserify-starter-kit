@@ -18,7 +18,7 @@ App = React.createClass({
     return (
       <div id="viewport">
         <MainAside />
-        <RouteHandler query={this.props.query} />
+        <RouteHandler />
       </div>
     )
   }

@@ -2,12 +2,14 @@
 
 var React            = require('react/addons'),
     Reflux           = require('reflux'),
+    Router           = require('react-router'),
     c3               = require('c3'),
     _                = require('lodash'),
     RP               = React.PropTypes,
     LeverStore       = require('../../stores/lever_store'),
     LeverFilterStore = require('../../stores/lever_filter_store'),
-    LeverChartStore = require('../../stores/lever_chart_store'),
+    LeverChartStore  = require('../../stores/lever_chart_store'),
+    LeverActions     = require('../../actions/actions'),
     View, chart;
 
 View = React.createClass({
@@ -15,14 +17,39 @@ View = React.createClass({
   mixins: [
     Reflux.listenTo(LeverStore, 'onLeverUpdate'),
     Reflux.listenTo(LeverFilterStore, 'onFilterUpdate'),
-    Reflux.listenTo(LeverChartStore, 'onChartUpdate')
+    Reflux.listenTo(LeverChartStore, 'onChartUpdate'),
+    Router.State
   ],
 
   propTypes: {
     leverTitle: RP.string.isRequired,
-    leverData: RP.object.isRequired,
-    leverSub: RP.string.isRequired,
-    leverFilters: RP.array.isRequired
+    leverSub: RP.string.isRequired
+    // leverData: RP.object.isRequired,
+    // leverFilters: RP.array.isRequired
+  },
+
+  getInitialState: function() {
+    return {
+      chartInit: {}
+    }
+  },
+
+  componentWillReceiveProps: function(nextprops) {
+
+    if (this.props.leverTitle !== nextprops.leverTitle) {
+      console.log('lever changed!', this.props.leverTitle, nextprops.leverTitle)
+    }
+
+    if (this.props.leverTitle !== nextprops.leverTitle ||
+      this.props.leverSub !== nextprops.leverSub) {
+      console.log('sub changed!', this.props.leverSub, nextprops.leverSub);
+      LeverActions.chartInit(nextprops.leverTitle, nextprops.leverSub)
+    }
+
+  },
+
+  onLeverUpdate: function onLeverUpdate(lever) {
+    // console.log('onLeverUpdate', lever);
   },
 
   componentDidMount: function() {
@@ -32,7 +59,7 @@ View = React.createClass({
      * data contents after the async load is finished below.
      */
 
-    chart = c3.generate(LeverStore.getChartInfo(this.props.leverTitle, this.props.leverSub));
+    // chart = c3.generate(LeverStore.getChartInfo(this.props.leverTitle, this.props.leverSub));
 
     /**
      * Add event listener to add/remove chart during resize
@@ -52,10 +79,10 @@ View = React.createClass({
    */
 
   resizeChart: function(chart) {
-    chart.resize({
-      height: this.getDOMNode().offsetHeight,
-      width: this.getDOMNode().offsetWidth
-    });
+    // chart.resize({
+    //   height: this.getDOMNode().offsetHeight,
+    //   width: this.getDOMNode().offsetWidth
+    // });
   },
 
   /**
@@ -65,9 +92,9 @@ View = React.createClass({
    */
 
   handleResize: function(chart) {
-    return _.debounce(function() {
-      return this.resizeChart(chart);
-    }, 450);
+    // return _.debounce(function() {
+    //   return this.resizeChart(chart);
+    // }, 450);
   },
 
   /**
@@ -88,20 +115,20 @@ View = React.createClass({
     * some and not others?
     */
 
-    chart.groups([this.props.leverFilters]);
+    // chart.groups([this.props.leverFilters]);
 
     /**
      * resize the chart automatically, if necessary
      */
-    this.handleResize(chart);
+    // this.handleResize(chart);
   },
 
 
-  onLeverUpdate: function(lever) {
-    var obj = LeverStore.getChartUpdate(this.props.leverTitle, this.props.leverSub),
-        _this = this;
+  // onLeverUpdate: function(lever) {
+    // var obj = LeverStore.getChartUpdate(this.props.leverTitle, this.props.leverSub),
+        // _this = this;
 
-    console.log('onLeverUpdate');
+    // console.log('onLeverUpdate');
 
     /**
      * each time the store is updated, the chart data is updated
@@ -110,15 +137,15 @@ View = React.createClass({
      * just change the contents
      */
 
-    setTimeout(function() {
-      chart.load(obj);
-      _this.handleChartCallback();
-    }, 200);
+    // setTimeout(function() {
+    //   chart.load(obj);
+    //   _this.handleChartCallback();
+    // }, 200);
 
 
-    window.chart = chart;
+    // window.chart = chart;
 
-  },
+  // },
 
   /**
    * Call chart hide/show depending on filter state
@@ -127,8 +154,8 @@ View = React.createClass({
    */
 
   onFilterUpdate: function(obj) {
-    chart.hide(obj.inactiveFilters);
-    chart.show(obj.activeFilters);
+    // chart.hide(obj.inactiveFilters);
+    // chart.show(obj.activeFilters);
   },
 
   render: function() {
