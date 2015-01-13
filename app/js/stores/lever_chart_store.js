@@ -18,15 +18,39 @@ Store = Reflux.createStore({
   listenables: LeverActions,
 
   init: function() {
-    // console.log('chart store init: ', _chartInit);
   },
 
+  // called when lever/sub is changed
   onChartInit: function setChartInit(lever, sub, data) {
+
+    // combine chart defaults with sub defaults.
     _chartInit = _.merge({},
                     _.extend({}, ChartProto),
                     ChartOpts[lever][sub]);
-    _chartInit.data.columns = data[sub];
+
+    // if data is valid, add it at init time.
+    if (_.isArray(data[sub])) {
+      _chartInit.data.columns = data[sub];
+    }
+
+    // if type is bar, for now we will stack them by default.
+    if (_chartInit.data.type === 'bar') {
+      _chartInit.data.groups = [this.getFilters(data[sub])];
+    }
+
     this.trigger(_chartInit);
+
+  },
+
+  getFilters: function getFilters(data) {
+    return _.chain(data)
+            .map(function(d) {
+              return d[0];
+            })
+            .filter(function(d) {
+              return d !== 'x';
+            })
+            .value();
   },
 
   onSetLeverData: function onSetLeverData(data) {

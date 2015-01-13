@@ -19,16 +19,27 @@ View = React.createClass({
 
   handleClick: function(e) {
     var val = $(e.target.parentNode).attr('data-name');
-
     e.preventDefault();
 
+    // Update filtes list
     LeverActions.toggleFilters(val);
   },
 
+
+  // Set the span colors to match the data.
   addFilterSpanStyle: function() {
+    var color;
+
+    // always make 'growth' the same color
+    if (this.props.filter === 'growth') {
+      color = colorScheme.y2;
+    } else {
+      color = colorScheme[this.props.leverTitle][this.props.itemNumber];
+    }
+
     return {
-      background: colorScheme[this.props.leverTitle][this.props.itemNumber],
-      border: '1px solid ' + colorScheme[this.props.leverTitle][this.props.itemNumber]
+      background: color,
+      border: '1px solid ' + color
     };
   },
 
