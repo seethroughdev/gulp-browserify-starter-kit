@@ -3,7 +3,7 @@
 var React            = require('react/addons'),
     Reflux           = require('reflux'),
     Router           = require('react-router'),
-    MainHeader       = require('../main/header.jsx'),
+    LeverHeader       = require('./lever_header.jsx'),
     LeverStore       = require('../../stores/lever_store'),
     LeverFilterStore = require('../../stores/lever_filter_store'),
     LeverActions     = require('../../actions/actions'),
@@ -63,9 +63,10 @@ View = React.createClass({
   render: function() {
     return (
       <main className="main__content">
-        <MainHeader
+        <LeverHeader
           leverTitle={this.state.leverTitle}
           leverSubs={this.state.leverSubs}
+          leverData={this.state.leverData}
         />
         <section className="chart">
           <LeverChart
@@ -74,8 +75,8 @@ View = React.createClass({
             leverData={this.state.leverData}
           />
           <LeverAside
-            leverFilters={this.state.leverFilters}
             leverTitle={this.state.leverTitle}
+            leverFilters={this.state.leverFilters}
             activeFilters={this.state.activeFilters}
           />
         </section>

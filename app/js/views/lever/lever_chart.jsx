@@ -9,6 +9,7 @@ var React            = require('react/addons'),
     LeverStore       = require('../../stores/lever_store'),
     LeverFilterStore = require('../../stores/lever_filter_store'),
     LeverChartStore  = require('../../stores/lever_chart_store'),
+    LeverDateStore  = require('../../stores/lever_date_store'),
     LeverActions     = require('../../actions/actions'),
     View, chart;
 
@@ -18,6 +19,7 @@ View = React.createClass({
     Reflux.listenTo(LeverStore, 'onLeverUpdate'),
     Reflux.listenTo(LeverFilterStore, 'onFilterUpdate'),
     Reflux.listenTo(LeverChartStore, 'onChartUpdate'),
+    Reflux.listenTo(LeverDateStore, 'onDatePicker'),
     Router.State
   ],
 
@@ -34,22 +36,26 @@ View = React.createClass({
   },
 
   componentWillReceiveProps: function(nextprops) {
+    var thisTitle = this.props.leverTitle,
+        nextTitle = nextprops.leverTitle,
+        thisSub   = this.props.leverSub,
+        nextSub   = nextprops.leverSub;
 
     // Lever changed ->
-    if (this.props.leverTitle !== nextprops.leverTitle) {
-      console.log('lever changed!', this.props.leverTitle, nextprops.leverTitle);
-      LeverActions.chartInit(nextprops.leverTitle, nextprops.leverSub, nextprops.leverData);
+    if (thisTitle !== nextTitle) {
+      console.log('lever changed!', thisTitle, nextTitle);
+      LeverActions.chartInit(nextTitle, nextprops.leverSub, nextprops.leverData);
 
     // Sub changed ->
-    } else if (this.props.leverTitle === nextprops.leverTitle &&
-      this.props.leverSub !== nextprops.leverSub) {
-      console.log('sub changed!', this.props.leverSub, nextprops.leverSub);
-      LeverActions.chartInit(nextprops.leverTitle, nextprops.leverSub, nextprops.leverData);
+    } else if (thisTitle === nextTitle &&
+      thisSub !== nextSub) {
+      console.log('sub changed!', thisSub, nextSub);
+      LeverActions.chartInit(nextTitle, nextSub, nextprops.leverData);
 
     // Lever or Sub changed ->
-    } else if (this.props.leverTitle !== nextprops.leverTitle ||
-      this.props.leverSub !== nextprops.leverSub) {
-      console.log('lever and sub changed!', nextprops.leverTitle, nextprops.leverSub);
+    } else if (thisTitle !== nextTitle ||
+      thisSub !== nextSub) {
+      console.log('lever and sub changed!', nextprops.leverTitle, nextSub);
     }
 
   },
@@ -66,6 +72,10 @@ View = React.createClass({
 
   onLeverUpdate: function onLeverUpdate(lever) {
     // console.log('onLeverUpdate', lever);
+  },
+
+  onDatePicker: function onDatePicker(data) {
+    console.log(data);
   },
 
   componentDidMount: function() {

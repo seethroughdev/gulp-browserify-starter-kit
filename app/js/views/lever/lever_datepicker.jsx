@@ -1,10 +1,17 @@
 'use strict';
 
-var React = require('react/addons'),
-    $     = require('domtastic'),
+var React        = require('react/addons'),
+    Router       = require('react-router'),
+    $            = require('domtastic'),
+    LeverActions = require('../../actions/actions'),
     View;
 
 View = React.createClass({
+
+  mixins: [
+    Router.State,
+    Router.Navigation
+  ],
 
   getInitialState: function() {
     return {
@@ -30,7 +37,6 @@ View = React.createClass({
       activeText: text
     });
     this.deactivateSelector();
-    console.log(val);
   },
 
   handleClick: function(e) {
@@ -39,9 +45,14 @@ View = React.createClass({
   },
 
   handleSelect: function(e) {
-    var $el = $(e.target);
+    var $el    = $(e.target),
+        elText = $el.text(),
+        elVal  = $el.attr('data-value');
 
-    this.activateSelector($el.text(), $el.attr('data-value'));
+    this.activateSelector(elText, elVal);
+    LeverActions.dateFilter(this.props.data, elVal);
+
+    this.transitionTo('leverSub', {lever: this.getParams().lever, sub: this.getParams().sub}, {show: Math.floor(Math.random() * 100)});
 
     e.preventDefault();
   },
