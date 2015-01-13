@@ -32,10 +32,7 @@ Store = Reflux.createStore({
     // if data is valid, add it at init time.
     if (_.isArray(data[sub])) {
       _chartInit.data.columns = data[sub];
-      _chartInit.size = {
-        height: document.getElementById('chartOuter').offsetHeight  * 0.9,
-        width: document.getElementById('chartOuter').offsetWidth * 0.9
-      };
+      _chartInit.size = this.getChartSize();
     }
 
     // if type is bar, for now we will stack them by default.
@@ -47,6 +44,16 @@ Store = Reflux.createStore({
 
   },
 
+  // size chart based off container size
+  getChartSize: function() {
+    var outerEl = document.getElementById('chartOuter');
+    return {
+        height: outerEl.offsetHeight  * 0.9,
+        width: outerEl.offsetWidth * 0.9
+      };
+  },
+
+  // get filters to group data
   getFilters: function getFilters(data) {
     return _.chain(data)
             .map(function(d) {
