@@ -10,6 +10,7 @@ var Reflux         = require('reflux'),
     LeverActions   = require('../actions/actions'),
     ChartProto     = require('../chart-options/_default-chart-opts'),
     ChartOpts      = require('../chart-options/_lever-chart-opts'),
+    $              = require('domtastic'),
     Store, _chartInit, _leverData;
 
 
@@ -31,6 +32,10 @@ Store = Reflux.createStore({
     // if data is valid, add it at init time.
     if (_.isArray(data[sub])) {
       _chartInit.data.columns = data[sub];
+      _chartInit.size = {
+        height: document.getElementById('chartOuter').offsetHeight  * 0.9,
+        width: document.getElementById('chartOuter').offsetWidth * 0.9
+      };
     }
 
     // if type is bar, for now we will stack them by default.

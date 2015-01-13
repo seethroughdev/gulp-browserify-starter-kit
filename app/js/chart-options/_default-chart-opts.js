@@ -19,18 +19,15 @@ module.exports = {
     ],
     order: 'desc'
   },
-  size: {
-    height: 400
-  },
   bindto: '#chartContainer',
   color: {
     pattern: colorScheme.main
   },
   padding: {
-    top: 0,
-    right: 120,
-    left: 70,
-    bottom: 10
+    top: 50,
+    right: 100,
+    left: 100,
+    bottom: 50
   },
   grid: {
     y: {

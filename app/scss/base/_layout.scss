@@ -124,15 +124,23 @@
   flex-grow: 3;
   padding: 1em .5em;
   min-height: 100%;
+  position: relative;
 
   @include break(medium) {
     padding: 1em 2em 0;
   }
 
   @include break(large) {
-    padding: 1.667em 2.667em 0;
+    padding: 0 2.667em 0;
     flex: 4;
   }
+}
+
+#chartContainer {
+  min-height: 90%;
+  height: 90%;
+  position: absolute;
+  top: 5%;
 }
 
 

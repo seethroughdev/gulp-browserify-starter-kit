@@ -25,7 +25,6 @@ View = React.createClass({
     leverTitle: RP.string.isRequired,
     leverSub: RP.string.isRequired,
     leverData: RP.object.isRequired
-    // leverFilters: RP.array.isRequired
   },
 
   getInitialState: function() {
@@ -55,6 +54,8 @@ View = React.createClass({
 
   },
 
+  /*==========  Create and update chart.  ==========*/
+
   onChartUpdate: function(chartObj) {
     if (_.isObject(chart)) {
       chart.destroy();
@@ -68,18 +69,7 @@ View = React.createClass({
   },
 
   componentDidMount: function() {
-
-    /**
-     * Generate initial chart instance.  We will replace the
-     * data contents after the async load is finished below.
-     */
-
-    // chart = c3.generate(LeverStore.getChartInfo(this.props.leverTitle, this.props.leverSub));
-
-    /**
-     * Add event listener to add/remove chart during resize
-     */
-
+    // Add event listener to add/remove chart during resize
     window.addEventListener('resize', this.handleResize);
   },
 
@@ -93,23 +83,25 @@ View = React.createClass({
    * @param  {Object} chart Lever chart instance.
    */
 
-  resizeChart: function(chart) {
+  resizeChart: function() {
+    var outerEl = document.getElementById('chartOuter');
     chart.resize({
-      height: this.getDOMNode().offsetHeight,
-      width: this.getDOMNode().offsetWidth
+      height: outerEl.offsetHeight  * 0.9,
+      width: outerEl.offsetWidth * 0.9
     });
   },
 
   /**
    * Handle on resize function in a performant way.
-   * @param  {Object} chart Lever chart instance.
    * @return {Function}     Calls chart resize method.
    */
 
-  handleResize: function(chart) {
-    return _.debounce(function() {
-      return this.resizeChart(chart);
-    }, 450);
+  lazyResize: _.debounce(function() {
+    return this.resizeChart();
+  }, 100),
+
+  handleResize: function() {
+    this.lazyResize();
   },
 
   // onLeverUpdate: function(lever) {
@@ -150,10 +142,9 @@ View = React.createClass({
 
   render: function() {
     return (
-      <div
-          id="chartContainer"
-          className="chart__content"
-      />
+      <div className="chart__content" id="chartOuter">
+        <div id="chartContainer" />
+      </div>
     )
   }
 });
