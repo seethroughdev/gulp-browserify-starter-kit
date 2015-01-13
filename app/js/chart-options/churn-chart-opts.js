@@ -8,11 +8,6 @@ var colorScheme = require('../util/colors-util'),
 module.exports.summary = {
   axis: {
     y: {
-      tick: {
-        format: function(d) {
-          return d;
-        }
-      },
       label: {
         text: 'Customers'
       }
@@ -31,9 +26,6 @@ module.exports.summary = {
   },
   tooltip: {
     format: {
-      // title: function(d) {
-      //   return d;
-      // },
       value: function(value, ratio, id) {
         return tt.num(value, ratio, id);
       }
@@ -57,11 +49,6 @@ module.exports.summary = {
 module.exports.revenue = {
   axis: {
     y: {
-      tick: {
-        format: function(d) {
-          return d;
-        }
-      },
       label: {
         text: 'Revenue (USD)'
       }
@@ -83,9 +70,6 @@ module.exports.revenue = {
   },
   tooltip: {
     format: {
-      // title: function(d) {
-      //   return d;
-      // },
       value: function(value, ratio, id) {
         return tt.currency(value, ratio, id);
       }
@@ -110,11 +94,6 @@ module.exports.revenue = {
 module.exports.monthly = {
   axis: {
     y: {
-      tick: {
-        format: function(d) {
-          return d;
-        }
-      },
       label: {
         text: 'Customers'
       }
@@ -136,9 +115,6 @@ module.exports.monthly = {
   },
   tooltip: {
     format: {
-      // title: function(d) {
-      //   return d;
-      // },
       value: function(value, ratio, id) {
         return tt.num(value, ratio, id);
       }
@@ -160,11 +136,6 @@ module.exports.monthly = {
 module.exports.annual = {
   axis: {
     y: {
-      tick: {
-        format: function(d) {
-          return d;
-        }
-      },
       label: {
         text: 'Customers'
       }
@@ -186,9 +157,6 @@ module.exports.annual = {
   },
   tooltip: {
     format: {
-      // title: function(d) {
-      //   return d;
-      // },
       value: function(value, ratio, id) {
         return tt.num(value, ratio, id);
       }

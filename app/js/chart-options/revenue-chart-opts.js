@@ -1,7 +1,8 @@
 'use strict';
 
-var colorScheme = require('../util/colors-util'),
+var d3          = require('d3'),
     numeral     = require('numeral'),
+    colorScheme = require('../util/colors-util'),
     tt          = require('../util/tt-util');
 
 
@@ -9,11 +10,6 @@ var colorScheme = require('../util/colors-util'),
 module.exports.summary = {
   axis: {
     y: {
-      tick: {
-        format: function(d) {
-          return numeral(d).format('(0.0a)');
-        }
-      },
       label: {
         text: 'Revenue (USD)'
       }
@@ -58,11 +54,6 @@ module.exports.summary = {
 module.exports.plans = {
   axis: {
     y: {
-      tick: {
-        format: function(d) {
-          return numeral(d).format('(0.0a)');
-        }
-      },
       label: {
         text: 'Revenue (USD)'
       }
@@ -89,11 +80,6 @@ module.exports.plans = {
 module.exports.mix = {
   axis: {
     y: {
-      tick: {
-        format: function(d) {
-          return d;
-        }
-      },
       label: {
         text: 'Revenue (USD)'
       }
@@ -120,11 +106,6 @@ module.exports.mix = {
 module.exports.location = {
   axis: {
     y: {
-      tick: {
-        format: function(d) {
-          return d;
-        }
-      },
       label: {
         text: 'Revenue (USD)'
       }

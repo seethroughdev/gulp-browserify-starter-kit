@@ -8,8 +8,15 @@
 
 var d3          = require('d3'),
     nocase      = require('to-no-case'),
+    numeral     = require('numeral'),
     colorScheme = require('../util/colors-util'),
-    tt          = require('../util/tt-util');
+    tt          = require('../util/tt-util'),
+    formatNumber;
+
+formatNumber = function formatNumber(val) {
+  var format = val === Math.floor(val) ? '(0a)' : '(0.0a)';
+  return numeral(val).format(format);
+};
 
 module.exports = {
   data: {
@@ -53,6 +60,11 @@ module.exports = {
   },
   axis: {
     y: {
+      tick: {
+        format: function(d) {
+          return formatNumber(d);
+        }
+      },
       label: {
         position: 'outer-middle'
       }
