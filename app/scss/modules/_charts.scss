@@ -36,6 +36,13 @@
     opacity: 1;
     min-width: 7rem;
   }
+  .c3-tooltip .name {
+    // text-transform: uppercase;
+  }
+  .c3-tooltip .value {
+    @extend .font-semi;
+
+  }
   .c3-line {
     stroke-width: 1px;
   }

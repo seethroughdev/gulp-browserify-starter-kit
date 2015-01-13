@@ -3,7 +3,7 @@
 var React            = require('react/addons'),
     Reflux           = require('reflux'),
     Router           = require('react-router'),
-    LeverHeader       = require('./lever_header.jsx'),
+    LeverHeader      = require('./lever_header.jsx'),
     LeverStore       = require('../../stores/lever_store'),
     LeverFilterStore = require('../../stores/lever_filter_store'),
     LeverActions     = require('../../actions/actions'),

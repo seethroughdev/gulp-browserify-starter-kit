@@ -1,7 +1,10 @@
 'use strict';
 
 var colorScheme = require('../util/colors-util'),
-    numeral     = require('numeral');
+    numeral     = require('numeral'),
+    tt          = require('../util/tt-util');
+
+
 
 module.exports.summary = {
   axis: {
@@ -29,12 +32,8 @@ module.exports.summary = {
   },
   tooltip: {
     format: {
-      // title: function(d) {
-      //   return d;
-      // },
       value: function(value, ratio, id) {
-        var ttFormat = id === 'growth' ? '(0%)' : '$0,0.00';
-        return numeral(value).format(ttFormat);
+        return tt.currency(value, ratio, id);
       }
     }
   },
@@ -73,7 +72,7 @@ module.exports.plans = {
     format: {
       // title: function (d) { return 'Data ' + d; },
       value: function(value, ratio, id) {
-        return numeral(value).format('$0,0.00');
+        return tt.currency(value, ratio, id);
       }
     }
   },
@@ -103,8 +102,8 @@ module.exports.mix = {
   tooltip: {
     format: {
       // title: function (d) { return 'Data ' + d; },
-      value: function(d) {
-        return d;
+      value: function(value, ratio, id) {
+        return tt.currency(value, ratio, id);
       }
     }
   },
@@ -134,8 +133,8 @@ module.exports.location = {
   tooltip: {
     format: {
       // title: function (d) { return 'Data ' + d; },
-      value: function(d) {
-        return d;
+      value: function(value, ratio, id) {
+        return tt.currency(value, ratio, id);
       }
     }
   },

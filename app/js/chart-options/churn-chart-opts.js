@@ -1,6 +1,9 @@
 'use strict';
 
-var colorScheme = require('../util/colors-util');
+var colorScheme = require('../util/colors-util'),
+    numeral     = require('numeral'),
+    tt          = require('../util/tt-util');
+
 
 module.exports.summary = {
   axis: {
@@ -18,6 +21,21 @@ module.exports.summary = {
       show: true,
       label: {
         text: 'Growth %'
+      },
+      tick: {
+        format: function(d) {
+          return numeral(d).format('(0%)');
+        }
+      }
+    }
+  },
+  tooltip: {
+    format: {
+      // title: function(d) {
+      //   return d;
+      // },
+      value: function(value, ratio, id) {
+        return tt.num(value, ratio, id);
       }
     }
   },
@@ -52,6 +70,11 @@ module.exports.revenue = {
       show: true,
       label: {
         text: 'Growth %'
+      },
+      tick: {
+        format: function(d) {
+          return numeral(d).format('(0%)');
+        }
       }
     }
   },
@@ -60,9 +83,11 @@ module.exports.revenue = {
   },
   tooltip: {
     format: {
-      // title: function (d) { return 'Data ' + d; },
-      value: function(d) {
-        return d;
+      // title: function(d) {
+      //   return d;
+      // },
+      value: function(value, ratio, id) {
+        return tt.currency(value, ratio, id);
       }
     }
   },
@@ -98,6 +123,11 @@ module.exports.monthly = {
       show: true,
       label: {
         text: 'Growth %'
+      },
+      tick: {
+        format: function(d) {
+          return numeral(d).format('(0%)');
+        }
       }
     }
   },
@@ -106,9 +136,11 @@ module.exports.monthly = {
   },
   tooltip: {
     format: {
-      // title: function (d) { return 'Data ' + d; },
-      value: function(d) {
-        return d;
+      // title: function(d) {
+      //   return d;
+      // },
+      value: function(value, ratio, id) {
+        return tt.num(value, ratio, id);
       }
     }
   },
@@ -141,6 +173,11 @@ module.exports.annual = {
       show: true,
       label: {
         text: 'Growth %'
+      },
+      tick: {
+        format: function(d) {
+          return numeral(d).format('(0%)');
+        }
       }
     }
   },
@@ -149,9 +186,11 @@ module.exports.annual = {
   },
   tooltip: {
     format: {
-      // title: function (d) { return 'Data ' + d; },
-      value: function(d) {
-        return d;
+      // title: function(d) {
+      //   return d;
+      // },
+      value: function(value, ratio, id) {
+        return tt.num(value, ratio, id);
       }
     }
   },

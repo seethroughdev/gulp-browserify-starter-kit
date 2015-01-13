@@ -6,7 +6,10 @@
  * to be instantiate the new Chart on load.
  */
 
-var colorScheme = require('../util/colors-util');
+var d3          = require('d3'),
+    nocase      = require('to-no-case'),
+    colorScheme = require('../util/colors-util'),
+    tt          = require('../util/tt-util');
 
 module.exports = {
   data: {
@@ -32,6 +35,20 @@ module.exports = {
   grid: {
     y: {
       show: true
+    }
+  },
+  tooltip: {
+    format: {
+      title: function(d) {
+        var format = d3.time.format('%b %d, %Y');
+        return format(d);
+      },
+      value: function(value, ratio, id) {
+        return tt.num(value, ratio, id);
+      },
+      name: function(name, ratio, id, index) {
+        return nocase(name);
+      }
     }
   },
   axis: {
