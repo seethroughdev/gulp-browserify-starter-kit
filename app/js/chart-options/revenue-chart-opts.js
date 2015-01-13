@@ -19,14 +19,22 @@ module.exports.summary = {
       show: true,
       label: {
         text: 'growth %'
+      },
+      tick: {
+        format: function(d) {
+          return numeral(d).format('(0%)');
+        }
       }
     }
   },
   tooltip: {
     format: {
-      // title: function (d) { return 'Data ' + d; },
-      value: function(d) {
-        return d;
+      // title: function(d) {
+      //   return d;
+      // },
+      value: function(value, ratio, id) {
+        var ttFormat = id === 'growth' ? '(0%)' : '$0,0.00';
+        return numeral(value).format(ttFormat);
       }
     }
   },
@@ -53,7 +61,7 @@ module.exports.plans = {
     y: {
       tick: {
         format: function(d) {
-          return d;
+          return numeral(d).format('(0.0a)');
         }
       },
       label: {
@@ -64,8 +72,8 @@ module.exports.plans = {
   tooltip: {
     format: {
       // title: function (d) { return 'Data ' + d; },
-      value: function(d) {
-        return d;
+      value: function(value, ratio, id) {
+        return numeral(value).format('$0,0.00');
       }
     }
   },
