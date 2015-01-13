@@ -94,10 +94,10 @@ View = React.createClass({
    */
 
   resizeChart: function(chart) {
-    // chart.resize({
-    //   height: this.getDOMNode().offsetHeight,
-    //   width: this.getDOMNode().offsetWidth
-    // });
+    chart.resize({
+      height: this.getDOMNode().offsetHeight,
+      width: this.getDOMNode().offsetWidth
+    });
   },
 
   /**
@@ -107,37 +107,10 @@ View = React.createClass({
    */
 
   handleResize: function(chart) {
-    // return _.debounce(function() {
-    //   return this.resizeChart(chart);
-    // }, 450);
+    return _.debounce(function() {
+      return this.resizeChart(chart);
+    }, 450);
   },
-
-  /**
-   * Callback after chart data is reloaded
-   */
-
-  handleChartCallback: function() {
-
-    /**
-    * stack the appropriate groups
-    * this will only apply to stackable charts
-    * although at some point we might want to consider making
-    * this a flag instead of applying to all
-    * but because its based off a dynamic list, we can't
-    * add them before...
-    *
-    * so will there be a time where we want to stack
-    * some and not others?
-    */
-
-    // chart.groups([this.props.leverFilters]);
-
-    /**
-     * resize the chart automatically, if necessary
-     */
-    // this.handleResize(chart);
-  },
-
 
   // onLeverUpdate: function(lever) {
     // var obj = LeverStore.getChartUpdate(this.props.leverTitle, this.props.leverSub),
@@ -169,8 +142,10 @@ View = React.createClass({
    */
 
   onFilterUpdate: function(obj) {
-    // chart.hide(obj.inactiveFilters);
-    // chart.show(obj.activeFilters);
+    if (!_.isUndefined(chart)) {
+      chart.hide(obj.inactiveFilters);
+      chart.show(obj.activeFilters);
+    }
   },
 
   render: function() {
