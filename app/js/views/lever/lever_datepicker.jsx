@@ -52,7 +52,7 @@ View = React.createClass({
     this.activateSelector(elText, elVal);
     LeverActions.datePicker(elVal);
 
-    this.transitionTo('leverSub', {lever: this.getParams().lever, sub: this.getParams().sub}, {show: Math.floor(Math.random() * 100)});
+    this.transitionTo('leverSub', {lever: this.getParams().lever, sub: this.getParams().sub}, {filter: elVal});
 
     e.preventDefault();
   },
