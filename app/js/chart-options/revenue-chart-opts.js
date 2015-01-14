@@ -1,7 +1,6 @@
 'use strict';
 
-var d3          = require('d3'),
-    numeral     = require('numeral'),
+var numeral     = require('numeral'),
     colorScheme = require('../util/colors-util'),
     tt          = require('../util/tt-util');
 
@@ -17,7 +16,7 @@ module.exports.summary = {
     y2: {
       show: true,
       label: {
-        text: 'growth %'
+        text: 'Growth (%)'
       },
       tick: {
         format: function(d) {

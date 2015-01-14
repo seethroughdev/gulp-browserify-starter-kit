@@ -36,7 +36,7 @@ module.exports = {
   padding: {
     top: 50,
     right: 100,
-    left: 100,
+    left: 70,
     bottom: 50
   },
   grid: {

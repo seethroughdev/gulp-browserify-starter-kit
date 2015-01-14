@@ -3,14 +3,13 @@
     font-size: .8rem;
     font-family: $fontPrimary;
   }
-  g.tick {
-    fill: $dkGrey;
+  .c3-axis line, .c3-axis path {
+    stroke: $grey;
+    opacity: 0.35;
   }
-  g.c3-axis line, g.c3-axis path {
-    stroke: $dkGrey;
-  }
-  g.c3-axis text {
-    fill: $dkGrey;
+  .c3-axis text {
+    fill: darken($grey, 10%);
+    font-size: 16px;
   }
   .c3-grid line {
     stroke: $ltGrey;
@@ -19,6 +18,9 @@
     path {
       stroke-dasharray: $svgDash;
     }
+  }
+  .c3-axis text.c3-axis-y2-label, .c3-axis text.c3-axis-y-label {
+    // fill: $grey;
   }
   .c3-legend-item {
     @include break(large) {
@@ -47,8 +49,8 @@
     stroke-width: 1px;
   }
   .c3-line-growth {
-    stroke-dasharray: 5,5;
-    stroke-width: 1px;
+    stroke-dasharray: 10,7;
+    stroke-width: 2px;
   }
 }
 

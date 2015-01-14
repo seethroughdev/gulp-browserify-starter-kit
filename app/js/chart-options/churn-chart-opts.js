@@ -15,7 +15,7 @@ module.exports.summary = {
     y2: {
       show: true,
       label: {
-        text: 'Growth %'
+        text: 'Growth (%)'
       },
       tick: {
         format: function(d) {
@@ -56,7 +56,7 @@ module.exports.revenue = {
     y2: {
       show: true,
       label: {
-        text: 'Growth %'
+        text: 'Growth (%)'
       },
       tick: {
         format: function(d) {
@@ -101,7 +101,7 @@ module.exports.monthly = {
     y2: {
       show: true,
       label: {
-        text: 'Growth %'
+        text: 'Growth (%)'
       },
       tick: {
         format: function(d) {
@@ -143,7 +143,7 @@ module.exports.annual = {
     y2: {
       show: true,
       label: {
-        text: 'Growth %'
+        text: 'Growth (%)'
       },
       tick: {
         format: function(d) {
