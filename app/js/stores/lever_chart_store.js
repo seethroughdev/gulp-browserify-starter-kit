@@ -10,7 +10,6 @@ var Reflux         = require('reflux'),
     LeverActions   = require('../actions/actions'),
     ChartProto     = require('../chart-options/_default-chart-opts'),
     ChartOpts      = require('../chart-options/_lever-chart-opts'),
-    $              = require('domtastic'),
     Store, _chartInit, _leverData;
 
 
@@ -65,8 +64,8 @@ Store = Reflux.createStore({
             .value();
   },
 
-  onSetLeverData: function onSetLeverData(data) {
-    _leverData = data;
+  onDatePicker: function onDatePicker(val) {
+    console.log(_leverData);
   }
 
 });

@@ -8,9 +8,8 @@
 
 var Reflux       = require('reflux'),
     LeverActions = require('../actions/actions'),
-    // _            = require('lodash'),
-    // $            = require('domtastic'),
-    store;
+    _            = require('lodash'),
+    store, _storedData;
 
 
 store = Reflux.createStore({
@@ -18,6 +17,10 @@ store = Reflux.createStore({
   listenables: LeverActions,
 
   init: function() {
+  },
+
+  onSetLeverData: function(data) {
+    _storedData = _.extend({}, data);
   },
 
   onDatePicker: function(data, range) {

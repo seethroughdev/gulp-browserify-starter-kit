@@ -33,8 +33,4 @@ Actions.load.listen(function(lever) {
   getLever(lever, Actions.loadCompleted, Actions.loadFailed);
 });
 
-// Actions.toggleFilters.listen(function(filters) {
-//   console.log('ffffilters', filters);
-// });
-
 module.exports = Actions;

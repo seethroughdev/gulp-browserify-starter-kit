@@ -27,6 +27,7 @@ leverStore = Reflux.createStore({
    */
 
   onLoadCompleted: function(leverObj) {
+    console.log('load completed');
     _leverObj = leverObj;
     _lever = this.getLever();
     _leverData = this.getLeverData();

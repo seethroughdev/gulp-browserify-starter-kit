@@ -3,6 +3,7 @@
 var React            = require('react/addons'),
     Reflux           = require('reflux'),
     Router           = require('react-router'),
+    RP               = React.PropTypes,
     LeverHeader      = require('./lever_header.jsx'),
     LeverStore       = require('../../stores/lever_store'),
     LeverFilterStore = require('../../stores/lever_filter_store'),
@@ -13,6 +14,11 @@ var React            = require('react/addons'),
     View;
 
 View = React.createClass({
+
+  propTypes: {
+    params: RP.object.isRequired,
+    query: RP.object.isRequired
+  },
 
   mixins: [
     Reflux.listenTo(LeverStore, 'handleLoadItemsComplete'),
@@ -57,6 +63,7 @@ View = React.createClass({
 
   // when lever/subs change, update lever data
   componentWillReceiveProps: function(nextprops) {
+    console.log(nextprops.params.sub, this.state.leverSub);
     LeverActions.load(this.getParams().lever);
   },
 

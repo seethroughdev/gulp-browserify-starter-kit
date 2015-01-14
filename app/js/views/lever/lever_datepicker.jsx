@@ -50,7 +50,7 @@ View = React.createClass({
         elVal  = $el.attr('data-value');
 
     this.activateSelector(elText, elVal);
-    LeverActions.dateFilter(this.props.data, elVal);
+    LeverActions.datePicker(elVal);
 
     this.transitionTo('leverSub', {lever: this.getParams().lever, sub: this.getParams().sub}, {show: Math.floor(Math.random() * 100)});
 
