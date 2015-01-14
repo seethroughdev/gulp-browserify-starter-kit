@@ -12,7 +12,6 @@ View = React.createClass({
 
   propTypes: {
     leverFilters: RP.array.isRequired,
-    leverTitle: RP.string.isRequired,
     activeFilters: RP.array.isRequired
   },
 
@@ -35,7 +34,6 @@ View = React.createClass({
                 _.map(this.props.leverFilters, function(filter, i) {
                   return <LeverFilter
                     filter={filter}
-                    leverTitle={this.props.leverTitle}
                     isActive={this.isActive(filter)}
                     itemNumber={i}
                     key={i}

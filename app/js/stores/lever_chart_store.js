@@ -21,7 +21,9 @@ Store = Reflux.createStore({
   },
 
   // called when lever/sub is changed
-  onChartInit: function setChartInit(lever, sub, data) {
+  onChartInit: function onChartInit(lever, sub, data) {
+
+    console.log('init');
 
     // combine chart defaults with sub defaults.
     _chartInit = _.merge({},

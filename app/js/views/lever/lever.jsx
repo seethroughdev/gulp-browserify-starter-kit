@@ -21,7 +21,7 @@ View = React.createClass({
   },
 
   mixins: [
-    Reflux.listenTo(LeverStore, 'handleLoadItemsComplete'),
+    Reflux.listenTo(LeverStore, 'onLoadLeverComplete'),
     Reflux.listenTo(LeverFilterStore, 'handleFilterChange'),
     Router.State
   ],
@@ -38,7 +38,7 @@ View = React.createClass({
     };
   },
 
-  handleLoadItemsComplete: function(lever) {
+  onLoadLeverComplete: function(lever) {
     this.setState({
       leverData: lever.data,
       leverRow: lever.row,
@@ -63,26 +63,40 @@ View = React.createClass({
 
   // when lever/subs change, update lever data
   componentWillReceiveProps: function(nextprops) {
-    console.log(nextprops.params.sub, this.state.leverSub);
-    LeverActions.load(this.getParams().lever);
+    var thisTitle = this.props.params.lever,
+        nextTitle = nextprops.params.lever,
+        thisSub   = this.props.params.sub,
+        nextSub   = nextprops.params.sub;
+
+    // Lever changed ->
+    if (thisTitle !== nextTitle) {
+
+      LeverActions.load(nextprops.params.lever);
+
+    // If sub changed, but not lever ->
+    } else if (thisTitle === nextTitle &&
+                thisSub !== nextSub) {
+
+      this.setState({
+        leverSub: nextprops.params.sub,
+        leverFilters: LeverStore.getLeverFilters(this.getParams().sub)
+      });
+    }
   },
 
   render: function() {
     return (
       <main className="main__content">
         <LeverHeader
-          leverTitle={this.state.leverTitle}
+          params={this.props.params}
           leverSubs={this.state.leverSubs}
-          leverData={this.state.leverData}
         />
         <section className="chart">
           <LeverChart
-            leverTitle={this.state.leverTitle}
-            leverSub={this.state.leverSub}
+            params={this.props.params}
             leverData={this.state.leverData}
           />
           <LeverAside
-            leverTitle={this.state.leverTitle}
             leverFilters={this.state.leverFilters}
             activeFilters={this.state.activeFilters}
           />

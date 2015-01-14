@@ -16,7 +16,7 @@ var React            = require('react/addons'),
 View = React.createClass({
 
   mixins: [
-    Reflux.listenTo(LeverStore, 'onLeverUpdate'),
+    Reflux.listenTo(LeverStore, 'onLoadLeverComplete'),
     Reflux.listenTo(LeverFilterStore, 'onFilterUpdate'),
     Reflux.listenTo(LeverChartStore, 'onChartUpdate'),
     Reflux.listenTo(LeverDateStore, 'onDatePicker'),
@@ -24,9 +24,8 @@ View = React.createClass({
   ],
 
   propTypes: {
-    leverTitle: RP.string.isRequired,
-    leverSub: RP.string.isRequired,
-    leverData: RP.object.isRequired
+    leverData: RP.object.isRequired,
+    params: RP.object.isRequired
   },
 
   getInitialState: function() {
@@ -36,31 +35,41 @@ View = React.createClass({
   },
 
   componentWillReceiveProps: function(nextprops) {
-    var thisTitle = this.props.leverTitle,
-        nextTitle = nextprops.leverTitle,
-        thisSub   = this.props.leverSub,
-        nextSub   = nextprops.leverSub;
-
-    // Lever changed ->
-    if (thisTitle !== nextTitle) {
-      console.log('lever changed!', thisTitle, nextTitle);
-      LeverActions.chartInit(nextTitle, nextprops.leverSub, nextprops.leverData);
-
-    // Sub changed ->
-    } else if (thisTitle === nextTitle &&
-      thisSub !== nextSub) {
-      console.log('sub changed!', thisSub, nextSub);
-      LeverActions.chartInit(nextTitle, nextSub, nextprops.leverData);
+    var thisTitle = this.props.params.lever,
+        nextTitle = nextprops.params.lever,
+        thisSub   = this.props.params.sub,
+        nextSub   = nextprops.params.sub,
+        thisData  = this.props.leverData,
+        nextData  = nextprops.leverData;
 
     // Lever or Sub changed ->
-    } else if (thisTitle !== nextTitle ||
+    if (thisTitle !== nextTitle ||
       thisSub !== nextSub) {
-      console.log('lever and sub changed!', nextprops.leverTitle, nextSub);
+      this.handleChartInit(nextTitle, nextSub, nextprops.leverData);
     }
-
   },
 
-  /*==========  Create and update chart.  ==========*/
+  chartInit: function chartInit(title, sub, data) {
+    LeverActions.chartInit(title, sub, data);
+  },
+
+  // Prevent chart from double loading with debounce after.
+  lazyChartLoad: _.debounce(function(title, sub, data) {
+    return this.chartInit(title, sub, data);
+  }, 200, {
+    leading: true,
+    trailing: false
+  }),
+
+  handleChartInit: function(title, sub, data) {
+    this.lazyChartLoad(title, sub, data);
+  },
+
+
+  // Any time the chart is updated, we will destroy it, then create a new one.
+  // This would be more efficient to populate only the changes, but the current
+  // api doesn't support very many attributes.  And react will solve a lot of
+  // this problem for us.  So for now, we will destory and create on sub change.
 
   onChartUpdate: function(chartObj) {
     if (_.isObject(chart)) {
@@ -70,12 +79,13 @@ View = React.createClass({
     chart = c3.generate(chartObj);
   },
 
-  onLeverUpdate: function onLeverUpdate(lever) {
-    // console.log('onLeverUpdate', lever);
-  },
-
   onDatePicker: function onDatePicker(data) {
     console.log(data);
+  },
+
+  // Load chart when lever is complete for the first time
+  onLoadLeverComplete: function onLoadLeverComplete(obj) {
+    this.chartInit(this.props.params.lever, this.props.params.sub, obj.data);
   },
 
   componentDidMount: function() {
@@ -88,13 +98,14 @@ View = React.createClass({
   },
 
 
-  /**
-   * Resize chart based on container size
-   * @param  {Object} chart Lever chart instance.
-   */
-
+  // Resize chart based on container size
   resizeChart: function() {
     var outerEl = document.getElementById('chartOuter');
+
+    if (_.isUndefined(chart)) {
+      return;
+    }
+
     chart.resize({
       height: outerEl.offsetHeight  * 0.9,
       width: outerEl.offsetWidth * 0.9
@@ -113,29 +124,6 @@ View = React.createClass({
   handleResize: function() {
     this.lazyResize();
   },
-
-  // onLeverUpdate: function(lever) {
-    // var obj = LeverStore.getChartUpdate(this.props.leverTitle, this.props.leverSub),
-        // _this = this;
-
-    // console.log('onLeverUpdate');
-
-    /**
-     * each time the store is updated, the chart data is updated
-     * you will only see a change if the lever/subs change
-     * but this also allows us to only instantiate one chart and
-     * just change the contents
-     */
-
-    // setTimeout(function() {
-    //   chart.load(obj);
-    //   _this.handleChartCallback();
-    // }, 200);
-
-
-    // window.chart = chart;
-
-  // },
 
   /**
    * Call chart hide/show depending on filter state

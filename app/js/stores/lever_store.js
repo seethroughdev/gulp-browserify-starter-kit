@@ -1,10 +1,5 @@
 'use strict';
 
-/**
- * This is the lever store.  All lever related data is managed through here.
- */
-
-
 var Reflux         = require('reflux'),
     _              = require('lodash'),
     LeverActions   = require('../actions/actions'),
@@ -27,7 +22,7 @@ leverStore = Reflux.createStore({
    */
 
   onLoadCompleted: function(leverObj) {
-    console.log('load completed');
+    // console.log('load completed');
     _leverObj = leverObj;
     _lever = this.getLever();
     _leverData = this.getLeverData();
@@ -76,32 +71,6 @@ leverStore = Reflux.createStore({
     return LeverRowHelper;
   },
 
-  /**
-   * Return default chart object to create chart
-   * @param  {String} lever Current Lever
-   * @param  {String} sub   Current Sub
-   * @return {Object}       New prototype obj of chart options
-   */
-
-  // getChartInfo: function(lever, sub) {
-  //   return _.merge({}, ChartOpts[lever][sub], ChartProto);
-  // },
-
-  /**
-   * Get Object of chart data and chart options merged
-   * @param  {String} lever Current Lever
-   * @param  {String} sub   Current Sub
-   * @return {Object}       New prototype obj of chart opts/data
-   */
-
-  // getChartUpdate: function(lever, sub) {
-  //   var o = {
-  //     unload: true,
-  //     columns: _leverData[sub]
-  //   }, d;
-  //   d = _.merge({}, o, ChartOpts[lever][sub].data);
-  //   return d;
-  // },
 
   /**
    * Return array of filters from data object.

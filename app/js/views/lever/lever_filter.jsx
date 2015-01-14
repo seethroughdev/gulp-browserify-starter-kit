@@ -2,6 +2,7 @@
 
 var React            = require('react/addons'),
     RP               = React.PropTypes,
+    Router           = require('react-router'),
     $                = require('domtastic'),
     nocase           = require('to-no-case'),
     LeverActions     = require('../../actions/actions'),
@@ -10,9 +11,12 @@ var React            = require('react/addons'),
 
 View = React.createClass({
 
+  mixins: [
+    Router.State
+  ],
+
   propTypes: {
     filter: RP.string.isRequired,
-    leverTitle: RP.string.isRequired,
     itemNumber: RP.number.isRequired,
     isActive: RP.bool.isRequired
   },
@@ -21,7 +25,7 @@ View = React.createClass({
     var val = $(e.target.parentNode).attr('data-name');
     e.preventDefault();
 
-    // Update filtes list
+    // Update filters list
     LeverActions.toggleFilters(val);
   },
 
@@ -34,7 +38,7 @@ View = React.createClass({
     if (this.props.filter === 'growth') {
       color = colorScheme.y2;
     } else {
-      color = colorScheme[this.props.leverTitle][this.props.itemNumber];
+      color = colorScheme[this.getParams().lever][this.props.itemNumber];
     }
 
     return {
