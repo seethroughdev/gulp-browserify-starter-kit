@@ -127,12 +127,15 @@
   position: relative;
 
   @include break(medium) {
-    padding: 1em 2em 0;
+    padding: 0;
   }
 
   @include break(large) {
-    padding: 0 2.667em 0;
     flex: 4;
+  }
+
+  @include break(wide) {
+    padding: 0 2em 0;
   }
 }
 

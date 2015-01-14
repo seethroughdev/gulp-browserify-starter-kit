@@ -9,7 +9,10 @@
   }
   .c3-axis text {
     fill: darken($grey, 10%);
-    font-size: 16px;
+    font-size: 14px;
+    @include break(wide) {
+      font-size: 16px;
+    }
   }
   .c3-grid line {
     stroke: $ltGrey;

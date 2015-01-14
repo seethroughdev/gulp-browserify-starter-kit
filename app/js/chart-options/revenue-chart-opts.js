@@ -60,7 +60,6 @@ module.exports.plans = {
   },
   tooltip: {
     format: {
-      // title: function (d) { return 'Data ' + d; },
       value: function(value, ratio, id) {
         return tt.currency(value, ratio, id);
       }
@@ -86,7 +85,6 @@ module.exports.mix = {
   },
   tooltip: {
     format: {
-      // title: function (d) { return 'Data ' + d; },
       value: function(value, ratio, id) {
         return tt.currency(value, ratio, id);
       }
@@ -112,7 +110,6 @@ module.exports.location = {
   },
   tooltip: {
     format: {
-      // title: function (d) { return 'Data ' + d; },
       value: function(value, ratio, id) {
         return tt.currency(value, ratio, id);
       }

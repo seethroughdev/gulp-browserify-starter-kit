@@ -108,7 +108,7 @@ View = React.createClass({
 
     chart.resize({
       height: outerEl.offsetHeight  * 0.9,
-      width: outerEl.offsetWidth * 0.9
+      width: outerEl.offsetWidth * 0.95
     });
   },
 
