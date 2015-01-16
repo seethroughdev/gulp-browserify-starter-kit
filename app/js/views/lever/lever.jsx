@@ -4,6 +4,7 @@ var React            = require('react/addons'),
     Reflux           = require('reflux'),
     Router           = require('react-router'),
     RP               = React.PropTypes,
+    _                = require('lodash'),
     LeverHeader      = require('./lever_header.jsx'),
     LeverStore       = require('../../stores/lever_store'),
     LeverFilterStore = require('../../stores/lever_filter_store'),
@@ -23,18 +24,19 @@ View = React.createClass({
   mixins: [
     Reflux.listenTo(LeverStore, 'onLoadLeverComplete'),
     Reflux.listenTo(LeverFilterStore, 'handleFilterChange'),
-    Router.State
+    Router.State,
+    Router.Navigation
   ],
 
   getInitialState: function() {
     return {
+      leverTitle: this.props.params.lever,
       leverData: {},
-      leverTitle: this.getParams().lever,
       leverSubs: [],
-      leverSub: '',
-      leverFilters: [],
       leverRow: [],
-      activeFilters: []
+      leverColumns: [],
+      activeColumns: [],
+      columns: []
     };
   },
 
@@ -42,17 +44,38 @@ View = React.createClass({
     this.setState({
       leverData: lever.data,
       leverRow: lever.row,
-      leverTitle: this.getParams().lever,
-      leverSub: this.getParams().sub,
       leverSubs: lever.subs,
-      leverFilters: LeverStore.getLeverFilters(this.getParams().sub)
+      leverColumns: lever.columns
     });
+    this.setColumns();
   },
 
-  handleFilterChange: function(filters) {
+  /**
+   * Send off columns to be processed by columns_store
+   * @param {string} sub Custom or current sub
+   * @return {Action} Returns a call to setColumns action
+   */
+  setColumns: function(sub) {
+    sub = sub || this.props.params.sub;
+    return LeverActions.setColumns(this.state.leverColumns[sub], this.props.query.hideColumns);
+  },
+
+  handleFilterChange: function(columns) {
+    console.log('filter changed');
+
+    // we need to disable this for sub changes!  The sub query.hideColumns
+    // should always reset to [] on title or sub changes!
+    // -AL
+
+    // this.transitionTo('leverSub', {
+    //   lever: this.props.params.lever,
+    //   sub: this.props.params.sub
+    // }, _.extend(this.props.query, {hideColumns: columns.inactive}));
+
     this.setState({
-      activeFilters: filters.activeFilters,
-      inactiveFilters: filters.inactiveFilters
+      columns: columns.columns,
+      activeColumns: columns.active,
+      inactiveColumns: columns.inactive
     });
   },
 
@@ -77,10 +100,7 @@ View = React.createClass({
     } else if (thisTitle === nextTitle &&
                 thisSub !== nextSub) {
 
-      this.setState({
-        leverSub: nextprops.params.sub,
-        leverFilters: LeverStore.getLeverFilters(this.getParams().sub)
-      });
+      this.setColumns(nextprops.params.sub, true);
     }
   },
 
@@ -89,6 +109,7 @@ View = React.createClass({
       <main className="main__content">
         <LeverHeader
           params={this.props.params}
+          query={this.props.query}
           leverSubs={this.state.leverSubs}
         />
         <section className="chart">
@@ -97,8 +118,9 @@ View = React.createClass({
             leverData={this.state.leverData}
           />
           <LeverAside
-            leverFilters={this.state.leverFilters}
-            activeFilters={this.state.activeFilters}
+            columns={this.state.columns}
+            activeColumns={this.state.activeColumns}
+            query={this.props.query}
           />
         </section>
         <LeverRow leverRow={this.state.leverRow} />

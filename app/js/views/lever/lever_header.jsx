@@ -34,7 +34,8 @@ View = React.createClass({
                       params={{
                         lever: leverTitle,
                         sub: sub
-                      }}>
+                      }}
+                      >
                       {sub}
                     </Link>
                   </li>

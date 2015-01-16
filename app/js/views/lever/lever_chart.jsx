@@ -17,7 +17,7 @@ View = React.createClass({
 
   mixins: [
     Reflux.listenTo(LeverStore, 'onLoadLeverComplete'),
-    Reflux.listenTo(LeverFilterStore, 'onFilterUpdate'),
+    Reflux.listenTo(LeverFilterStore, 'onColumnUpdate'),
     Reflux.listenTo(LeverChartStore, 'onChartUpdate'),
     Reflux.listenTo(LeverDateStore, 'onDatePicker'),
     Router.State
@@ -131,10 +131,11 @@ View = React.createClass({
    * @param  {Array} inactiveFilters List of filters without .is-active class
    */
 
-  onFilterUpdate: function(obj) {
+  onColumnUpdate: function(obj) {
+    console.log(obj);
     if (!_.isUndefined(chart)) {
-      chart.hide(obj.inactiveFilters);
-      chart.show(obj.activeFilters);
+      chart.hide(obj.inactive);
+      chart.show(obj.active);
     }
   },
 

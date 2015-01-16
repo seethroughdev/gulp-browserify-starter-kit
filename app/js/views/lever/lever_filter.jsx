@@ -4,6 +4,7 @@ var React            = require('react/addons'),
     RP               = React.PropTypes,
     Router           = require('react-router'),
     $                = require('domtastic'),
+    _                = require('lodash'),
     nocase           = require('to-no-case'),
     LeverActions     = require('../../actions/actions'),
     colorScheme      = require('../../util/colors-util'),
@@ -12,11 +13,13 @@ var React            = require('react/addons'),
 View = React.createClass({
 
   mixins: [
-    Router.State
+    Router.State,
+    Router.Navigation
   ],
 
   propTypes: {
-    filter: RP.string.isRequired,
+    columns: RP.array.isRequired,
+    column: RP.string.isRequired,
     itemNumber: RP.number.isRequired,
     isActive: RP.bool.isRequired
   },
@@ -25,8 +28,7 @@ View = React.createClass({
     var val = $(e.target.parentNode).attr('data-name');
     e.preventDefault();
 
-    // Update filters list
-    LeverActions.toggleFilters(val);
+    LeverActions.setColumns(this.props.columns, this.props.query.hideColumns, val);
   },
 
 
@@ -35,7 +37,7 @@ View = React.createClass({
     var color;
 
     // always make 'growth' the same color
-    if (this.props.filter === 'growth') {
+    if (this.props.column === 'growth') {
       color = colorScheme.y2;
     } else {
       color = colorScheme[this.getParams().lever][this.props.itemNumber];
@@ -58,12 +60,12 @@ View = React.createClass({
     return (
       <li className={classes}
           itemNumber={this.props.itemNumber}
-          data-name={this.props.filter}
+          data-name={this.props.column}
           onClick={this.handleClick}>
         <span
           className="filter__span"
           style={this.addFilterSpanStyle()}></span>
-        <div>{nocase(this.props.filter)}</div>
+        <div>{nocase(this.props.column)}</div>
       </li>
     )
   }

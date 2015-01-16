@@ -4,7 +4,7 @@ var Reflux         = require('reflux'),
     _              = require('lodash'),
     LeverActions   = require('../actions/actions'),
     LeverRowHelper = require('../util/lever-row-util'),
-    leverStore, _lever, _leverData, _leverObj;
+    leverStore, _lever, _leverData, _leverObj, _leverColumns;
 
 
 leverStore = Reflux.createStore({
@@ -22,14 +22,16 @@ leverStore = Reflux.createStore({
    */
 
   onLoadCompleted: function(leverObj) {
-    // console.log('load completed');
+    console.log('onLoadCompleted');
     _leverObj = leverObj;
     _lever = this.getLever();
     _leverData = this.getLeverData();
+    _leverColumns = this.getLeverColumns(leverObj[_lever]);
     return this.trigger({
       subs: this.getLeverSubs(),
       row: this.getLeverRow(),
-      data: this.getLeverData()
+      data: this.getLeverData(),
+      columns: _leverColumns
     });
   },
 
@@ -69,6 +71,33 @@ leverStore = Reflux.createStore({
 
   getLeverRow: function() {
     return LeverRowHelper;
+  },
+
+  getLeverColumns: function(obj) {
+    var cols = {},
+        key;
+    for (key in obj) {
+      cols[key] = _.chain(obj[key])
+        .map(function(s) {
+          return s[0];
+        })
+        .filter(function(s) {
+          return s !== 'x';
+        })
+        .value();
+    }
+    return cols;
+  },
+
+  getColumns: function(leverData) {
+    return _.chain(leverData)
+            .map(function(s) {
+              return s[0];
+            })
+            .filter(function(s) {
+              return s !== 'x';
+            })
+            .value();
   },
 
 

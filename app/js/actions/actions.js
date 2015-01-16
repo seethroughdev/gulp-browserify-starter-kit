@@ -21,6 +21,7 @@ Actions = Reflux.createActions([
     'loadCompleted',
     'loadFailed',
     'loadSub',
+    'setColumns',
     'setFilters',
     'toggleFilters',
     'resetFilters',

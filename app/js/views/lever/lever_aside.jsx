@@ -11,16 +11,16 @@ var React        = require('react/addons'),
 View = React.createClass({
 
   propTypes: {
-    leverFilters: RP.array.isRequired,
-    activeFilters: RP.array.isRequired
+    columns: RP.array.isRequired,
+    activeColumns: RP.array.isRequired
   },
 
   resetFilters: function() {
     LeverActions.resetFilters();
   },
 
-  isActive: function(filter) {
-    return _.contains(this.props.activeFilters, filter);
+  isActive: function(column) {
+    return _.contains(this.props.activeColumns, column);
   },
 
   render: function() {
@@ -31,12 +31,15 @@ View = React.createClass({
           <div className="scroll-wrapper">
             <ul className="filter__tags">
               {
-                _.map(this.props.leverFilters, function(filter, i) {
+                _.map(this.props.columns, function(column, i) {
                   return <LeverFilter
-                    filter={filter}
-                    isActive={this.isActive(filter)}
+                    columns={this.props.columns}
+                    column={column}
+                    isActive={this.isActive(column)}
                     itemNumber={i}
                     key={i}
+                    params={this.props.params}
+                    query={this.props.query}
                    />
                 }, this)
               }
