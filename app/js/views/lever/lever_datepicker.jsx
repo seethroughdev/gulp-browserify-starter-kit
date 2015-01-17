@@ -1,12 +1,19 @@
 'use strict';
 
 var React        = require('react/addons'),
+    RP           = React.PropTypes,
     Router       = require('react-router'),
     $            = require('domtastic'),
+    _            = require('lodash'),
     LeverActions = require('../../actions/actions'),
     View;
 
 View = React.createClass({
+
+  propTypes: {
+    params: RP.object.isRequired,
+    query: RP.object.isRequired
+  },
 
   mixins: [
     Router.State,
@@ -52,7 +59,10 @@ View = React.createClass({
     this.activateSelector(elText, elVal);
     LeverActions.datePicker(elVal);
 
-    this.transitionTo('leverSub', {lever: this.getParams().lever, sub: this.getParams().sub}, {filter: elVal});
+    this.transitionTo('leverSub', {
+      lever: this.getParams().lever,
+      sub: this.getParams().sub
+    }, _.extend(this.props.query, {filter: elVal}));
 
     e.preventDefault();
   },

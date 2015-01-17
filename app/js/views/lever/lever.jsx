@@ -24,7 +24,6 @@ View = React.createClass({
   mixins: [
     Reflux.listenTo(LeverStore, 'onLoadLeverComplete'),
     Reflux.listenTo(LeverFilterStore, 'handleFilterChange'),
-    Router.State,
     Router.Navigation
   ],
 
@@ -40,6 +39,7 @@ View = React.createClass({
     };
   },
 
+  // Create complete lever object
   onLoadLeverComplete: function(lever) {
     this.setState({
       leverData: lever.data,
@@ -56,32 +56,37 @@ View = React.createClass({
    * @return {Action} Returns a call to setColumns action
    */
   setColumns: function(sub) {
+
+    // if its a sub or lever change, reset hideColumns
+    var cols = sub || _.isUndefined(this.props.query.hideColumns) ? [] : this.props.query.hideColumns;
+
+    // allow to pass sub in if its in a transition instead of load
     sub = sub || this.props.params.sub;
-    return LeverActions.setColumns(this.state.leverColumns[sub], this.props.query.hideColumns);
+
+    // call action to update columns
+    return LeverActions.setColumns(this.state.leverColumns[sub], cols);
   },
 
   handleFilterChange: function(columns) {
-    console.log('filter changed');
 
-    // we need to disable this for sub changes!  The sub query.hideColumns
-    // should always reset to [] on title or sub changes!
-    // -AL
+    // long-winded way to add the inactive columns to the existing query props
+    this.transitionTo('leverSub', {
+      lever: this.props.params.lever,
+      sub: this.props.params.sub
+    }, _.extend(this.props.query, {hideColumns: columns.inactive}));
 
-    // this.transitionTo('leverSub', {
-    //   lever: this.props.params.lever,
-    //   sub: this.props.params.sub
-    // }, _.extend(this.props.query, {hideColumns: columns.inactive}));
-
+    // update all children with the new column states
     this.setState({
       columns: columns.columns,
       activeColumns: columns.active,
       inactiveColumns: columns.inactive
     });
+
   },
 
   // when page is loaded, call lever action
   componentWillMount: function() {
-    LeverActions.load(this.getParams().lever);
+    LeverActions.load(this.props.params.lever);
   },
 
   // when lever/subs change, update lever data
@@ -100,7 +105,7 @@ View = React.createClass({
     } else if (thisTitle === nextTitle &&
                 thisSub !== nextSub) {
 
-      this.setColumns(nextprops.params.sub, true);
+      this.setColumns(nextprops.params.sub);
     }
   },
 
@@ -116,10 +121,12 @@ View = React.createClass({
           <LeverChart
             params={this.props.params}
             leverData={this.state.leverData}
+            query={this.props.query}
           />
           <LeverAside
             columns={this.state.columns}
             activeColumns={this.state.activeColumns}
+            params={this.props.params}
             query={this.props.query}
           />
         </section>

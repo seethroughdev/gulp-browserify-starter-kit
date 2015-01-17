@@ -132,7 +132,6 @@ View = React.createClass({
    */
 
   onColumnUpdate: function(obj) {
-    console.log(obj);
     if (!_.isUndefined(chart)) {
       chart.hide(obj.inactive);
       chart.show(obj.active);

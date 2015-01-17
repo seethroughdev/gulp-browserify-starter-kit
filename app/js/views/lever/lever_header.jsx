@@ -12,6 +12,7 @@ var React      = require('react/addons'),
 View = React.createClass({
   propTypes: {
     params: RP.object.isRequired,
+    query: RP.object.isRequired,
     leverSubs: RP.array.isRequired
   },
   render: function() {
@@ -35,17 +36,22 @@ View = React.createClass({
                         lever: leverTitle,
                         sub: sub
                       }}
+                      query={{
+                        filter: this.props.query.filter
+                      }}
                       >
                       {sub}
                     </Link>
                   </li>
                 )
-              })
+              }, this)
             }
           </ul>
         </section>
         <section className="main-header__tr">
-          <DatePicker />
+          <DatePicker
+            params={this.props.params}
+            query={this.props.query} />
         </section>
       </header>
     )

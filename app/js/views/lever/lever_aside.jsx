@@ -11,6 +11,8 @@ var React        = require('react/addons'),
 View = React.createClass({
 
   propTypes: {
+    params: RP.object.isRequired,
+    query: RP.object.isRequired,
     columns: RP.array.isRequired,
     activeColumns: RP.array.isRequired
   },
