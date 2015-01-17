@@ -49,7 +49,6 @@ store = Reflux.createStore({
     filteredData = this.filterData(data, startDateIndex, endDateIndex);
 
     this.trigger(filteredData);
-
   },
 
   filterData: function filterData(data, start, end) {
@@ -121,11 +120,11 @@ store = Reflux.createStore({
 
   /*==========  PARSE FILTER  ==========*/
 
-  getFilterLength: function(type) {
+  getFilterLength: function getFilterLength(type) {
     return type.replace(/\D+/gi, '');
   },
 
-  getFilterType: function(type) {
+  getFilterType: function getFilterType(type) {
     return type.replace(/\d+/i, '');
   }
 
