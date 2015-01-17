@@ -70,7 +70,7 @@ View = React.createClass({
   handleFilterChange: function(columns) {
 
     // long-winded way to add the inactive columns to the existing query props
-    this.transitionTo('leverSub', {
+    this.replaceWith('leverSub', {
       lever: this.props.params.lever,
       sub: this.props.params.sub
     }, _.extend(this.props.query, {hideColumns: columns.inactive}));
