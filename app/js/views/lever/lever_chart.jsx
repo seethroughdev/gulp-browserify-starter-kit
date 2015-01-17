@@ -19,7 +19,7 @@ View = React.createClass({
     Reflux.listenTo(LeverStore, 'onLoadLeverComplete'),
     Reflux.listenTo(LeverFilterStore, 'onColumnUpdate'),
     Reflux.listenTo(LeverChartStore, 'onChartUpdate'),
-    Reflux.listenTo(LeverDateStore, 'onDatePicker'),
+    Reflux.listenTo(LeverDateStore, 'filterChartData'),
     Router.State
   ],
 
@@ -79,8 +79,10 @@ View = React.createClass({
     chart = c3.generate(chartObj);
   },
 
-  onDatePicker: function onDatePicker(data) {
-    console.log(data);
+  filterChartData: function(data) {
+    chart.load({
+      columns: data[this.props.params.sub]
+    });
   },
 
   // Load chart when lever is complete for the first time

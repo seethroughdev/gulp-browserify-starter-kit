@@ -122,6 +122,10 @@ leverStore = Reflux.createStore({
     LeverActions.setFilters(leverFilters);
 
     return leverFilters;
+  },
+
+  onDatePicker: function onDatePicker(val) {
+    LeverActions.filterDate(val, _leverData);
   }
 });
 

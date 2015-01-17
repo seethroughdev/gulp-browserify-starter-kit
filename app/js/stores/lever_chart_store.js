@@ -64,10 +64,6 @@ Store = Reflux.createStore({
               return d !== 'x';
             })
             .value();
-  },
-
-  onDatePicker: function onDatePicker(val) {
-    console.log(_leverData);
   }
 
 });

@@ -25,7 +25,8 @@ var dependencies = [
   'c3',
   'numeral',
   'reqwest',
-  'to-no-case'
+  'to-no-case',
+  'moment'
 ];
 
 // // Options

@@ -27,7 +27,8 @@ Actions = Reflux.createActions([
     'resetFilters',
     'chartInit',
     'setLeverData',
-    'datePicker'
+    'datePicker',
+    'filterDate'
   ]);
 
 Actions.load.listen(function(lever) {
