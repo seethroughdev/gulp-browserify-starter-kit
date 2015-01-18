@@ -71,6 +71,15 @@ View = React.createClass({
     this.deactivateSelector();
   },
 
+  componentDidMount: function() {
+    var $el;
+    if (this.props.query.filter) {
+      $el = $('.date-picker__dropdown')
+        .find('[data-value="' + this.props.query.filter + '"]');
+      this.activateSelector($el.text());
+    }
+  },
+
   render: function() {
 
     var cx = React.addons.classSet,
@@ -88,17 +97,17 @@ View = React.createClass({
             {this.state.activeText}
           </div>
           <ul className="date-picker__dropdown" onClick={this.handleSelect}>
-            <li data-value="7c">This Week</li>
-            <li data-value="30c">This Month</li>
-            <li data-value="365c">This Year</li>
-            <li className="ul__separator" />
             <li data-value="7l">Last 7 Days</li>
             <li data-value="14l">Last 14 Days</li>
             <li data-value="30l">Last 30 Days</li>
+            <li className="ul__separator" />
+            <li data-value="7c">This Week</li>
+            <li data-value="30c">This Month</li>
+            <li data-value="365c">This Year</li>
           </ul>
         </div>
       </div>
-    )
+    );
   }
 });
 

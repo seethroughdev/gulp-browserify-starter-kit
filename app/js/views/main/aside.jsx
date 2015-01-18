@@ -66,12 +66,15 @@ View = React.createClass({
                         params={{
                           lever: lever.toLowerCase(),
                           sub: 'summary'
+                        }}
+                        query={{
+                          filter: this.props.query.filter
                         }}>
                         {lever}
                       </Link>
                     </li>
-                  )
-                })
+                  );
+                }, this)
               }
             </ul>
           </li>

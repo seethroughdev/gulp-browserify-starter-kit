@@ -39,18 +39,25 @@ View = React.createClass({
         nextTitle = nextprops.params.lever,
         thisSub   = this.props.params.sub,
         nextSub   = nextprops.params.sub,
-        thisData  = this.props.leverData,
         nextData  = nextprops.leverData;
 
     // Lever or Sub changed ->
     if (thisTitle !== nextTitle ||
       thisSub !== nextSub) {
-      this.handleChartInit(nextTitle, nextSub, nextprops.leverData);
+      this.handleChartInit(nextTitle, nextSub, nextData);
     }
   },
 
   chartInit: function chartInit(title, sub, data) {
-    LeverActions.chartInit(title, sub, data);
+    var chartData;
+
+    if (!_.isUndefined(this.props.query.filter)) {
+      chartData = LeverDateStore.getFilterData(this.props.query.filter, data);
+    } else {
+      chartData = _.merge({}, data);
+    }
+
+    LeverActions.chartInit(title, sub, chartData);
   },
 
   // Prevent chart from double loading with debounce after.
@@ -69,7 +76,7 @@ View = React.createClass({
   // Any time the chart is updated, we will destroy it, then create a new one.
   // This would be more efficient to populate only the changes, but the current
   // api doesn't support very many attributes.  And react will solve a lot of
-  // this problem for us.  So for now, we will destory and create on sub change.
+  // this problem for us.  So for now, we will destroy and create on sub change.
 
   onChartUpdate: function(chartObj) {
     if (_.isObject(chart)) {
@@ -87,7 +94,7 @@ View = React.createClass({
 
   // Load chart when lever is complete for the first time
   onLoadLeverComplete: function onLoadLeverComplete(obj) {
-    this.chartInit(this.props.params.lever, this.props.params.sub, obj.data);
+    this.chartInit(this.props.params.lever, this.props.params.sub, obj.data, this.props.query.filter);
   },
 
   componentDidMount: function() {

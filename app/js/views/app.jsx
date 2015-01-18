@@ -17,10 +17,10 @@ App = React.createClass({
   render: function() {
     return (
       <div id="viewport">
-        <MainAside />
+        <MainAside params={this.props.params} query={this.props.query} />
         <RouteHandler params={this.props.params} query={this.props.query} />
       </div>
-    )
+    );
   }
 });
 

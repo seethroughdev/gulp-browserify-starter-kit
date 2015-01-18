@@ -11,7 +11,7 @@ var Reflux       = require('reflux'),
     _            = require('lodash'),
     moment       = require('moment'),
     constant     = require('../util/constant-util'),
-    store, stringDateFormat, _originalData;
+    store, stringDateFormat;
 
 
 // set date format from constants
@@ -25,14 +25,15 @@ store = Reflux.createStore({
   },
 
   onFilterDate: function onFilterDate(filter, data) {
-    var length, type, endDate, startDate, dateArr, endDateIndex, startDateIndex, filteredData;
+    this.trigger(this.getFilterData(filter, data));
+  },
+
+  getFilterData: function getFilterData(filter, data) {
+    var length, type, endDate, startDate, dateArr, endDateIndex, startDateIndex;
 
     length = this.getFilterLength(filter);
     type = this.getFilterType(filter);
 
-
-
-    // console.log('onFilterDate', length, type, data);
 
     dateArr = this.getDateArray(data);
     endDate = this.getEndDate(dateArr);
@@ -45,10 +46,10 @@ store = Reflux.createStore({
       startDateIndex = dateArr.length;
     }
 
-    // console.log(endDateIndex, startDateIndex, dateArr.length, data);
-    filteredData = this.filterData(data, startDateIndex, endDateIndex);
+    console.log(startDateIndex, endDateIndex);
 
-    this.trigger(filteredData);
+    return this.filterData(data, startDateIndex, endDateIndex);
+
   },
 
   filterData: function filterData(data, start, end) {
@@ -102,6 +103,7 @@ store = Reflux.createStore({
     endDate = endDate || moment().format(stringDateFormat);
 
     endDate = moment(endDate, stringDateFormat);
+    console.log(endDate);
 
     // wrapping in moment object a second time because
     // add/subtract method modifies current moment obj
