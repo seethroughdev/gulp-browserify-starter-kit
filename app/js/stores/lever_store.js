@@ -15,6 +15,7 @@ leverStore = Reflux.createStore({
     _leverData = {};
   },
 
+
   /**
    * Fired when async lever data is loaded
    * @param  {Object} leverObj Raw lever data
@@ -22,7 +23,6 @@ leverStore = Reflux.createStore({
    */
 
   onLoadCompleted: function(leverObj) {
-    console.log('onLoadCompleted');
     _leverObj = leverObj;
     _lever = this.getLever();
     _leverData = this.getLeverData();
@@ -35,6 +35,7 @@ leverStore = Reflux.createStore({
     });
   },
 
+
   /**
    * Return all the raw data from the current lever
    * @return {Array} Array of data objects of each sub belonging to lever.
@@ -44,6 +45,7 @@ leverStore = Reflux.createStore({
     return _leverObj[_lever];
   },
 
+
   /**
    * Get the current lever title from the object
    * @return {String} Slugified version of the current lever.
@@ -52,6 +54,7 @@ leverStore = Reflux.createStore({
   getLever: function() {
     return _.keys(_leverObj)[0];
   },
+
 
   /**
    * Get the subs of the given lever
@@ -63,6 +66,7 @@ leverStore = Reflux.createStore({
               .keys()
               .value();
   },
+
 
   /**
    * Get the lever row data which is static for all levers
@@ -124,6 +128,12 @@ leverStore = Reflux.createStore({
     return leverFilters;
   },
 
+
+  /**
+   * Action to call filterDate
+   * @param  {String} val Filter-type ie. 7c, 365c, 14l etc...
+   * @return {Action}     Call filterDate action
+   */
   onDatePicker: function onDatePicker(val) {
     LeverActions.filterDate(val, _leverData);
   }

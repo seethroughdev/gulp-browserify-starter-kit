@@ -24,47 +24,55 @@ store = Reflux.createStore({
   init: function() {
   },
 
-  onFilterDate: function onFilterDate(filter, data) {
-    this.trigger(this.getFilterData(filter, data));
-  },
-
+  /**
+   * Getter for filtered data
+   * @param  {String} filter Filter-type ie. 7c, 365c, 14l etc...
+   * @param  {Object} data   Full immutable data
+   * @return {Function}      Returns return value of filterData
+   */
   getFilterData: function getFilterData(filter, data) {
-    var length, type, endDate, startDate, dateArr, endDateIndex, startDateIndex;
+    var dateArr, startDateIndex;
 
-    length = this.getFilterLength(filter);
-    type = this.getFilterType(filter);
+    dateArr        = this.getDateArray(data);
+    startDateIndex = _.indexOf(dateArr, this.getStartDate(filter, dateArr));
 
-
-    dateArr = this.getDateArray(data);
-    endDate = this.getEndDate(dateArr);
-    startDate = this.getStartDate(length, type, endDate);
-
-    endDateIndex = _.indexOf(dateArr, endDate);
-    startDateIndex = _.indexOf(dateArr, startDate);
-
+    // if the data is less than the range, just show the whole data
     if (startDateIndex === -1) {
       startDateIndex = dateArr.length;
     }
 
-    console.log(startDateIndex, endDateIndex);
-
-    return this.filterData(data, startDateIndex, endDateIndex);
+    return this.filterData(data, startDateIndex);
 
   },
 
-  filterData: function filterData(data, start, end) {
-
+  /**
+   * The main data filtering function
+   * @param  {Object} data  Full immutable data
+   * @param  {Number} start Index of first date
+   * @return {Object}       Filtered data structure
+   */
+  filterData: function filterData(data, start) {
     var _newData = _.merge({}, data);
+
+    start += 1; // adding 1 to compensate for 'x' value
 
     _.each(_newData, function(val, key, obj) {
       _.each(val, function(v, i, a) {
-        _newData[key][i] = v.slice(end, start);
+        _newData[key][i] = v.slice(0, start);
       });
     });
 
     return _newData;
   },
 
+  /**
+   * Get actual dates from date object.
+   * In order to do this, we grab the first key of the dataObj
+   * Then we filter each array of data for [0] === 'x' to find the timeline.
+   * Then we basically remove the first element of the array.
+   * @param  {Object} data Full current data object
+   * @return {Array}      A simple array of dates in the 'x column'.
+   */
   getDateArray: function getDateArray(data) {
     var dateArr;
     dateArr = data[_.keys(data)[0]];
@@ -75,35 +83,34 @@ store = Reflux.createStore({
     return dateArr;
   },
 
-  // This crazy function will parse the first sub of the lever data,
-  // grab the array that has 'x' as the first, and grab the first
-  // date in the array.
+  /**
+   * This is here in anticipation of custom end dates in the future.
+   * Currently all data is filtered from 'today'.
+   * @param  {Array} dateArr Simple array of dates in 'x' column.
+   * @return {String}        Latest date of the array (which since its
+   * a time-series, makes it the first item)
+   */
   getEndDate: function getEndDate(dateArr) {
-    var endDate, isValid;
-
-    endDate = dateArr[0];
-
-    try {
-      isValid = moment(endDate, stringDateFormat, true).isValid();
-      if (!isValid) {
-        throw new Error('Date column does not appear to be valid.');
-      }
-    }
-    catch (e) {
-      console.log(e);
-    }
-
-    return endDate;
+    return dateArr[0];
   },
 
-  getStartDate: function getStartDate(length, type, endDate) {
 
-    length = +length || 30;
-    type = type || 'l';
-    endDate = endDate || moment().format(stringDateFormat);
+  /**
+   * Parse the data array to calculate starting date
+   * @param  {String} filter  Filter-type ie. 7c, 365c, 14l etc...
+   * @param  {Array} dateArr  Simple array of dates in 'x' column.
+   * @return {String}         Returns date string of start.
+   */
+  getStartDate: function getStartDate(filter, dateArr) {
+    var length, type, endDate;
 
-    endDate = moment(endDate, stringDateFormat);
-    console.log(endDate);
+    // parse filter string
+    length  = this.getFilterLength(filter);
+    type    = this.getFilterType(filter);
+
+    // Get end date ** For now, we are only using the lastest day as end
+    // date.  In the future this should be improved to be dynamic.
+    endDate = moment(dateArr[0], stringDateFormat);
 
     // wrapping in moment object a second time because
     // add/subtract method modifies current moment obj
@@ -128,6 +135,17 @@ store = Reflux.createStore({
 
   getFilterType: function getFilterType(type) {
     return type.replace(/\d+/i, '');
+  },
+
+  /**
+   * The action method for filtering data.  It sends the data back
+   * to anyone listening
+   * @param  {String} filter type, ie. 7c, 30c, 14l
+   * @param  {Object} data   Full data object, which we try to keep immutable.
+   * @return {Action}        Triggers the filter data to all listeners.
+   */
+  onFilterDate: function onFilterDate(filter, data) {
+    this.trigger(this.getFilterData(filter, data));
   }
 
 });
