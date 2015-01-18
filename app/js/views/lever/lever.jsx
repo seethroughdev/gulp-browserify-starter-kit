@@ -132,7 +132,7 @@ View = React.createClass({
         </section>
         <LeverRow leverRow={this.state.leverRow} />
       </main>
-    )
+    );
   }
 });
 

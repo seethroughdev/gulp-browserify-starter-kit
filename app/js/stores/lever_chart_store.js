@@ -8,7 +8,6 @@
 var Reflux         = require('reflux'),
     _              = require('lodash'),
     LeverActions   = require('../actions/actions'),
-    LeverDateStore = require('./lever_date_store'),
     ChartProto     = require('../chart-options/_default-chart-opts'),
     ChartOpts      = require('../chart-options/_lever-chart-opts'),
     Store, _chartInit;
@@ -22,9 +21,7 @@ Store = Reflux.createStore({
   },
 
   // called when lever/sub is changed
-  onChartInit: function onChartInit(lever, sub, data, filter) {
-
-    console.log('onChartInit');
+  onChartInit: function onChartInit(lever, sub, data) {
 
     // combine chart defaults with sub defaults.
     _chartInit = _.merge({},
@@ -33,9 +30,6 @@ Store = Reflux.createStore({
 
     // if data is valid, add it at init time.
     if (_.isArray(data[sub])) {
-
-      // console.log(filter);
-
       _chartInit.data.columns = data[sub];
       _chartInit.size = this.getChartSize();
     }

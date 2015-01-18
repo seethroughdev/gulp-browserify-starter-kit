@@ -54,7 +54,7 @@ store = Reflux.createStore({
   filterData: function filterData(data, start) {
     var _newData = _.merge({}, data);
 
-    start += 1; // adding 1 to compensate for 'x' value
+    start += 2; // adding 1 to compensate for 'x' value and today.
 
     _.each(_newData, function(val, key, obj) {
       _.each(val, function(v, i, a) {
@@ -105,26 +105,27 @@ store = Reflux.createStore({
     var length, type, endDate;
 
     // parse filter string
-    length  = this.getFilterLength(filter);
+    length  = parseInt(this.getFilterLength(filter), 10);
     type    = this.getFilterType(filter);
+
 
     // Get end date ** For now, we are only using the lastest day as end
     // date.  In the future this should be improved to be dynamic.
     endDate = moment(dateArr[0], stringDateFormat);
 
-    // wrapping in moment object a second time because
-    // add/subtract method modifies current moment obj
     if (type === 'l') {
-      return moment(endDate).subtract(length, 'days').format(stringDateFormat);
+      endDate =  moment(endDate).subtract(length - 1, 'days').format(stringDateFormat);
     } else {
       if (length === 7) {
-        return moment(endDate).startOf('isoWeek').format(stringDateFormat);
+        endDate =  moment(endDate).startOf('isoWeek').format(stringDateFormat);
       } else if (length === 30) {
-        return moment(endDate).startOf('month').format(stringDateFormat);
+        endDate =  moment(endDate).startOf('month').format(stringDateFormat);
       } else if (length === 365) {
-        return moment(endDate).startOf('year').format(stringDateFormat);
+        endDate =  moment(endDate).startOf('year').format(stringDateFormat);
       }
     }
+
+    return endDate;
   },
 
   /*==========  PARSE FILTER  ==========*/
