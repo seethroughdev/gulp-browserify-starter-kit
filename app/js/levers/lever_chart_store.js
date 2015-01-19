@@ -20,7 +20,14 @@ Store = Reflux.createStore({
   init: function() {
   },
 
-  // called when lever/sub is changed
+  /**
+   * Called whenever chart is created, merges default chart options,
+   * with sub chart options to create custom chart.
+   * @param  {String} lever Current lever.
+   * @param  {String} sub   Current sub.
+   * @param  {Object} data  Data object from service.
+   * @return {Object}       Returns chart init object with all settings.
+   */
   onChartInit: function onChartInit(lever, sub, data) {
 
     // combine chart defaults with sub defaults.
@@ -36,14 +43,19 @@ Store = Reflux.createStore({
 
     // if type is bar, for now we will stack them by default.
     if (_chartInit.data.type === 'bar') {
-      _chartInit.data.groups = [this.getFilters(data[sub])];
+      _chartInit.data.groups = [this.getColumns(data[sub])];
     }
 
     this.trigger(_chartInit);
 
+    return _chartInit;
+
   },
 
-  // size chart based off container size
+  /**
+   * Easy function to get parent containers size dimensions.
+   * @return {Object} Height and width of parent container in px
+   */
   getChartSize: function() {
     var outerEl = document.getElementById('chartOuter');
     return {
@@ -52,8 +64,12 @@ Store = Reflux.createStore({
       };
   },
 
-  // get filters to group data
-  getFilters: function getFilters(data) {
+  /**
+   * Take data object and return [0] of each array
+   * @param  {Object} data Full data object including all subs.
+   * @return {Array}       List of all current columns.
+   */
+  getColumns: function getColumns(data) {
     return _.chain(data)
             .map(function(d) {
               return d[0];
