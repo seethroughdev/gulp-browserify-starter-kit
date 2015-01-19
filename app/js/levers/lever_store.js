@@ -2,7 +2,7 @@
 
 var Reflux         = require('reflux'),
     _              = require('lodash'),
-    LeverActions   = require('../actions/actions'),
+    LeverActions   = require('./lever_actions'),
     LeverRowHelper = require('../util/lever-row-util'),
     leverStore, _lever, _leverData, _leverObj, _leverColumns;
 

@@ -6,11 +6,11 @@ var React            = require('react/addons'),
     c3               = require('c3'),
     _                = require('lodash'),
     RP               = React.PropTypes,
-    LeverStore       = require('../../stores/lever_store'),
-    LeverFilterStore = require('../../stores/lever_filter_store'),
-    LeverChartStore  = require('../../stores/lever_chart_store'),
-    LeverDateStore  = require('../../stores/lever_date_store'),
-    LeverActions     = require('../../actions/actions'),
+    LeverStore       = require('../lever_store'),
+    LeverFilterStore = require('../lever_columns_store'),
+    LeverChartStore  = require('../lever_chart_store'),
+    LeverDateStore  = require('../lever_date_store'),
+    LeverActions     = require('../lever_actions'),
     View, chart;
 
 View = React.createClass({

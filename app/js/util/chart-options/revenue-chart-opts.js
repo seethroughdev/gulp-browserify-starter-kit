@@ -1,8 +1,8 @@
 'use strict';
 
 var numeral     = require('numeral'),
-    colorScheme = require('../util/colors-util'),
-    tt          = require('../util/tt-util');
+    colorScheme = require('../colors-util'),
+    tt          = require('../tt-util');
 
 
 

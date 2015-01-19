@@ -4,9 +4,8 @@ var React      = require('react/addons'),
     RP         = React.PropTypes,
     _          = require('lodash'),
     Router     = require('react-router'),
-    Route      = Router.Route,
     Link       = Router.Link,
-    DatePicker = require('../lever/lever_datepicker.jsx'),
+    DatePicker = require('./lever_datepicker.jsx'),
     View;
 
 View = React.createClass({

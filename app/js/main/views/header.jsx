@@ -1,10 +1,6 @@
 'use strict';
 
 var React      = require('react/addons'),
-    _          = require('lodash'),
-    Router     = require('react-router'),
-    Route      = Router.Route,
-    Link       = Router.Link,
     View;
 
 View = React.createClass({
@@ -22,7 +18,7 @@ View = React.createClass({
         <section className="main-header__tr">
         </section>
       </header>
-    )
+    );
   }
 });
 

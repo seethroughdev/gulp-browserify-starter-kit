@@ -1,7 +1,6 @@
 'use strict';
 
 var React  = require('react/addons'),
-    Reflux = require('reflux'),
     Home;
 
 Home = React.createClass({
@@ -10,7 +9,7 @@ Home = React.createClass({
       <main className="main__content">
         <h1>Homepage</h1>
       </main>
-    )
+    );
   }
 });
 

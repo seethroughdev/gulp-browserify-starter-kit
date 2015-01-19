@@ -2,7 +2,6 @@
 
 var React  = require('react/addons'),
     Router = require('react-router'),
-    Route  = Router.Route,
     Link   = Router.Link,
     View, _levers;
 

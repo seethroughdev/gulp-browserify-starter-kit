@@ -7,9 +7,9 @@
 
 var Reflux         = require('reflux'),
     _              = require('lodash'),
-    LeverActions   = require('../actions/actions'),
-    ChartProto     = require('../chart-options/_default-chart-opts'),
-    ChartOpts      = require('../chart-options/_lever-chart-opts'),
+    LeverActions   = require('./lever_actions'),
+    ChartProto     = require('../util/chart-options/_default-chart-opts'),
+    ChartOpts      = require('../util/chart-options/_lever-chart-opts'),
     Store, _chartInit;
 
 

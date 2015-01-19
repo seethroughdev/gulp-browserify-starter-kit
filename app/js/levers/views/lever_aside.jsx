@@ -3,8 +3,7 @@
 var React        = require('react/addons'),
     RP           = React.PropTypes,
     _            = require('lodash'),
-    $            = require('domtastic'),
-    LeverActions = require('../../actions/actions'),
+    LeverActions = require('../lever_actions'),
     LeverFilter  = require('./lever_filter.jsx'),
     View;
 

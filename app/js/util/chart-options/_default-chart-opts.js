@@ -9,8 +9,8 @@
 var d3          = require('d3'),
     nocase      = require('to-no-case'),
     numeral     = require('numeral'),
-    colorScheme = require('../util/colors-util'),
-    tt          = require('../util/tt-util'),
+    colorScheme = require('../colors-util'),
+    tt          = require('../tt-util'),
     formatNumber;
 
 formatNumber = function formatNumber(val) {

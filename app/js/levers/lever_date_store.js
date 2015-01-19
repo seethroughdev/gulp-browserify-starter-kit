@@ -7,7 +7,7 @@
 
 
 var Reflux       = require('reflux'),
-    LeverActions = require('../actions/actions'),
+    LeverActions = require('./lever_actions'),
     _            = require('lodash'),
     moment       = require('moment'),
     constant     = require('../util/constant-util'),

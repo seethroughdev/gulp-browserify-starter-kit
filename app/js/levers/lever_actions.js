@@ -1,7 +1,7 @@
 'use strict';
 
 var Reflux       = require('reflux'),
-    leverService = require('../services/levers_service'),
+    leverService = require('./lever_service'),
     Actions, getLever;
 
 /**
@@ -22,9 +22,6 @@ Actions = Reflux.createActions([
     'loadFailed',
     'loadSub',
     'setColumns',
-    'setFilters',
-    'toggleFilters',
-    'resetFilters',
     'chartInit',
     'setLeverData',
     'datePicker',

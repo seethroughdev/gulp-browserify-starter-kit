@@ -4,9 +4,8 @@ var React            = require('react/addons'),
     RP               = React.PropTypes,
     Router           = require('react-router'),
     $                = require('domtastic'),
-    _                = require('lodash'),
     nocase           = require('to-no-case'),
-    LeverActions     = require('../../actions/actions'),
+    LeverActions     = require('../lever_actions'),
     colorScheme      = require('../../util/colors-util'),
     View;
 

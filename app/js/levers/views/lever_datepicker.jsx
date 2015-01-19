@@ -5,7 +5,7 @@ var React        = require('react/addons'),
     Router       = require('react-router'),
     $            = require('domtastic'),
     _            = require('lodash'),
-    LeverActions = require('../../actions/actions'),
+    LeverActions = require('../lever_actions'),
     View;
 
 View = React.createClass({

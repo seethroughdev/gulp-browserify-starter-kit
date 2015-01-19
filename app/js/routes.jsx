@@ -2,15 +2,13 @@
 
 var React         = require('react/addons'),
     Router        = require('react-router'),
-    Reflux        = require('reflux'),
     Route         = Router.Route,
     DefaultRoute  = Router.DefaultRoute,
     NotFoundRoute = Router.NotFoundRoute,
-    Link          = Router.Link,
 
-    AppView       = require('./views/app.jsx'),
-    HomeView      = require('./views/home.jsx'),
-    LeverView     = require('./views/lever/lever.jsx'),
+    AppView       = require('./main/app.jsx'),
+    HomeView      = require('./main/home.jsx'),
+    LeverView     = require('./levers/views/lever.jsx'),
     routes;
 
 routes = (

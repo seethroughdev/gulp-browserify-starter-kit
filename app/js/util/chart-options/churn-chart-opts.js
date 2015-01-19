@@ -1,8 +1,8 @@
 'use strict';
 
-var colorScheme = require('../util/colors-util'),
+var colorScheme = require('../colors-util'),
     numeral     = require('numeral'),
-    tt          = require('../util/tt-util');
+    tt          = require('../tt-util');
 
 
 module.exports.summary = {
