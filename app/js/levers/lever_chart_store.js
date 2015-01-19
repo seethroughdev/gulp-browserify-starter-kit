@@ -10,7 +10,11 @@ var Reflux         = require('reflux'),
     LeverActions   = require('./lever_actions'),
     ChartProto     = require('../util/chart-options/_default-chart-opts'),
     ChartOpts      = require('../util/chart-options/_lever-chart-opts'),
-    Store, _chartInit;
+    Store, _containerId;
+
+
+// set ID of chart container
+_containerId = 'chartOuter';
 
 
 Store = Reflux.createStore({
@@ -31,14 +35,14 @@ Store = Reflux.createStore({
   onChartInit: function onChartInit(lever, sub, data) {
 
     // combine chart defaults with sub defaults.
-    _chartInit = _.merge({},
+    var _chartInit = _.merge({},
                     _.extend({}, ChartProto),
                     ChartOpts[lever][sub]);
 
     // if data is valid, add it at init time.
     if (_.isArray(data[sub])) {
       _chartInit.data.columns = data[sub];
-      _chartInit.size = this.getChartSize();
+      _chartInit.size = this.getChartSize(_containerId);
     }
 
     // if type is bar, for now we will stack them by default.
@@ -54,10 +58,11 @@ Store = Reflux.createStore({
 
   /**
    * Easy function to get parent containers size dimensions.
+   * @param  {String} id ID of chart container
    * @return {Object} Height and width of parent container in px
    */
-  getChartSize: function() {
-    var outerEl = document.getElementById('chartOuter');
+  getChartSize: function(id) {
+    var outerEl = document.getElementById(id);
     return {
         height: outerEl.offsetHeight  * 0.9,
         width: outerEl.offsetWidth * 0.9
