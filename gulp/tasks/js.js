@@ -71,17 +71,18 @@ vendorBundle.on('update', function() {
 /*==========  BUNDLE FUNCTION  ==========*/
 
 function bundle(src, filename) {
+  var startTime = Date.now();
   return src.bundle()
     .on('error', handleErrors)
     .pipe(source(filename))
       .pipe(buffer())
       .pipe($.sourcemaps.init({loadMaps: true}))
-      .pipe($.uglify())
+      .pipe($.if(production, $.uglify()))
       .pipe($.sourcemaps.write('./'))
-      .pipe($.size({
-        showFiles: true
-      }))
     .pipe(gulp.dest(path.dist.js))
+    .pipe($.size({
+      showFiles: true
+    }))
     .pipe(browserSync.reload({ stream:true }));
 }
 
@@ -117,4 +118,4 @@ gulp.task('js:hint', function() {
 });
 
 
-gulp.task('js', ['js:browserify', 'js:modernizr', 'js:hint']);
+gulp.task('js', ['js:browserify', 'js:vendor', 'js:modernizr', 'js:hint']);
