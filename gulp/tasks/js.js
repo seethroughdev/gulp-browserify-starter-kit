@@ -1,19 +1,19 @@
 'use strict';
 
-var gulp = require('gulp'),
-  $ = require('gulp-load-plugins')(),
-  browserSync = require('browser-sync'),
-  reload = browserSync.reload,
-  browserify = require('browserify'),
-  watchify = require('watchify'),
-  uglifyify = require('uglifyify'),
-  reactify = require('reactify'),
-  envify = require('envify'),
-  source = require('vinyl-source-stream');
+var gulp      = require('gulp'),
+  $           = require('gulp-load-plugins')(),
+  watchify    = require('watchify'),
+  browserify  = require('browserify'),
+  reactify    = require('reactify'),
+  buffer      = require('vinyl-buffer'),
+  source      = require('vinyl-source-stream'),
+  browserSync = require('browser-sync');
 
-var path = require('../utils/paths'),
+var path      = require('../utils/paths'),
   handleErrors = require('../utils/handleErrors');
 
+
+// Array shared between mainJS external and vendorJS require options.
 
 var dependencies = [
   'lodash',
@@ -29,133 +29,74 @@ var dependencies = [
   'moment'
 ];
 
-// // Options
-// var browserifyOpts = {
-//   debug: true,
-//   standalone: 'shared',
-//   transform: [
-//     'reactify'
-//   ]
-// };
-
-// gulp.task('js:browserify', function () {
-//   return browserify( './' + path.src.js + 'index.js', browserifyOpts ).bundle()
-//     .on('error', handleErrors)
-//     .pipe(source( './' + path.src.js + 'index.js' ))
-//     .pipe($.rename('bundle.js'))
-//     .pipe(gulp.dest(path.dist.js))
-//     .pipe($.rename('bundle.min.js'))
-//     .pipe($.streamify($.uglify()))
-//     .on('error', handleErrors)
-//     .pipe(gulp.dest(path.dist.js))
-//     .pipe(reload({stream: true}));
-// });
-
-// gulp.task('js:vendor', function() {
-//   return gulp.src([
-//       path.npm.path + 'lodash/dist/lodash.js',
-//       path.npm.path + 'domtastic/domtastic.js',
-//       path.npm.path + 'react/dist/react-with-addons.js',
-//       path.npm.path + 'react-router/dist/react-router.js',
-//       path.bower.path + 'reflux/dist/reflux.js',
-//       path.npm.path + 'd3/d3.js',
-//       path.npm.path + 'c3/c3.js',
-//       path.npm.path + 'numeral/min/numeral.min.js',
-//       path.src.js + 'vendor/**/*.js',
-//       '!' + path.src.js + 'vendor/modernizr.js'
-//     ])
-//     .on('error', handleErrors)
-//     .pipe($.changed(path.dist.js + 'vendor/'))
-//     .pipe($.concat('vendor.js'))
-//     .pipe($.uglify())
-//     .pipe($.size({
-//       showFiles: true,
-//       title: 'compressed vendor:'
-//     }))
-//     .pipe(gulp.dest(path.dist.js));
-// });
 
 var production = process.env.NODE_ENV === 'production';
 
-function scripts(watch) {
-  var bundler, rebundle;
-  bundler = browserify({
+/*==========  MainJS Handling  ==========*/
+
+var mainBundle = watchify(browserify({
     basedir: __dirname,
     debug: !production,
     entries: '../../' + path.src.js + 'index.js',
     cache: {},
     packageCache: {},
-    fullPaths: watch,
+    fullPaths: true,
     extensions: ['.jsx']
-  });
+  }, watchify.args));
 
-  if (watch) {
-    bundler = watchify(bundler);
-  }
+mainBundle.transform(reactify);
+mainBundle.external(dependencies);
+mainBundle.on('update', function() {
+  return bundle(mainBundle, 'bundle.js');
+});
 
-  bundler.transform(reactify);
-  bundler.transform({
-    global: true
-  }, envify);
 
-  bundler.external(dependencies);
+/*==========  VENDOR JS BUNDLE  ==========*/
 
-  if (production) {
-    bundler.transform({
-      global: true
-    }, uglifyify);
-  }
+var vendorBundle = watchify(browserify({
+  basedir: __dirname,
+  debug: !production,
+  entries: '../../' + path.src.js + 'vendor.js',
+  cache: {},
+  packageCache: {},
+  fullPaths: true,
+  require: dependencies
+}));
 
-  rebundle = function() {
-    var stream = bundler.bundle();
-    var start = Date.now();
-    stream.on('error', handleErrors);
+vendorBundle.on('update', function() {
+  return bundle(vendorBundle, 'vendor.js');
+});
 
-    stream = stream.pipe(source('bundle.js'));
 
-    if (production) {
-      stream.pipe($.streamify($.uglify()));
-    }
+/*==========  BUNDLE FUNCTION  ==========*/
 
-    return stream
-      .pipe(gulp.dest(path.dist.js))
-      .pipe($.notify(function() {
-        console.log('Bundle built in ' + (Date.now() - start) + 'ms');
+function bundle(src, filename) {
+  return src.bundle()
+    .on('error', handleErrors)
+    .pipe(source(filename))
+      .pipe(buffer())
+      .pipe($.sourcemaps.init({loadMaps: true}))
+      .pipe($.uglify())
+      .pipe($.sourcemaps.write('./'))
+      .pipe($.size({
+        showFiles: true
       }))
-      .pipe(reload({
-        stream: true
-      }));
-  };
-  bundler.on('update', rebundle);
-
-  return rebundle();
+    .pipe(gulp.dest(path.dist.js))
+    .pipe(browserSync.reload({ stream:true }));
 }
 
+
+/*==========  ADDING TASKS  ==========*/
+
 gulp.task('js:browserify', function() {
-  return scripts(true);
+  return bundle(mainBundle, 'bundle.js');
 });
+
 
 gulp.task('js:vendor', function() {
-    var vendorsBundler = browserify({
-    basedir: __dirname,
-    debug: !production,
-    entries: '../../' + path.src.js + 'vendor.js',
-    cache: {},
-    packageCache: {},
-    fullPaths: true,
-    require: dependencies
-  });
-
-  var start = new Date();
-  vendorsBundler.bundle()
-    .on('error', handleErrors)
-    .pipe(source('vendor.js'))
-    .pipe($.streamify($.uglify()))
-    .pipe(gulp.dest(path.dist.js))
-    .pipe($.notify(function() {
-      console.log('VENDORS bundle built in ' + (Date.now() - start) + 'ms');
-    }));
+  return bundle(vendorBundle, 'vendor.js');
 });
+
 
 gulp.task('js:modernizr', function() {
   return gulp.src(path.bower.path + 'modernizr/modernizr.js')
