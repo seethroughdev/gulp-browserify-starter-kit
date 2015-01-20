@@ -1,13 +1,15 @@
 'use strict';
 
-var reqwest = require('reqwest'),
-    LeverService;
 
-LeverService = {
-  getLever: function getLever(lever, cb, errCb) {
-    console.log('calling service lever');
+var reqwest = require('reqwest'),
+    AccountService;
+
+
+AccountService = {
+  getAccount: function getAccount(cb, errCb) {
+    console.log('calling account service');
     reqwest({
-      url: '/data/example-' + lever + '-min.json',
+      url: '/data/example-account.json',
       type: 'json',
       success: function(resp) {
         cb(resp);
@@ -20,4 +22,4 @@ LeverService = {
   }
 };
 
-module.exports = LeverService;
+module.exports = AccountService;

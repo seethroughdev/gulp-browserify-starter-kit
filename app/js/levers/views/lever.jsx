@@ -5,7 +5,7 @@ var React            = require('react/addons'),
     Router           = require('react-router'),
     RP               = React.PropTypes,
     _                = require('lodash'),
-    LeverHeader      = require('./lever_header.jsx'),
+    LeverHeader      = require('../../main/views/header.jsx'),
     LeverStore       = require('../lever_store'),
     LeverFilterStore = require('../lever_columns_store'),
     LeverActions     = require('../lever_actions'),
@@ -116,7 +116,8 @@ View = React.createClass({
         <LeverHeader
           params={this.props.params}
           query={this.props.query}
-          leverSubs={this.state.leverSubs}
+          title={this.props.params.lever}
+          subMenu={this.state.leverSubs}
         />
         <section className="chart">
           <LeverChart

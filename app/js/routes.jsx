@@ -9,10 +9,16 @@ var React         = require('react/addons'),
     AppView       = require('./main/app.jsx'),
     HomeView      = require('./main/home.jsx'),
     LeverView     = require('./levers/views/lever.jsx'),
+    AccountView   = require('./account/views/account.jsx'),
     routes;
 
 routes = (
   <Route handler={ AppView }>
+    <Route name="account" path='account/' handler={AccountView}>
+      <Route name="accountSub" path=":sub/" handler={AccountView} />
+      <NotFoundRoute handler={AccountView} />
+      <DefaultRoute handler={AccountView} />
+    </Route>
     <Route name="lever" path=':lever/' handler={LeverView}>
       <Route name="leverSub" path=":sub/" handler={LeverView} />
       <NotFoundRoute handler={LeverView} />

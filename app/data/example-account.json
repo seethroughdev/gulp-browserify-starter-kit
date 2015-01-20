@@ -1,0 +1,27 @@
+[
+  {
+    "title": "settings",
+    "desc": "Change your personal settings",
+    "sub": [
+      {
+        "title": "appearance"
+      },
+      {
+        "title": "profile"
+      },
+      {
+        "title": "password"
+      }
+
+    ]
+  },
+  {
+    "title": "integrations"
+  },
+  {
+    "title": "contacts"
+  },
+  {
+    "title": "billing"
+  }
+]

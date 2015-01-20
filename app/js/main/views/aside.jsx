@@ -86,14 +86,22 @@ View = React.createClass({
         </ul>
         <ul className="main__aside__nav">
           <li>
-            <a href="#">Account</a>
+            <Link
+              to="accountSub"
+              activeClassName="is-active"
+              params={{
+                sub: 'settings'
+              }}
+             >Account
+            </Link>
+
           </li>
           <li>
             <a className="logo-btn logo" href="#">Tinge</a>
           </li>
         </ul>
       </aside>
-    )
+    );
   }
 });
 
