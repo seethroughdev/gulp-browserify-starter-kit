@@ -4,6 +4,10 @@
 var Reflux  = require('reflux'),
     actions = require('./lever_actions'),
     _       = require('lodash'),
+    Immutable      = require('immutable'),
+    IMap           = Immutable.Map,
+    List           = Immutable.List,
+    Seq            = Immutable.Seq,
     store;
 
 
@@ -23,7 +27,6 @@ store = Reflux.createStore({
    * @return {Object}          Complete list of columns
    */
   onSetColumns: function onSetColumns(columns, inactive, current) {
-    // console.log(columns, inactive, current);
     var _inactiveColumns, columnsObj;
 
     // create empty array if no inactive elements are included
@@ -42,7 +45,7 @@ store = Reflux.createStore({
     // Trigger change to all listeners.
     this.trigger(columnsObj);
 
-    return columnsObj;
+    return IMap(columnsObj);
   },
 
   /**
