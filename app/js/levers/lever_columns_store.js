@@ -23,6 +23,7 @@ store = Reflux.createStore({
    * @return {Object}          Complete list of columns
    */
   onSetColumns: function onSetColumns(columns, inactive, current) {
+    // console.log(columns, inactive, current);
     var _inactiveColumns, columnsObj;
 
     // create empty array if no inactive elements are included

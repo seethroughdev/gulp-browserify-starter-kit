@@ -21,6 +21,7 @@ var dependencies = [
   'domtastic',
   'react-router',
   'reflux',
+  'immutable',
   'd3',
   'c3',
   'numeral',

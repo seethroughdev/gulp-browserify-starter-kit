@@ -1,10 +1,12 @@
 'use strict';
 
 var Reflux         = require('reflux'),
-    _              = require('lodash'),
+    Immutable      = require('immutable'),
+    IMap           = Immutable.Map,
+    Seq            = Immutable.Seq,
     LeverActions   = require('./lever_actions'),
     LeverRowHelper = require('../util/lever-row-util'),
-    leverStore, _lever, _leverData, _leverObj, _leverColumns;
+    leverStore, _leverData;
 
 
 leverStore = Reflux.createStore({
@@ -15,56 +17,40 @@ leverStore = Reflux.createStore({
     _leverData = {};
   },
 
-
   /**
    * Fired when async lever data is loaded
    * @param  {Object} leverObj Raw lever data
-   * @return {Function} Emitter telling views data is ready.
+   * @return {Object} All lever data
    */
 
-  onLoadCompleted: function(leverObj) {
-    _leverObj = leverObj;
-    _lever = this.getLever();
-    _leverData = this.getLeverData();
-    _leverColumns = this.getLeverColumns(leverObj[_lever]);
-    return this.trigger({
-      subs: this.getLeverSubs(),
+  onLoadCompleted: function(resp) {
+    var leverObj;
+
+    _leverData = IMap(resp).first();
+
+    leverObj = {
+      subs: this.getLeverSubs(_leverData),
       row: this.getLeverRow(),
-      data: this.getLeverData(),
-      columns: _leverColumns
-    });
-  },
+      data: _leverData,
+      columns: this.getLeverColumns(_leverData)
+    };
 
+    this.trigger(leverObj);
 
-  /**
-   * Return all the raw data from the current lever
-   * @return {Array} Array of data objects of each sub belonging to lever.
-   */
-
-  getLeverData: function() {
-    return _leverObj[_lever];
-  },
-
-
-  /**
-   * Get the current lever title from the object
-   * @return {String} Slugified version of the current lever.
-   */
-
-  getLever: function() {
-    return _.keys(_leverObj)[0];
+    return IMap(leverObj);
   },
 
 
   /**
    * Get the subs of the given lever
+   * @param  {Object} leverData Raw lever data.
    * @return {Array} Slugified array of each sub.
    */
 
-  getLeverSubs: function() {
-    return _.chain(_leverObj[_lever])
-              .keys()
-              .value();
+  getLeverSubs: function(leverData) {
+    return Seq(leverData).map(function(k, v) {
+      return v;
+    }).toArray();
   },
 
 
@@ -77,57 +63,22 @@ leverStore = Reflux.createStore({
     return LeverRowHelper;
   },
 
-  getLeverColumns: function(obj) {
-    var cols = {},
-        key;
-    for (key in obj) {
-      cols[key] = _.chain(obj[key])
-        .map(function(s) {
-          return s[0];
-        })
-        .filter(function(s) {
-          return s !== 'x';
-        })
-        .value();
-    }
-    return cols;
-  },
-
-  getColumns: function(leverData) {
-    return _.chain(leverData)
-            .map(function(s) {
-              return s[0];
-            })
-            .filter(function(s) {
-              return s !== 'x';
-            })
-            .value();
-  },
-
 
   /**
-   * Return array of filters from data object.
-   * @param  {String} sub   Current sub selected
-   * @return {Array}       Array of current filters
+   * Get columns from each array in the object.
+   * @param  {Object} leverData Raw lever data.
+   * @return {Object}           Object of subs and arrays of each column
    */
-
-  getLeverFilters: function(sub) {
-    var leverFilters = [];
-
-    leverFilters = _.chain(_leverData[sub])
-            .map(function(s) {
-              return s[0];
-            })
-            .filter(function(s) {
-              return s !== 'x';
-            })
-            .value();
-
-    LeverActions.setFilters(leverFilters);
-
-    return leverFilters;
+  getLeverColumns: function(obj) {
+    return Seq(obj).map(function(k) {
+      var o = {};
+      return o[k] = Seq(k).map(function(n) {
+        return n[0];
+      }).filter(function(n) {
+        return n !== 'x';
+      }).toArray();
+    }).toObject();
   },
-
 
   /**
    * Action to call filterDate
