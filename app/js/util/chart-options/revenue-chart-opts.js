@@ -7,6 +7,7 @@ var numeral     = require('numeral'),
 
 
 module.exports.summary = {
+  description: 'This is the revenue summary chart.  You should like it.',
   axis: {
     y: {
       label: {
@@ -51,6 +52,7 @@ module.exports.summary = {
 };
 
 module.exports.plans = {
+  description: 'This is the revenue plans chart.  You should like it.',
   axis: {
     y: {
       label: {
@@ -76,6 +78,7 @@ module.exports.plans = {
 };
 
 module.exports.mix = {
+  description: 'This is the revenue mix chart.  You should like it.',
   axis: {
     y: {
       label: {
@@ -101,6 +104,7 @@ module.exports.mix = {
 };
 
 module.exports.location = {
+  description: 'This is the revenue summary chart.  You should like it.',
   axis: {
     y: {
       label: {

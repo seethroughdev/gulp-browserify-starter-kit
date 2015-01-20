@@ -6,6 +6,7 @@ var colorScheme = require('../colors-util'),
 
 
 module.exports.summary = {
+  description: 'This is the churn summary chart.  You should like it.',
   axis: {
     y: {
       label: {
@@ -47,6 +48,7 @@ module.exports.summary = {
 };
 
 module.exports.revenue = {
+  description: 'This is the churn revenue chart.  You should like it.',
   axis: {
     y: {
       label: {
@@ -92,6 +94,7 @@ module.exports.revenue = {
 };
 
 module.exports.monthly = {
+  description: 'This is the churn monthly chart.  You should like it.',
   axis: {
     y: {
       label: {
@@ -134,6 +137,7 @@ module.exports.monthly = {
 };
 
 module.exports.annual = {
+  description: 'This is the churn annual chart.  You should like it.',
   axis: {
     y: {
       label: {

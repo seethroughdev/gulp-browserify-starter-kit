@@ -159,6 +159,8 @@
 .message__container {
   @extend .container;
   text-align: center;
+  font-style: italic;
+  color: $dkGrey;
 }
 
 .data-row {

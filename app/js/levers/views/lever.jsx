@@ -11,6 +11,7 @@ var React            = require('react/addons'),
     LeverActions     = require('../lever_actions'),
     LeverAside       = require('./lever_aside.jsx'),
     LeverChart       = require('./lever_chart.jsx'),
+    LeverDescription = require('./lever_description.jsx'),
     LeverRow         = require('./lever_row.jsx'),
     View;
 
@@ -119,8 +120,8 @@ View = React.createClass({
         />
         <section className="chart">
           <LeverChart
-            params={this.props.params}
             leverData={this.state.leverData}
+            params={this.props.params}
             query={this.props.query}
           />
           <LeverAside
@@ -130,6 +131,9 @@ View = React.createClass({
             query={this.props.query}
           />
         </section>
+        <LeverDescription
+          params={this.props.params}
+          />
         <LeverRow leverRow={this.state.leverRow} />
       </main>
     );
