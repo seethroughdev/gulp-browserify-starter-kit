@@ -13,6 +13,7 @@ var React            = require('react/addons'),
     LeverChart       = require('./lever_chart.jsx'),
     LeverDescription = require('./lever_description.jsx'),
     LeverRow         = require('./lever_row.jsx'),
+    MainStore        = require('../../main/main_store'),
     View;
 
 View = React.createClass({
@@ -23,7 +24,8 @@ View = React.createClass({
   },
 
   mixins: [
-    Reflux.listenTo(LeverStore, 'onLoadComplete'),
+    Reflux.listenTo(LeverStore, 'onLoadLeverComplete'),
+    Reflux.listenTo(MainStore, 'onLoadMainComplete'),
     Reflux.listenTo(LeverFilterStore, 'handleFilterChange'),
     Router.Navigation
   ],
@@ -36,12 +38,13 @@ View = React.createClass({
       leverRow: [],
       leverColumns: [],
       activeColumns: [],
-      columns: []
+      columns: [],
+      showDescription: false
     };
   },
 
   // Create complete lever object
-  onLoadComplete: function(lever) {
+  onLoadLeverComplete: function(lever) {
     this.setState({
       leverData: lever.data,
       leverRow: lever.row,
@@ -49,6 +52,12 @@ View = React.createClass({
       leverColumns: lever.columns
     });
     this.setColumns();
+  },
+
+  onLoadMainComplete: function onLoadMainComplete(resp) {
+    this.setState({
+      showDescription: resp.lever.showDescription
+    });
   },
 
   /**
@@ -112,6 +121,7 @@ View = React.createClass({
   },
 
   render: function() {
+
     return (
       <main className="main__content">
         <LeverHeader
@@ -135,6 +145,7 @@ View = React.createClass({
         </section>
         <LeverDescription
           params={this.props.params}
+          config={this.props.config}
           />
         <LeverRow leverRow={this.state.leverRow} />
       </main>
