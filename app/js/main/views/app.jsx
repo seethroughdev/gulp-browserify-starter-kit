@@ -24,7 +24,7 @@ App = React.createClass({
 
   // Create complete lever object
   onLoadComplete: function(resp) {
-    console.log(resp);
+    // console.log(resp);
     this.setState({
       config: resp
     });

@@ -25,7 +25,6 @@ View = React.createClass({
 
   mixins: [
     Reflux.listenTo(LeverStore, 'onLoadLeverComplete'),
-    Reflux.listenTo(MainStore, 'onLoadMainComplete'),
     Reflux.listenTo(LeverFilterStore, 'handleFilterChange'),
     Router.Navigation
   ],
@@ -52,12 +51,6 @@ View = React.createClass({
       leverColumns: lever.columns
     });
     this.setColumns();
-  },
-
-  onLoadMainComplete: function onLoadMainComplete(resp) {
-    this.setState({
-      showDescription: resp.lever.showDescription
-    });
   },
 
   /**
