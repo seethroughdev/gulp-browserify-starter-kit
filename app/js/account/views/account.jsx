@@ -17,20 +17,22 @@ View = React.createClass({
   },
 
   mixins: [
-    Reflux.listenTo(AccountStore, 'onLoadAccountComplete'),
+    Reflux.listenTo(AccountStore, 'onLoadComplete'),
     Router.Navigation
   ],
 
   getInitialState: function() {
     return {
-      subMenu: []
+      subMenu: [],
+      desc: ''
     };
   },
 
   // Create complete lever object
-  onLoadAccountComplete: function(account) {
+  onLoadComplete: function(account) {
     this.setState({
-      subMenu: account.subMenu
+      subMenu: account.subMenu,
+      desc: account.desc
     });
   },
 
@@ -51,6 +53,7 @@ View = React.createClass({
         />
         <section>
           <h1>This is the account page</h1>
+          <p>{this.state.desc}</p>
         </section>
       </main>
     );

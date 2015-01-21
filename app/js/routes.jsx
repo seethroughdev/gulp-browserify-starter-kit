@@ -6,8 +6,8 @@ var React         = require('react/addons'),
     DefaultRoute  = Router.DefaultRoute,
     NotFoundRoute = Router.NotFoundRoute,
 
-    AppView       = require('./main/app.jsx'),
-    HomeView      = require('./main/home.jsx'),
+    AppView       = require('./main/views/app.jsx'),
+    HomeView      = require('./home/views/home.jsx'),
     LeverView     = require('./levers/views/lever.jsx'),
     AccountView   = require('./account/views/account.jsx'),
     routes;

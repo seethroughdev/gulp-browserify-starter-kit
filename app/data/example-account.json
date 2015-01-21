@@ -16,7 +16,16 @@
     ]
   },
   {
-    "title": "integrations"
+    "title": "integrations",
+    "desc": "Set up your integrations here.",
+    "sub": [
+      {
+        "title": "Your Integrations"
+      },
+      {
+        "title": "All Integrations"
+      }
+    ]
   },
   {
     "title": "contacts"

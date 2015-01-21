@@ -23,7 +23,7 @@ View = React.createClass({
   },
 
   mixins: [
-    Reflux.listenTo(LeverStore, 'onLoadLeverComplete'),
+    Reflux.listenTo(LeverStore, 'onLoadComplete'),
     Reflux.listenTo(LeverFilterStore, 'handleFilterChange'),
     Router.Navigation
   ],
@@ -41,7 +41,7 @@ View = React.createClass({
   },
 
   // Create complete lever object
-  onLoadLeverComplete: function(lever) {
+  onLoadComplete: function(lever) {
     this.setState({
       leverData: lever.data,
       leverRow: lever.row,
@@ -62,6 +62,7 @@ View = React.createClass({
     var cols = sub || _.isUndefined(this.props.query.hideColumns) ? [] : this.props.query.hideColumns;
 
     // allow to pass sub in if its in a transition instead of load
+
     sub = sub || this.props.params.sub;
 
     // call action to update columns
