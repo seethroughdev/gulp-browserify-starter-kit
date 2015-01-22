@@ -19,8 +19,16 @@ View = React.createClass({
   },
 
   getInitialState: function() {
+    var showDesc = false;
+
+    if (typeof this.props.config.lever !== 'undefined') {
+      showDesc = this.props.config.lever.showDescription;
+    }
+
+    console.log(showDesc);
+
     return {
-      isActive: false
+      isActive: showDesc
     };
   },
 
@@ -36,6 +44,10 @@ View = React.createClass({
     this.setState({
       message: ChartOpts[lever][sub].description
     });
+  },
+
+  componentDidMount: function() {
+    console.log('lever description mounted', this.props.config);
   },
 
   handleClick: function() {

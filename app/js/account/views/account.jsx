@@ -7,6 +7,10 @@ var React            = require('react/addons'),
     AccountActions   = require('../account_actions'),
     AccountStore     = require('../account_store'),
     Header           = require('../../main/views/header.jsx'),
+    SettingsView     = require('./account_settings.jsx'),
+    IntegrationsView = require('./account_integrations.jsx'),
+    ContactsView     = require('./account_contacts.jsx'),
+    BillingView      = require('./account_billing.jsx'),
     View;
 
 View = React.createClass({
@@ -42,6 +46,27 @@ View = React.createClass({
   },
 
   render: function() {
+
+    var accountSection;
+
+    switch (this.props.params.sub) {
+      case 'settings':
+        accountSection = <SettingsView />;
+        break;
+      case 'integrations':
+        accountSection = <IntegrationsView />;
+        break;
+      case 'contacts':
+        accountSection = <ContactsView />;
+        break;
+      case 'billing':
+        accountSection = <BillingView />;
+        break;
+      default:
+        accountSection = <SettingsView />;
+        break;
+    }
+
     return (
       <main className="main__content">
         <Header
@@ -53,7 +78,7 @@ View = React.createClass({
         />
         <section>
           <h1>This is the account page</h1>
-          <p>{this.state.desc}</p>
+          {accountSection}
         </section>
       </main>
     );
