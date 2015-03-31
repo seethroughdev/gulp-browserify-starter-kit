@@ -14,7 +14,7 @@ var rubySassOpts = {
 
 gulp.task('css:scss', function () {
   return gulp.src([ path.src.css + '*.scss' ])
-    .pipe($.rubySass(rubySassOpts))
+    .pipe($.sass())
     .on('error', handleErrors)
     .pipe($.autoprefixer('last 1 version', '> 1%', 'ie 8', 'ie 7'))
     .pipe($.csso())
