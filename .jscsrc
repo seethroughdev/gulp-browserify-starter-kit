@@ -1,6 +1,7 @@
 {
     "preset": "airbnb",
     "fileExtensions": [ ".js", "jscs", ".jsx" ],
+    "disallowMultipleVarDecl": null,
     "disallowMultipleLineBreaks": null,
     "disallowQuotedKeysInObjects": null
 }

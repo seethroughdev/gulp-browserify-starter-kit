@@ -6,8 +6,10 @@ var React         = require('react/addons'),
     Reflux        = require('reflux'),
     MainStore     = require('../main_store'),
     MainActions   = require('../main_actions'),
-    MainAside     = require('./aside.jsx'),
+    MainAside     = require('./aside.js'),
     App;
+
+require('../../../scss/main.scss');
 
 App = React.createClass({
 

@@ -1,23 +1,22 @@
 'use strict';
 
-var gulp        = require('gulp')
-,   browserSync = require('browser-sync');
-
-var path = require('../utils/paths');
+var gulp        = require('gulp'),
+    browserSync = require('browser-sync'),
+    path        = require('../utils/paths');
 
 function browserSyncInit() {
   return browserSync.init({
     server: {
-      baseDir: path.dist.path,
+      baseDir: path.src.path,
       directory: true
     },
-    startPath: '/views/index.html',
+    startPath: '/index.html',
     notify: false,
     browser: 'google chrome canary'
   });
 }
 
-gulp.task('serve', [ 'default' ], function () {
+gulp.task('serve', ['default'], function() {
 
   browserSyncInit();
 
@@ -28,4 +27,3 @@ gulp.task('serve', [ 'default' ], function () {
   gulp.watch([path.src.data + '**/*'], ['data']);
 
 });
-

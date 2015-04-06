@@ -2,7 +2,7 @@
 
 var React     = require('react/addons'),
     _         = require('lodash'),
-    LeverItem = require('./lever_row_item.jsx'),
+    LeverItem = require('./lever_row_item.js'),
     View;
 
 View = React.createClass({

@@ -6,10 +6,10 @@ var React         = require('react/addons'),
     DefaultRoute  = Router.DefaultRoute,
     NotFoundRoute = Router.NotFoundRoute,
 
-    AppView       = require('./main/views/app.jsx'),
-    HomeView      = require('./home/views/home.jsx'),
-    LeverView     = require('./levers/views/lever.jsx'),
-    AccountView   = require('./account/views/account.jsx'),
+    AppView       = require('./main/views/app.js'),
+    HomeView      = require('./home/views/home.js'),
+    LeverView     = require('./levers/views/lever.js'),
+    AccountView   = require('./account/views/account.js'),
     routes;
 
 routes = (
@@ -32,6 +32,6 @@ routes = (
 module.exports = Router.run(routes, function(Handler, state) {
   React.render(
     <Handler params={state.params} query={state.query} />,
-                                  document.getElementById('page')
+                                  document.getElementById('app')
   );
 });

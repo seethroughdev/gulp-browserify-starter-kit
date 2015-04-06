@@ -119,4 +119,4 @@ gulp.task('js:hint', function() {
 });
 
 
-gulp.task('js', ['js:browserify', 'js:vendor', 'js:modernizr', 'js:hint']);
+gulp.task('js', ['js:browserify', 'js:vendor', 'js:modernizr']);

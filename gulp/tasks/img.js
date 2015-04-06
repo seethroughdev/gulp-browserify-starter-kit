@@ -1,15 +1,15 @@
 'use strict';
 
-var gulp        = require('gulp')
-,   $           = require('gulp-load-plugins')()
-,   browserSync = require('browser-sync')
-,   reload      = browserSync.reload;
+var gulp        = require('gulp'),
+    $           = require('gulp-load-plugins')(),
+    browserSync = require('browser-sync'),
+    reload      = browserSync.reload;
 
-var path         = require('../utils/paths')
-,   handleErrors = require('../utils/handleErrors');
+var path         = require('../utils/paths'),
+    handleErrors = require('../utils/handleErrors');
 
 
-gulp.task('img:compress', function () {
+gulp.task('img:compress', function() {
   return gulp.src(path.src.img + '**/*')
     .pipe($.changed(path.dist.img))
     .pipe($.imagemin({

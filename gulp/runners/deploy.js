@@ -1,12 +1,11 @@
 
 'use strict';
 
-var gulp        = require('gulp')
-,   $           = require('gulp-load-plugins')()
-,   runSequence = require('run-sequence');
-
-var path         = require('../utils/paths')
-,   handleErrors = require('../utils/handleErrors');
+var gulp         = require('gulp'),
+    $            = require('gulp-load-plugins')(),
+    runSequence  = require('run-sequence'),
+    path         = require('../utils/paths'),
+    handleErrors = require('../utils/handleErrors');
 
 
 /*==========  GH PAGES OPTIONS  ==========*/

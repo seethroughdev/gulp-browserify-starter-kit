@@ -6,11 +6,11 @@ var React            = require('react/addons'),
     RP               = React.PropTypes,
     AccountActions   = require('../account_actions'),
     AccountStore     = require('../account_store'),
-    Header           = require('../../main/views/header.jsx'),
-    SettingsView     = require('./account_settings.jsx'),
-    IntegrationsView = require('./account_integrations.jsx'),
-    ContactsView     = require('./account_contacts.jsx'),
-    BillingView      = require('./account_billing.jsx'),
+    Header           = require('../../main/views/header.js'),
+    SettingsView     = require('./account_settings.js'),
+    IntegrationsView = require('./account_integrations.js'),
+    ContactsView     = require('./account_contacts.js'),
+    BillingView      = require('./account_billing.js'),
     View;
 
 View = React.createClass({

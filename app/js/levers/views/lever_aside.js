@@ -4,7 +4,7 @@ var React        = require('react/addons'),
     RP           = React.PropTypes,
     _            = require('lodash'),
     LeverActions = require('../lever_actions'),
-    LeverFilter  = require('./lever_filter.jsx'),
+    LeverFilter  = require('./lever_filter.js'),
     View;
 
 View = React.createClass({

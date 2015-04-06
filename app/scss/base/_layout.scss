@@ -46,15 +46,13 @@
   }
 }
 
-
-
-#site-wrapper {
+#site-wrapper, #app {
   position: relative;
   overflow: hidden;
   width: 100%;
   min-height: 100%;
+  height: 100%;
 }
-
 
 #viewport {
   min-height: 100%;
@@ -213,5 +211,3 @@ section.main-header__tr {
     display: none !important;
   }
 }
-
-
