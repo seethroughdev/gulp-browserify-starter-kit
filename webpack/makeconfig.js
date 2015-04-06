@@ -58,7 +58,8 @@ module.exports = function(isDevelopment) {
       'react-router': 'ReactRouter',
       'd3': 'd3',
       'c3': 'c3',
-      'lodash': '_'
+      'lodash': '_',
+      'moment': 'moment'
     },
     module: {
       loaders: [{
