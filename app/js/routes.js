@@ -1,10 +1,7 @@
 'use strict';
 
-var React         = require('react/addons'),
+var React         = require('react'),
     Router        = require('react-router'),
-    Route         = Router.Route,
-    DefaultRoute  = Router.DefaultRoute,
-    NotFoundRoute = Router.NotFoundRoute,
 
     AppView       = require('./main/views/app.js'),
     HomeView      = require('./home/views/home.js'),
@@ -12,8 +9,10 @@ var React         = require('react/addons'),
     AccountView   = require('./account/views/account.js'),
     routes;
 
+const {Route, DefaultRoute, NotFoundRoute} = Router;
+
 routes = (
-  <Route handler={ AppView }>
+  <Route handler={AppView}>
     <Route name="account" path='account/' handler={AccountView}>
       <Route name="accountSub" path=":sub/" handler={AccountView} />
       <NotFoundRoute handler={AccountView} />
@@ -31,7 +30,6 @@ routes = (
 
 module.exports = Router.run(routes, function(Handler, state) {
   React.render(
-    <Handler params={state.params} query={state.query} />,
-                                  document.getElementById('app')
+    <Handler {...state} />, document.getElementById('app')
   );
 });

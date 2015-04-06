@@ -1,6 +1,6 @@
 'use strict';
 
-var React        = require('react/addons'),
+var React        = require('react'),
     RP           = React.PropTypes,
     Router       = require('react-router'),
     $            = require('domtastic'),

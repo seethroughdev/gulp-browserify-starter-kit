@@ -1,6 +1,6 @@
 'use strict';
 
-var React        = require('react/addons'),
+var React        = require('react'),
     RP           = React.PropTypes,
     _            = require('lodash'),
     LeverActions = require('../lever_actions'),

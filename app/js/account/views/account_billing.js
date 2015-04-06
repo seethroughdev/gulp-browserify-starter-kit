@@ -1,6 +1,6 @@
 'use strict';
 
-var React            = require('react/addons'),
+var React            = require('react'),
     Reflux           = require('reflux'),
     Router           = require('react-router'),
     RP               = React.PropTypes,

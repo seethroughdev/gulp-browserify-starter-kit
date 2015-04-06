@@ -22,7 +22,6 @@ gulp.task('serve', ['default'], function() {
 
   gulp.watch([path.src.html + '**/*.jade'], ['html']);
   gulp.watch([path.src.css + '**/*.scss'], ['css']);
-  gulp.watch([path.src.js + '**/*'], ['js:hint']);
   gulp.watch([path.src.img + '**/*'], ['img']);
   gulp.watch([path.src.data + '**/*'], ['data']);
 

@@ -53,6 +53,13 @@ module.exports = function(isDevelopment) {
         './app/js/index.js'
       ]
     },
+    externals: {
+      'react': 'React',
+      'react-router': 'ReactRouter',
+      'd3': 'd3',
+      'c3': 'c3',
+      'lodash': '_'
+    },
     module: {
       loaders: [{
         loader: 'url-loader?limit=100000',

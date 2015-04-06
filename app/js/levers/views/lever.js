@@ -1,6 +1,6 @@
 'use strict';
 
-var React            = require('react/addons'),
+var React            = require('react'),
     Reflux           = require('reflux'),
     Router           = require('react-router'),
     RP               = React.PropTypes,
@@ -25,9 +25,12 @@ View = React.createClass({
 
   mixins: [
     Reflux.listenTo(LeverStore, 'onLoadLeverComplete'),
-    Reflux.listenTo(LeverFilterStore, 'handleFilterChange'),
-    Router.Navigation
+    Reflux.listenTo(LeverFilterStore, 'handleFilterChange')
   ],
+
+  contextTypes: {
+    router: React.PropTypes.func
+  },
 
   getInitialState: function() {
     return {
@@ -74,7 +77,7 @@ View = React.createClass({
   handleFilterChange: function(columns) {
 
     // long-winded way to add the inactive columns to the existing query props
-    this.replaceWith('leverSub', {
+    this.context.router.replaceWith('leverSub', {
       lever: this.props.params.lever,
       sub: this.props.params.sub
     }, _.extend(this.props.query, {hideColumns: columns.inactive}));
@@ -118,26 +121,23 @@ View = React.createClass({
     return (
       <main className="main__content">
         <LeverHeader
-          params={this.props.params}
-          query={this.props.query}
+          {... this.props}
           title={this.props.params.lever}
           subMenu={this.state.leverSubs}
         />
         <section className="chart">
           <LeverChart
+            {... this.props}
             leverData={this.state.leverData}
-            params={this.props.params}
-            query={this.props.query}
           />
           <LeverAside
+            {... this.props}
             columns={this.state.columns}
             activeColumns={this.state.activeColumns}
-            params={this.props.params}
-            query={this.props.query}
           />
         </section>
         <LeverDescription
-          params={this.props.params}
+          {... this.props}
           config={this.props.config}
           />
         <LeverRow leverRow={this.state.leverRow} />

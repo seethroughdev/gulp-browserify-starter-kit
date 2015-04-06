@@ -1,6 +1,6 @@
 'use strict';
 
-var React            = require('react/addons'),
+var React            = require('react'),
     Reflux           = require('reflux'),
     Router           = require('react-router'),
     c3               = require('c3'),
@@ -19,8 +19,7 @@ View = React.createClass({
     Reflux.listenTo(LeverStore, 'onLoadLeverComplete'),
     Reflux.listenTo(LeverFilterStore, 'onColumnUpdate'),
     Reflux.listenTo(LeverChartStore, 'onChartUpdate'),
-    Reflux.listenTo(LeverDateStore, 'filterChartData'),
-    Router.State
+    Reflux.listenTo(LeverDateStore, 'filterChartData')
   ],
 
   propTypes: {

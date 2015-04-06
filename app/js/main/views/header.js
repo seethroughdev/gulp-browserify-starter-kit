@@ -1,12 +1,12 @@
 'use strict';
 
-var React      = require('react/addons'),
+var React      = require('react'),
     RP         = React.PropTypes,
     _          = require('lodash'),
-    Router     = require('react-router'),
-    Link       = Router.Link,
     DatePicker = require('../../levers/views/lever_datepicker.js'),
     View;
+
+const {Link} = require('react-router');
 
 View = React.createClass({
 
@@ -17,19 +17,19 @@ View = React.createClass({
     title: RP.string
   },
 
-  mixins: [
-    Router.State
-  ],
-
   getDefaultProps: function() {
     return {
       title: 'Heading'
     };
   },
 
+  contextTypes: {
+    router: React.PropTypes.func
+  },
+
   render: function() {
 
-    var currentHandler = this.getRoutes(),
+    var currentHandler = this.context.router.getCurrentRoutes(),
         currentHandlerLength = currentHandler.length,
         headerTopRight;
 

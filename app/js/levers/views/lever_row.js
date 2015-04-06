@@ -1,6 +1,6 @@
 'use strict';
 
-var React     = require('react/addons'),
+var React     = require('react'),
     _         = require('lodash'),
     LeverItem = require('./lever_row_item.js'),
     View;
