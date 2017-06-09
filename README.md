@@ -7,7 +7,7 @@ It includes:
 - [Browserify](http://browserify.org/) | Javascript
 - [Sass](http://sass-lang.com/) | CSS
 - [Jade](http://jade-lang.com/) | HTML
-- [Mocha](http://visionmedia.github.io/mocha/) | Testing
+- [Mocha](http://mochajs.org/) | Testing
 
 It also compresses images and builds custom icon-fonts.
 
